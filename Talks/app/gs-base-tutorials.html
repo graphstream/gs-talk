@@ -83,13 +83,13 @@ an "Guilhelm Savin"</pre>
 <!--=========================================================-->
 
 <div  class="step">
-<h1>Installation of GraphStream</h1>
+<h2>Installation of GraphStream</h2>
 
 <p>Basic steps to  install GraphStream</p>
 <ol>
 <li>Get a working java SDK installed</li>
 <li>Get Eclipse installed</li>
-<li>Get the GraphStream CSSS2012 tutorial workspace</li>
+<li>Get the GraphStream tutorial sources</li>
 <li>Get GraphStream binaries</li>
 </ol>
 
@@ -100,7 +100,7 @@ an "Guilhelm Savin"</pre>
   <h2>Get Eclipse Installed</h2>
   <ul>
   <li>Go to the Eclipse download page at:<br>
-  <a href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junor">http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junor</a>
+  <a href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junosr1">http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junosr1</a>
   </li>
   <li>On the right column, "Download Links", pick up your OS</li>
   <li>Click the download button</li>
@@ -113,17 +113,32 @@ an "Guilhelm Savin"</pre>
 <div class="step" >
   <h2>Get the tutorial workspace</h2>
   <ul>
-  <li>Go to the GraphStream tutorial page at:<br>
-    <a href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/">http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/</a>
+  <li>Go to the tutorial page at github:<br>
+    <a href="http://github.com/graphstream/gs-talk-simtools">http://github.com/graphstream/gs-talk-simtools</a>
     </li>
-    <li> Get the <code>workspace</code> archive</li>
-    <li>Once downloaded, open the file. A <code>GraphStreamWorkspace</code> folder is created. Move it somewhere safe.</li>
+    <li> Get the code:
+    	<ul>
+    		<li>with the "Zip" button on github (will dowload an archive)</li>
+    		<li><b>or</b> through git: <br>
+    		<code>git clone git://github.com/graphstream/gs-talk-simtools.git</code>
+    		</li>
+    	</ul>
+    </li>
+    <li>In that project, we want the <code>Demos</code> folder.</li>
     </ul>
-    <h3>Let's run it</h3>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+<div class="step" >
+    <h2>Import into Eclipse</h2>
+
     <ul>
-      <li>Start Eclipse form the application inside the <code>eclipse</code> folder.</li>
-      <li>When asked about a workspace, indicate the <code>GraphStreamWorkspace</code> folder. 
-      </li>
+      <li>Start Eclipse.</li>
+      <li>When asked about a workspace, indicate a new workspace or any exixting one.</li>
+      <li>Go to menu <code>File &gt; Import &gt; General &gt; Existing projects into workspace</code>.</li>
+      <li>Browse to the project (<code>Demos</code>  folder), Eclipse should recognize the project.</li>
+      <li>Maven users: noting to do here</li>
       </ul>
 </div>
 
@@ -135,8 +150,10 @@ an "Guilhelm Savin"</pre>
       <li>Go to the GraphStream Nightly Builds page at:<br>
         <a href="http://graphstream-project.org/pub/1.x/nightly-build/last/">http://graphstream-project.org/pub/1.x/nightly-build/last/</a></li>
       <li>We need the 3 binaries <ul><li><code>gs-algo-1.2-git-last.jar</code></li><li> <code>gs-core-1.2-git-last.jar</code></li><li><code>gs-ui-1.2-git-last.jar</code></li></ul> </li>
-      <li> Save those jar files in the <code>lib/</code> folder of the <code>CSSS-2012-Demos</code> project.</li>
-      <li>Right-clic on the <code>CSSS-2012-Demos</code>, then <code>properties</code>, then <code>Java build path</code> (left panel), then <code>libraries</code> (right panel), then clic the <code>Add jars</code> button, and select our 3 jar files in the <code>CSSS-2012-Demos/lib</code> folder. </li>
+      <li> Save those jar files in the <code>lib/</code> folder of project.</li>
+      <li>In Eclipse, select the project in the right panel and refrech the project (F5 key).</li>
+      <li>Right-clic on the project (<code>gs-talk-simtools)</code>, then <code>properties</code>, then <code>Java build path</code> (left panel), then <code>libraries</code> (right panel), then clic the <code>Add jars</code> button, and select our 3 jar files in the <code>gs-talk-simtools/lib</code> folder. </li>
+      <li>Maven : <code>mvn compile</code> </li>
         </ul>
 </div>
 
@@ -155,7 +172,7 @@ an "Guilhelm Savin"</pre>
 <div class="step">
 <h2>Create and display</h2>
 
-	<p>Open <code>CSSS-2012-Demos &gt; src &gt; org &gt; graphstream &gt; csssdemo &gt; tutorial1 &gt; Tutorial1.java</code>:</p>
+	<p>Open <code> src &gt; org &gt; graphstream &gt; demo &gt; tutorial1 &gt; Tutorial1.java</code>:</p>
 		
 	<pre class="prettyprint lang-java">
 import org.graphstream.graph.*;
@@ -471,7 +488,7 @@ public interface Source {
 <div class="step">
 <h2>A first dynamic graph</h2>
 	<br/>
-	<div class="text_center"><img src="images/Source.png"/><img src="images/Link.png"/><img src="images/Sink.png"/></div>
+	<div class="text_center"><img style="width:20%" src="images/Source.png"/><img style="width:20%" src="images/Link.png"/><img style="width:20%" src="images/Sink.png"/></div>
 	<br/>
 	<div class="theBlock">
 	<center>These three interfaces are the most important of GraphStream.</center>
