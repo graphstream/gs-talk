@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <title>GraphStream Talk - Simtools</title>
+  <meta name="description" content="Technical presentation of the GraphStream Library">
+  <meta name="author" content="The GraphStream Team" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Oxygen+Mono|Muli' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+
+  <!-- build:css styles/main.css -->
+  <link href="styles/prettify.css" type="text/css" rel="stylesheet" />
+  <link href="styles/lecture.css" rel="stylesheet" type="text/css" />
+  <!-- endbuild -->     
+
+   <!-- build:js scripts/vendor/jquery.js -->
+   <script src="bower_components/jquery/jquery.js"></script>
+   <!-- endbuild -->     
+  
+</head>
+
+
+<body>
+  <div id="menu_handle" class="x2">»</div>
+  <div id="menu" class="x-2">
+    <ul></ul>
+  </div>
+
+  <div id="simple" data-template="mytemplate">
+
+
+
+
+
+	
+
+
+  <div id="home" class="step">
+  <h1>GraphStream Tutorials</h1>
+  <h3>Let's get some coding done</h3>
+  
+  <br>
+  <br>
+  <div class="twocols">
+  	<div class="first">&nbsp;</div>
+  <pre class="second prettyprint lang-shell">DGS0004
+cg "id":"GraphStream Team" 
+an "Stefan Balev"
+an "Antoine Dutot" 
+an "Yoann Pigné"
+an "Guilhelm Savin"</pre>
+</div>
+  </div>
+
+
+  <!-- ============ -->
+  <!-- = OUTLOOCK = -->
+  <!-- ============ -->
+
+    <!-- ==== SLIDE ==== -->
+    <div class="step" >
+      <h2>Outlook</h2>  
+        <ol class="x2">
+          <li>Installation of GraphStream</li>
+          <li>Tutorial 1: Basic tasks with GraphStream</li>
+          <li>Tutorial 2: A first dynamic graph</li>
+        </ol>
+    </div>
+
+
+
+<!--=========================================================-->
+<!-- INSTALLATION -->
+<!--=========================================================-->
+
+<div  class="step">
+<h1>Installation of GraphStream</h1>
+
+<p>Basic steps to  install GraphStream</p>
+<ol>
+<li>Get a working java SDK installed</li>
+<li>Get Eclipse installed</li>
+<li>Get the GraphStream CSSS2012 tutorial workspace</li>
+<li>Get GraphStream binaries</li>
+</ol>
+
+</div>
+
+<!-- ==== SLIDE ==== -->
+<div class="step" >
+  <h2>Get Eclipse Installed</h2>
+  <ul>
+  <li>Go to the Eclipse download page at:<br>
+  <a href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junor">http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/junor</a>
+  </li>
+  <li>On the right column, "Download Links", pick up your OS</li>
+  <li>Click the download button</li>
+  <li>Once downloaded, open the file. An <code>eclipse</code> folder is created. Move it somewhere safe.</li>
+  </ul>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+<div class="step" >
+  <h2>Get the tutorial workspace</h2>
+  <ul>
+  <li>Go to the GraphStream tutorial page at:<br>
+    <a href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/">http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/</a>
+    </li>
+    <li> Get the <code>workspace</code> archive</li>
+    <li>Once downloaded, open the file. A <code>GraphStreamWorkspace</code> folder is created. Move it somewhere safe.</li>
+    </ul>
+    <h3>Let's run it</h3>
+    <ul>
+      <li>Start Eclipse form the application inside the <code>eclipse</code> folder.</li>
+      <li>When asked about a workspace, indicate the <code>GraphStreamWorkspace</code> folder. 
+      </li>
+      </ul>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+<div class="step" >
+  <h2>Get GraphStream binaries</h2>
+    <ul>
+      <li>Go to the GraphStream Nightly Builds page at:<br>
+        <a href="http://graphstream-project.org/pub/1.x/nightly-build/last/">http://graphstream-project.org/pub/1.x/nightly-build/last/</a></li>
+      <li>We need the 3 binaries <ul><li><code>gs-algo-1.2-git-last.jar</code></li><li> <code>gs-core-1.2-git-last.jar</code></li><li><code>gs-ui-1.2-git-last.jar</code></li></ul> </li>
+      <li> Save those jar files in the <code>lib/</code> folder of the <code>CSSS-2012-Demos</code> project.</li>
+      <li>Right-clic on the <code>CSSS-2012-Demos</code>, then <code>properties</code>, then <code>Java build path</code> (left panel), then <code>libraries</code> (right panel), then clic the <code>Add jars</code> button, and select our 3 jar files in the <code>CSSS-2012-Demos/lib</code> folder. </li>
+        </ul>
+</div>
+
+
+
+<!--=========================================================-->
+<!-- TUTORIAL 1 -->
+<!--=========================================================-->
+
+<div  class="step">
+<h1>Tutorial 1</h1>
+<h2>Basic tasks with GraphStream</h2>
+	
+</div>
+
+<div class="step">
+<h2>Create and display</h2>
+
+	<p>Open <code>CSSS-2012-Demos &gt; src &gt; org &gt; graphstream &gt; csssdemo &gt; tutorial1 &gt; Tutorial1.java</code>:</p>
+		
+	<pre class="prettyprint lang-java">
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
+
+public class Tutorial1 {
+	public static void main(String args[]) {
+		Graph graph = new SingleGraph("Tutorial 1");
+		
+		graph.display();
+		
+		graph.addNode("A");
+		graph.addNode("B");
+		graph.addEdge("AB", "A", "B");
+		graph.addNode("C");
+		graph.addEdge("BC", "B", "C", true); // Directed edge.
+		graph.addEdge("CA", "C", "A");
+	}
+}</pre>
+</div>
+
+<div class="step">
+<h2>Basic tasks with GS</h2>
+	
+	<p>We can improve the display with some CSS:</p>
+	<p><div class="left" style="width:60%;">
+		<pre class="prettyprint lang-java">
+...
+graph.display();
+
+<span class="hcode">graph.addAttribute("ui.quality");
+graph.addAttribute("ui.antialias");
+graph.addAttribute("ui.stylesheet",
+	"edge { fill-color: grey; }");
+</span>
+graph.addNode("A");
+...</pre>
+	</div><div class="right" style="width:35%;">
+		<img src="images/Tutorial1.png" style="width:80%;"/>
+	</div></p>
+</div>
+
+
+<div class="step">
+<h2>Basic tasks with GS</h2>
+
+	<ul>
+		<li>Each node, edge and attribute is identified by an unique string.</li>
+		<li>The node and edge elements are created for you.</li>
+		<li>You can access them however, when created:
+			<pre class="prettyprint lang-java">Node n = graph.addNode("A");</pre>
+		</li>
+		<li>Or after creation:
+			<pre class="prettyprint lang-java">Node n = graph.getNode("A");</pre>
+		</li>
+	</ul>
+</div>
+	
+<div class="step">
+<h2>Basic tasks with GS</h2>
+
+	<ul>
+		<li>You can remove nodes and edges the same way:
+			<pre class="prettyprint lang-java">graph.removeNode("A");</pre>
+		</li>
+		<li>You can change the graph this way at any time. Each change is considered as an “event”.</li>
+		<li>The sequence of changes is seen as the dynamics of the graph.</li>
+		<li>There are many other ways to modify the graph.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>Basic tasks with GS</h2>
+	<ul>
+		<li>Data stored in the graph, on nodes and edges, are called “attributes”.</li>
+		<li> An attribute is a pair (name,value).</li>
+	</ul>
+
+	<p>
+		<div class="left" style="width:60%;">
+			<pre class="prettyprint lang-java">
+Edge ab = graph.getEdge("AB");
+Edge bc = graph.getEdge("BC");
+Edge ca = graph.getEdge("CA");
+
+ab.setAttribute("ui.label", "AB");
+bc.setAttribute("ui.label", "BC");
+ca.setAttribute("ui.label", "CA");</pre>
+		</div>
+		<div class="right" style="width:35%;"><img src="images/Tutorial1b.png" style="width:80%;"/></div>
+	</p>
+</div>
+
+<div class="step">
+<h2>Basic tasks with GS</h2>
+	<ul>
+		<li>But you can add any kind of data on each graph element.</li>
+		<li>However not all attributes appear in the viewer.</li>
+		<li>Notice the way you can add arrays with <code>setAttribute()</code> and a variable number of arguments:</li>
+	</ul>
+
+	<p><pre class="prettyprint lang-java">
+ab.setAttribute("aNumber", 10);
+bc.setAttribute("anObject", new Double(10));
+ca.setAttribute("anArrayOfThings", 1, 2, 3);</pre>
+	</p>
+</div>
+	
+<div class="step">
+<h2>Basic tasks with GS</h2>
+
+	<ul>
+		<li>You can access attributes in several ways:</li>
+	</ul>
+	
+	<p><pre class="prettyprint lang-java">
+int value1 = ((Number) ab.getAttribute("aNumber")).intValue();
+double value2 = bc.getAttribute("anObject");
+Object[] value3 = ca.getAttribute("anArrayOfThings");</pre>
+	</p>
+	
+	<ul>
+		<li>Special methods are here to simplify things:</li>
+	</ul>
+	
+	<p><pre class="prettyprint lang-java">
+double value4 = ab.getNumber("aNumber");
+double value5 = bc.getNumber("anObject");</pre>
+	</p>
+</div>
+	
+<div class="step">
+<h2>Basic tasks with GS</h2>
+
+	<ul><li>Travelling through all nodes of the graph is easy:</li></ul>
+
+	<p><pre class="prettyprint lang-java">
+for(Node n: graph) {
+	System.out.println(n.getId());
+}</pre></p>
+	
+	<ul><li>The same for edges:</li></ul>
+	
+	<p><pre class="prettyprint lang-java">
+for(Edge e: graph.getEachEdge()) {
+	System.out.println(e.getId());
+}</pre></p>
+</div>
+	
+<div class="step">
+<h2>Basic tasks with GS</h2>
+
+	<ul><li>You can also do it with iterators:</li></ul>
+	
+	<p><pre class="prettyprint lang-java">
+Iterator&lt;? extends Node&gt; nodes = graph.getNodeIterator();
+
+while(nodes.hasNext()) {
+	System.out.println(nodes.next().getId());
+}</pre></p>
+	
+	<ul><li>The same for edges:</li></ul>
+	
+	<p><pre class="prettyprint lang-java">
+Iterator&lt;? extends Edge&gt; edges = graph.getEdgeIterator();
+
+while(edges.hasNext()) {
+	System.out.println(edges.next().getId());
+}		</pre></p>
+</div>
+	
+<div class="step">
+<h2>Basic tasks with GS</h2>
+
+	<ul><li>Or even with indices:</li></ul>
+	
+	<p><pre class="prettyprint lang-java">
+int n = graph.getNodeCount();
+
+for(int i=0; i&lt;n; i++) {
+	System.out.println(graph.getNode(i).getId());
+}</pre></p>
+	
+	<ul><li>The same for edges:</li></ul>
+	
+	<p><pre class="prettyprint lang-java">
+int n = graph.getEdgeCount();
+
+for(int i=0; i&lt;n; i++) {
+	System.out.println(graph.getEdge(i).getId());
+}
+		</pre></p>
+
+	<p>Be careful: indices remains the same as long as the graph is
+	unchanged, but as soon as an addition or removal occurs, indices are no
+	more tied to their old node or edge.</p>
+</div>
+	
+<div class="step">
+<h2>Basic tasks with GS</h2>
+
+	<ul><li>You can also travel the graph using nodes:</li></ul>
+
+	<p><pre class="prettyprint lang-java">
+import static org.graphstream.algorithm.Toolkit.*;
+...
+Node node = randomNode(graph);
+
+for(Edge e: node.getEachEdge()) {
+	System.out.printf("neighbor %s via %s%n",
+		e.getOpposite(node).getId(),
+		e.getId() );
+}
+</pre></p>
+
+	<ul>
+		<li><code>Toolkit</code> is a collection of often used methods and small algorithms.</li>
+		<li>Each node and edge allows to iterate on its neighbourhood.</li>
+	</ul>
+</div>
+	
+<div class="step">
+<h2>Basic tasks with GS</h2>
+	<ul><li>You can iterate on directed edges:</li></ul>
+	<p><pre class="prettyprint lang-java">
+Node node = getRandomNode(graph);
+Iterator&lt;? extends Edge&gt; edges = node.getLeavingEdgeIterator();</pre></p>
+		<ul><li>Or:</li></ul>
+		<p><pre class="prettyprint lang-java">Iterator&lt;? extends Edge&gt; edges = node.getEnteringEdgeIterator();</pre></p>
+		<ul><li>And get the node degree, entering or leaving:</li></ul>
+		<p><pre class="prettyprint lang-java">
+System.out.println(“Node degree %d (entering %d, leaving %d)%n”,
+	node.getDegree(),
+	node.getInDegree(),
+	node.getOutDegree());</pre></p>
+	</div>
+
+<!--=========================================================-->
+<!-- TUTORIAL 2 -->
+<!--=========================================================-->
+
+<div id="home" class="step">
+<h1>Tutorial 2</h1>
+<h2>A first dynamic graph</h2>
+	
+</div>
+	
+<div class="step">
+<h2>A first dynamic graph</h2>
+
+	<ul>
+		<li>Each graph is a source of events.</li>
+		<li>You can connect to any source using the <code>Source.addSink(Sink)</code> method.</li>
+		<li>You can choose to receive only events concerning the graph structure with <code>addElementSink(ElementSink)</code>.
+		<em>Elements</em> are nodes and edges.</li>
+		<li>You can choose to receive only events concerning data attributes stored on elements with <code>addAttributeSink(AttributeSink)</code>.</li>
+		<li>A <code>Sink</code> is only an empty interface inheriting <code>ElementSink</code> and <code>AttributeSink</code>.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<p>An element sink must follow the interface:</p>
+	<p><pre class="prettyprint lang-java">
+public interface ElementSink {
+	void nodeAdded( ... );
+	void nodeRemoved( ... );
+	void edgeAdded( ... );
+	void edgeRemoved( ... );
+	void graphCleared( ... );
+	void stepBegins( ... );
+}</pre></p>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<p>An attribute sink must follow the interface:</p>
+	<p><pre class="prettyprint lang-java">
+public interface AttributeSink {
+	void graphAttributeAdded( ... );
+	void graphAttributeChanged( ... );
+	void graphAttributeRemoved( ... );
+
+	void nodeAttributeAdded( ... );
+	void nodeAttributeChanged( ... );
+	void nodeAttributeRemoved( ... );
+
+	void edgeAttributeAdded( ... );
+	void edgeAttributeChanged( ... );
+	void edgeAttributeRemoved( ... );
+}</pre></p>	
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+
+	<p>A source is an interface that only defines methods to handle a set of sinks.</p>
+	
+	<p><pre class="prettyprint lang-java">
+public interface Source {
+	void addSink(Sink sink);
+	void removeSink(Sink sink);
+	void addAttributeSink(AttributeSink sink);
+	void removeAttributeSink(AttributeSink sink);
+	void addElementSink(ElementSink sink);
+	void removeElementSink(ElementSink sink);
+	void clearElementSinks();
+	void clearAttributeSinks();
+	void clearSinks();
+}</pre></p>	
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<br/>
+	<div class="text_center"><img src="images/Source.png"/><img src="images/Link.png"/><img src="images/Sink.png"/></div>
+	<br/>
+	<div class="theBlock">
+	<center>These three interfaces are the most important of GraphStream.</center>
+	</div>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+
+	<ul>
+		<li>As the graph is also a sink, you could use these methods to create the graph.</li>
+		<li>But a better way is to send graph events using an existing source, like a file.</li>
+		<li>Few graph file formats are dynamic.</li>
+		<li>GraphStream provides a format named DGS that allows to store and load dynamic graphs.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<p>A DGS file looks like this. You can find it in the <code>Tutorial2 &gt; tutorial2.dgs</code></p>
+	<p><div class="left" style="width: 40%;">
+	<pre class="prettyprint lang-java">
+DGS003
+"Tutorial 2" 0 0
+an "A"
+an "B"
+an "C"
+ae "AB" "A" "B"
+ae "BC" "B" "C"
+ae "CA" "C" "A"
+ce "AB" label="AB"
+ce "BC" label="BC"
+ce "CA" label="CA"</pre></div>
+		<div class="right" style="width:60%;">
+<ul>
+	<li><code>an</code> add a node and <code>ae</code> an edge.</li>
+	<li><code>ae "AB" "A" &gt; "B"</code> adds a directed edge.</li>
+	<li><code>cn</code>, <code>ce</code> and <code>cg</code> change or add
+		one or more attributes on a node, edge or graph.</li>
+	<li><code>dn</code> and <code>de</code> allow to remove nodes, edges.</li>
+</ul>
+	</div></p>
+</div>
+	
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<ul>
+		<li>Each change in the graph is an event.</li>
+		<li>However you may want to define a notion of time, and group some events as occurring "at the same time".</li>
+		<li>You can do this using a <code>step</code>.</li>
+		<li>The DGS notion for steps is <code>st &lt;number&gt;</code>.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<ul>
+		<li>The ability to remove nodes and edges make the format dynamic.</li>
+		<li>Add this to the previous DGS file:</li>
+	</ul>
+	<pre class="prettyprint lang-java">
+st 2
+an "D"
+an "E"
+ae "BD" "B" "D"
+ae "CE" "C" "E"
+ae "DE" "D" "E"
+de "AB"
+dn "A"
+st 3</pre>
+	<ul>
+		<li>And save it.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<ul>
+		<li>We will now read this file.</li>
+		<li>This can be done in one simple operation :</li>
+	</ul>
+
+	<p><pre class="prettyprint lang-java">
+graph.read("tutorial2.dgs");</pre></p>
+
+	<ul>
+		<li>However this will "play" all events as fast as possible.</li>
+		<li>We have no control over the speed at which events occur.</li>
+		<li>This form of reading is an utility method of the <code>Graph</code>
+			interface allowing to read static graphs from all the supported
+			file formats.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<ul>
+		<li>We can read the DGS file event by event using an input source:</li>
+	</ul>
+	<p><pre class="prettyprint lang-java">
+public class Tutorial2 {
+	public static void main(String args[]) {
+		Graph graph = new SingleGraph("Tutorial2");
+		graph.display();
+		graph.addAttribute("ui.antialias");
+		try {
+			FileSource source = FileSourceFactory.sourceFor(
+				"tutorial2.dgs");
+			source.addSink(graph);
+			source.begin("tutorial2.dgs");
+			while(source.nextEvents());
+			source.end();
+		} catch(Exception e) { e.printStackTrace(); }
+	}
+}</pre></p>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<ul>
+		<li>We read the file event by event (line by line in the file), however it still does it as
+		fast as it can.</li>
+		<li>Note the line <code>while(source.nextEvents());</code> that does
+		the job.</li>
+		<li>Also note that we have to call the <code>begin()</code> and <code>end()</code>
+		methods before and after reading to cleanly open and close the file.</li>
+	</ul>
+	<p><pre class="prettyprint lang-java">
+		while(source.nextEvents()) { Thread.sleep(1000); }</pre></p>
+	<ul>
+	  <li>We can also run it <em>step by step</em> so that events between two step appear together</li>
+	  </ul>
+  	<p><pre class="prettyprint lang-java">
+  		while(source.nextStep()) { Thread.sleep(1000); }</pre></p>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<ul>
+		<li>The graph is automatically reshaped for you.</li>
+		<li>However you may want to position nodes by yourself.</li>
+		<li>You can do this using the <code>x</code> and <code>y</code> attributes:</li>
+	</ul>
+	<p><pre class="prettyprint lang-java">
+an "A" x=0 y=1
+an "B" x=1 y=-1
+an "C" x=-1 y=-1</pre></p>
+	
+	<ul>
+		<li>And:</li>
+	</ul>
+
+	<p><pre class="prettyprint lang-java">
+an "D" x=1 y=1 
+an "E" x=-1 y=1</pre></p>
+</div>
+
+<div class="step">
+<h2>A first dynamic graph</h2>
+	<ul>
+		<li>You have to tell the viewer it should not place nodes for you:</li>
+	</ul>
+	<p><pre class="prettyprint lang-java">
+	graph.display(false);</pre></p>
+	<ul>
+		<li>You can now run the program anew.</li>
+	</ul>
+</div>
+
+
+
+
+   <!-- ==== SLIDE ==== -->
+   <div class="step">
+     <h2>Slides and Material</h2>
+<br><br><p>Get the Slides and Materials for this session on GraphStream tutorial page at:</p>
+<p>  <a href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/">http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/</a>
+  </p>
+  </div>
+  
+  
+
+</div>
+
+<!-- build:js scripts/vendor/jmpress.js -->
+<script src="bower_components/jmpress/jmpress.js"></script>
+<!-- endbuild -->    
+
+<!-- build:js scripts/main.js -->
+<script type="text/javascript" src="scripts/prettify.js"></script>
+<script type="text/javascript" src="scripts/lang-css.js"></script>
+<script type="text/javascript" src="scripts/lecture.js"></script>
+<!-- endbuild -->   
+ 
+</body>
+</html>

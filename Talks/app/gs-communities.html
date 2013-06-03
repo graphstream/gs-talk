@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+	<title>GraphStream to detect community structure in networks</title>
+  <meta name="description" content="Technical presentation of the GraphStream Library">
+  <meta name="author" content="The GraphStream Team" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Oxygen+Mono|Muli' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!-- build:css styles/main.css -->
+  <link href="styles/prettify.css" type="text/css" rel="stylesheet" />
+  <link href="styles/lecture.css" rel="stylesheet" type="text/css" />
+  <!-- endbuild -->     
+
+   <!-- build:js scripts/vendor/jquery.js -->
+   <script src="bower_components/jquery/jquery.js"></script>
+   <!-- endbuild -->     
+  
+</head>
+
+
+<body>
+  <div id="menu_handle" class="x2">»</div>
+  <div id="menu" class="x-2">
+    <ul></ul>
+  </div>
+
+  <div id="simple" data-template="mytemplate">
+
+<div id="home" class="step">
+<h1>GraphStream to detect community structures in networks</h1>
+	
+	<div class="center text_center"><img style="width:50%;" src="images/zachary.png"/></div>
+</div>
+
+<div class="step">
+<h2>Community structure</h2>
+	<p>We will try to detect community structure in networks.</p>
+
+	<em>Intuitively</em>, communities are groups of nodes in a network, where:
+	<ul>
+		<li>There are more links between nodes inside the same community,</li>
+		<li>Fewer links between nodes in different communities.</li>
+	</ul>
+	<div class="center text_center"><img style="width:30%;" src="images/Community_Structure2.jpg"/></div>
+</div>
+
+<div class="step">
+<h2>Community structure</h2>
+
+	<p><div class="left" style="width:40%;">
+		<p>Lots of complex networks exhibit community structure, often
+		based on interactions:</p>
+		<ul>
+			<li>Social networks,</li>
+			<li>Biological networks,</li>
+			<li>Information networks,</li>
+			<li>Road networks</li>
+			<li>...</li>
+		</ul>
+
+		<p>We will present a method to detect this structure and take
+		care of potential network dynamics.</p>
+
+	</div><div class="right" style="width:55%;">
+		<img style="width:45%;" src="images/Community_Structure1.jpg"/>
+		<img style="width:45%;" src="images/Network_Community_Structure.svg"/>
+		<img style="width:45%;" src="images/Community_Structure3.jpg"/>
+		<img style="width:45%;" src="images/Community_Structure4.jpg"/>
+	</div></p>
+
+</div>
+
+<div class="step">
+<h2>Agenda</h2>
+	<p>In this tutorial we will:</p>
+	
+	<ul>
+		<li>try to detect communities inside a network using various tools
+			provided by GraphStream</li>
+		<li>see how to measure the quality of the community structure.</li>
+		<li>see a technique to approximate communities detection, and adapt to
+			the network dynamics.</li>
+	</ul>
+
+	<p>This is not a published technique, but more a way to show you how to
+	combine the various building blocks of GraphStream to experiment on dynamic
+	networks.</p>
+</div>
+
+<div class="step">
+<h2>Determining community structure</h2>
+	<p>Most often we use two kinds of criteria:</p>
+	<ul>
+		<li><strong>Internal validity:</strong> some sort of measure indicates the importance of
+			links inside communities compared to links between
+			communities.</li>
+		<li><strong>External validity:</strong> we rely on an expert, having a knowledge on the
+			network semantics, to validate the communities.</li>
+	</ul>
+	<p>We are focused here in the first one.</p>
+</div>
+
+<div class="step">
+<h2>Determining communities</h2>
+	<p>Once we have such a measure, several techniques can be used to find
+	the communities:</p>
+	<ul>
+		<li><strong>Optimizing the minimum cut</strong>: often used for load balancing.
+			The number of communities is known by advance. One search to
+			minimize the number of edges between communities (the cut).</li>
+		<li><strong>Hierarchical clustering</strong>: uses a similarity measure to group
+			node pairs, in communities, then to group communities.</li>
+		<li><strong>Girvan-Newman algorithm</strong>: in this algorithm, we remove
+			progressively edges that lie between communities, using some kind
+			of measure to identify them.</li>
+		<li><strong>Modularity maximization</strong>: The modularity is one of the most
+			used measures. This methods employ various techniques (often
+			metaheuristics) to compute network divisions and maximize
+			modularity.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>Modularity</h2>
+	<p>One of the most used measure is the modularity \(Q\).</p>
+
+	<p><strong>Intuition</strong>: \(Q\) measures the fraction of intra-communities
+	edges minus the same fraction if the network had edges at random (with
+	the same communities divisions).</p>
+
+	<ul>
+		<li>If \(Q=0\) the edges intra-communities is not better than random.</li>
+		<li>If \(Q=1\) we have very strong community structure.</li>
+		<li>In practice modular network lie between \(Q=0.3\) and \(Q=0.7\).</li>
+	</ul>
+
+	<p>Modularity gives results in \(\left[-\frac{1}{2} .. 1\right]\).</p>
+</div>
+
+<!-- Explication 1 =========================================================== -->
+
+<!--div class="step">
+<h2>Modularity</h2>
+	<p>The modularity is defined as follows:</p>
+
+	<ul>
+		<li>Consider a division of the network in \(k\) modules.</li>
+
+		<li>Consider a \(k \times k\)  matrix \(\mathbb{e}\) such that each
+		element \(e_{ij}\) indicates the fractions of edges going from
+		community \(i\) to community \(j\).</li>
+
+		<li>The trace of the matrix \(Tr \mathbb{e} = \sum_i e_{ii}\) gives
+		the fraction of edges connecting nodes inside communities.</li>
+	</ul>
+
+	<p>However \(Tr\mathbb{e}\) is not sufficient, since putting all nodes in
+	one big cluster would give a maximum value of \(1\).</p>
+</div>
+
+<div class="step">
+<h2>Modularity</h2>
+	<p>To better refine the measure we will compare the trace with a more random
+	network:</p>
+	
+	<ul>
+		<li>we define the total fraction of edges which connect to community
+		\(i\): \(a_i = \sum_j e_{ij}\).</li>
+
+		<li>In a network were edges connect nodes without regard to communities,
+		we would have \(e_{ij} = a_i a_j\).</li>
+	</ul>
+
+	<p>The measure then becomes:</p>
+
+	\[Q = \sum_i \left( e_{ii} - a_i^2 \right) = Tr\mathbb{e} - || \mathbb{e}^2 ||\]
+
+	<p>Where \(||\mathbb{x}||\) is the sum of elements of matrix \(\mathbb{x}\).</p>
+</div-->
+
+<!-- Explication 2 =========================================================== -->
+
+<div class="step">
+<h2>Modularity</h2>
+	<p>Suppose a given network with modules:</p>
+	<div class="center text_center"><img width="40%" src="images/Modularity1.svg"/></div>
+
+	<p>How to determine its modularity ?</p>
+</div>
+
+<div class="step">
+<h2>Modularity</h2>
+	<p>We could compare the proportion of internal links <span
+	style="color:red;">\(I_c\)</span> in each community \(c\) to the number
+	of edges \(m\). Links in green <span
+	style="color:green;">\(O_c\)</span> go out of the community \(c\). </p>
+
+	<p><div class="left" style="width:48%;">
+		\[Q = \sum_c\frac{I_c}{m} \]
+	</div><div class="right" style="width:48%">
+		<div class="center text_center"><img width="40%" src="images/Modularity2.svg"/></div>
+	</div></p>
+
+
+	<p style="clear:both;">However:
+	This would not be sufficient, since putting all nodes in the
+	same community would produce a perfectly modular network !</p>
+</div>
+
+<div class="step">
+<h2>Modularity</h2>
+	<p>Instead we compare the ratio \(\frac{I_c}{m}\) with the expected value
+	in the same network but with all its links randomly rewired, that is:</p>
+
+	<p><div class="left" style="width:48%;">
+		\[\frac{(2 I_c + O_c)^2}{(2m)^2}\]
+	</div><div class="right" style="width:48%">
+		<div class="center text_center"><img width="40%" src="images/Modularity3.svg"/></div>
+	</div></p>
+
+	<p style="clear:both;">Which yield for the modularity \(Q\):</p>
+
+	\[Q = \sum_c\frac{I_c}{m} - \sum_c\frac{(2 I_c + O_c)^2}{(2m)^2}\]
+</div>
+
+<div class="step">
+<h2>Network dynamics?</h2>
+	<p>Computing the modularity can take some time.</p>
+
+	<p>But in addition computing the communities themselves is often very
+	time consuming and is the most demanding task.</p>
+
+	<p>If the network under analysis evolves, it becomes impossible to recompute
+	the whole modules each time a change occurs in the graph.</p>
+</div>
+
+<div class="step">
+<h2>Graph layouts</h2>
+	<p>A novel approach to determine the modules uses graph layouts.</p>
+
+	<p>A layout is a mapping of nodes of the network in a space such that
+	nodes are assigned positions according to a given criteria, often an
+	aesthetic one.</p>
+
+	<p>A large fraction of the layout algorithms are <em>force based</em>: they
+	apply some repulsive force among all nodes and attractive force between
+	connected nodes.</p>
+	
+	<div class="center text_center">
+		<img style="width:35%;" src="images/polbooks_fr.png"/>
+		<img style="width:35%;" src="images/LinLog1.png"/>
+	</div>
+</div>
+
+<div class="step">
+<h2>The Lin-Log layout</h2>
+	<p>The <em>Lin-Log</em> layout does not try to produce aesthetic layouts
+	but tries to position nodes so that:</p>
+
+	<ul>
+		<li>densely connected nodes are grouped by placing them at nearby
+			positions,</li>
+		<li>weakly connected nodes are separated by placing them at distant
+			positions.</li>
+	</ul>
+	
+	<p>Most force based algorithms uses the evaluation of the energy where
+	force equilibrium correspond to energy minimization.</p>
+
+	<p>It is based on a \((a,r)\)-energy model where \(a\) is the
+	attraction force factor and \(r\) the repulsion force factor of the
+	energy model, the \(a\) and \(r\) factors for the force algorithm are
+	derived from it.</p>
+</div>
+
+<div class="step">
+<h2>The Lin-Log layout and network dynamics</h2>
+	<p>The interesting part in layouts to detect communities is: each time a
+	change occurs in the graph, the layout restart its computation from its
+	previous equilibrium state. There are lots of chances for the new
+	equilibrium to be close to the previous one.</p>
+
+	<p>Indeed, a process that uses a layout to compute communities could them
+	adapt more easily to network dynamics.</p>
+
+	<p>The <em>Lin-Log</em> layout was proposed by <em>Andreas Noak</em>.</p>
+	
+	<div class="center text_center">
+		<img style="width:25%;" src="images/LinLog2.png"/>
+	</div>
+</div>
+
+<div class="step">
+<h2>Practical session</h2>
+
+	<p>We will see how to:</p>
+
+	<ol>
+		<li>read, layout and display a graph automatically.</li>
+		<li>control the layout directly and change it to a <em>Lin-Log</em> layout.</li>
+		<li>retrieve feedback from the distant view process.</li>
+		<li>compute communities from the <em>Lin-Log</em> layout and display them.</li>
+		<li>retrieve the communities.</li>
+		<li>compute the modularity of these communities.</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>How GraphStream handles display</h2>
+	<p>GraphStream puts the display of the graph in a separate thread or
+	process.</p>
+
+	<p>Usually your display will evolve in parallel with the computations
+	you are running on your graph.</p>
+
+
+	<div  class=" centered" >
+		<img style="height:20%" src="images/Source.png"/><img style="height:20%" src="images/Link.png"/><img style="height:20%"  src="images/PipeCloud.png"/><img style="height:20%" src="images/Link.png"/><img style="height:20%" src="images/Sink.png"/>
+	</div>
+	<div  class=" centered" >
+		<p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Graph</p><p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Network</p>
+		<p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Viewer</p>
+	</div>
+</div>
+
+<div class="step">
+<h2>How GraphStream handles graph layouts</h2>
+	<p>The viewer is able to create by itself a third thread or process that
+	will handle the layout of the graph.</p>
+
+	<p>By default this layout tries to provide a aesthetically pleasing display
+	of the graph:</p>
+	
+	<ul>
+		<li>putting densely connected nodes in the center of the layout,</li>
+		<li>and ensuring the edge lengths are as uniform as possible.</li>
+	</ul>
+
+	<p>This default algorithm is a derivative of the <em>Frutcherman-Reingold</em>
+	one.</p>
+	
+	<div class="center text_center">
+		<div class="left" style="width:48%;">
+			<img style="width:50%;" src="images/polbooks_fr.png"/><br/>
+			Frutcherman-Reingold
+		</div>
+		<div class="right" style="width:48%;">
+			<img style="width:50%;" src="images/LinLog1.png"/><br/>
+			Lin-Log
+		</div>
+	</div>
+</div>
+
+<div class="step">
+<h2>Step 1</h2>
+	<p>Open the <code>tutorial4</code> package, then the
+	<code>LinLogLayout.java</code> file. You will see this code:</p>
+
+	<pre class="prettyprint lang-java">
+public class LinLogLayout {
+	// ...
+	private Graph graph;
+	private Viewer viewer;
+	
+	public void findCommunities(String fileName)
+			throws IOException, GraphParseException {
+		graph = new SingleGraph("communities");
+		viewer = graph.display(true);
+		graph.read(fileName);
+	}
+}</pre>
+
+	<p>It creates a graph, displays, launches an automatic layout on it (the
+	<code>display(true)</code> argument) and then reads it.</p>
+</div>
+
+<div class="step">
+<h2>Before proceeding</h2>
+	<p>Before proceeding, to avoid compilation problems
+	copy and paste the following imports to your programi, just under the already
+	present imports:</p>
+	<pre class="prettyprint lang-java">
+import org.graphstream.algorithm.ConnectedComponents;
+import org.graphstream.algorithm.measure.Modularity;
+import org.graphstream.graph.Edge;
+import org.graphstream.stream.ProxyPipe;
+import org.graphstream.ui.graphicGraph.GraphPosLengthUtils;
+import org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Units;
+import org.graphstream.ui.layout.springbox.implementations.LinLog;
+import org.graphstream.ui.spriteManager.Sprite;
+import org.graphstream.ui.spriteManager.SpriteManager;</pre>
+	<p>We will need them in the following.</p>
+</div>
+
+<div class="step">
+<h2>Step 2</h2>
+	<p>We will now:</p>
+	<ol>
+		<li>Stop the automatic layout.</li>
+		<li>Create our own <code>LinLog</code> layout.</li>
+		<li>Configure it using some \((a, r)\) parameters.</li>
+		<li>Connect the layout graph events output to the graph so that
+			the graph nodes receive position attributes.</li>
+		<li>Connect the graph to the layout so that the layout receive
+			each modification event on the graph.</li>
+		<li>Run the layout in a loop.</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 2</h2>
+	<pre class="prettyprint lang-java">
+public class LinLogLayout {
+	// ...
+	<span class="hcode">private LinLog layout;</span>
+	<span class="hcode">private double a = 0;</span>
+	<span class="hcode">private double r = -1.3;</span>
+	<span class="hcode">private double force = 3;</span>
+	public void findCommunities(String fileName) throws ... {
+		graph = new SingleGraph("communities");
+		viewer = graph.display(<span class="hcode">false</span>);		<span class="nocode">// 1</span>
+		<span class="hcode">layout = new LinLog(false);</span>		<span class="nocode">// 2</span>
+		<span class="hcode">layout.configure(a, r, true, force);</span>	<span class="nocode">// 3</span>
+		<span class="hcode">layout.addSink(graph);</span>			<span class="nocode">// 4</span>
+		<span class="hcode">graph.addSink(layout);</span>			<span class="nocode">// 5</span>
+		graph.read(fileName);
+		
+		<span class="hcode">while(true) {</span>				<span class="nocode">// 5</span>
+		<span class="hcode">	layout.compute();</span>
+		<span class="hcode">}</span>
+	}
+}</pre>
+
+	<p>Run this example to see the new <em>Lin-Log</em> layout and compare it to the
+	old version.</p>
+</div>
+
+<div class="step">
+<h2>Step 3</h2>
+	<p>As said before the viewer runs in its own thread or process.
+	Therefore interactions you make with it are not directly reflected on
+	the graph structure you use.</p>
+
+	<p>Try grabbing a node with the mouse and move it.</p>
+
+	<p>We will:</p>
+
+	<ol>
+		<li>Create a back link from the viewer to our program to receive its
+			interactions.</li>
+		<li>Connect this link to our graph so that it is modified by the
+			viewer events.</li>
+		<li>Consult these events regularly to update the graph from the user
+			interactions.</li>
+		<li>Check if the user closed the viewer window to properly end the
+			program.</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 3</h2>
+	<pre class="prettyprint lang-java">
+public class LinLogLayout {
+	// ...
+	<span class="hcode">private ProxyPipe fromViewer;</span>
+	public void findCommunities(String fileName) throws ... {
+		graph = new SingleGraph("communities");
+		viewer = graph.display(false);
+		<span class="hcode">fromViewer = viewer.newThreadProxyOnGraphicGraph();</span>	<span class="nocode">// 1</span>
+		layout = new LinLog(false);
+		
+		layout.configure(a, r, true, force);
+		layout.addSink(graph);
+		graph.addSink(layout);
+		<span class="hcode">fromViewer.addSink(graph);</span>				<span class="nocode">// 2</span>
+
+		graph.read(fileName);
+		
+		while(<span class="hcode">! graph.hasAttribute("ui.viewClosed")</span>) {		<span class="nocode">// 4</span>
+			<span class="hcode">fromViewer.pump();</span>				<span class="nocode">// 3</span>
+			layout.compute();
+		}
+	}
+}</pre>
+	<p>Now try to grab a node in the display.</p>
+</div>
+
+<div class="step">
+<h2>Finding community structure with a Lin-Log layout</h2>
+	<p>At the contrary of the <em>Frutcherman-Reingold</em> layout,
+	<em>Lin-Log</em> creates some very long edges between nodes in distinct
+	communities and short edges between nodes in the same communities.</p>
+
+	<ul>
+		<li>We can use this property to obtain a quick (and hopefully good enough)
+		approximation of the communities.</li>
+
+		<li>The technique relies on cutting the edges that are longer than the
+		global average edge length.</li>
+
+		<li>We can then move the cut above or under this average to improve
+		the communities.</li>
+	</ul>
+</div>
+
+<div class="step">
+<h2>Step 4</h2>
+	<p>We will:</p>
+
+	<ol>
+		<li>Add a style sheet on the graph to tell the viewer how to
+			better display the graph.</li>
+		<li>Beautify the display a little by adding some anti-aliasing.</li>
+		<li>Prepare for detection of communities using the layout.</li>
+		<li>Specify a cut threshold (a factor for the average edge length).</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 4</h2>
+
+<pre class="prettyprint lang-java">
+public class LinLogLayout {
+	// ...
+	<span class="hcode">private double cutThreshold = 1;</span>				<span class="nocode">// 4</span>
+	public void findCommunities(String fileName) throws ... {
+		// ...
+		<span class="hcode">graph.addAttribute("ui.antialias");</span>			<span class="nocode">// 2</span>
+		<span class="hcode">graph.addAttribute("ui.stylesheet", styleSheet);</span>	<span class="nocode">// 1</span>
+		graph.read(fileName);
+		while(! graph.hasAttribute("ui.viewClosed")) {
+			fromViewer.pump();
+			layout.compute();
+			<span class="hcode">showCommunities();</span>				<span class="nocode">// 3</span>
+		}
+	}
+	
+	<span class="hcode">public void showCommunities() {</span>					<span class="nocode">// 3</span>
+	<span class="hcode">	// ...</span>
+	<span class="hcode">}</span>
+	
+	<span class="hcode">protected static String styleSheet =</span>				<span class="nocode">// 1</span>
+			<span class="hcode">"node { size: 7px; fill-color: rgb(150,150,150); }" +</span>
+			<span class="hcode">"edge { fill-color: rgb(255,50,50); size: 2px; }" +</span>
+			<span class="hcode">"edge.cut { fill-color: rgba(200,200,200,128); }";</span>
+}</pre>
+</div>
+
+<div class="step">
+<h2>Step 4 a</h2>
+	<p>In the style sheet, we specify that each edge will be red, excepted
+	edges with the <code>ui.class</code> set to the value
+	"<code>cut</code>" that will be grey.</p>
+
+	<p>It remains to provide the code to detect the communities, in the <code>showCommunities()</code>
+	method. We will do it in two sub-steps. First we will:</p>
+
+	<ol>
+		<li>Browse each edge of the graph</li>
+		<li>Store each edge length in an array of real values.</li>
+		<li>Doing this we will compute the average edge length.</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 4 a</h2>
+<pre class="prettyprint lang-java">
+public void showCommunities() {
+	int nEdges = graph.getEdgeCount();
+	double averageDist = 0;
+	double edgesDist[] = new double[nEdges];
+	
+	for(int i=0; i&lt;nEdges; i++) {					<span class="nocode">// 1</span>
+		Edge edge = graph.getEdge(i);
+		edgesDist[i] = GraphPosLengthUtils.edgeLength(edge);	<span class="nocode">// 2</span>
+		averageDist += edgesDist[i];				<span class="nocode">// 3</span>
+	}
+	
+	averageDist /= nEdges;						<span class="nocode">// 3</span>
+	// ...
+}</pre>
+</div>
+
+<div class="step">
+<h2>Step 4 b</h2>
+	<p>Now we will select which edge is inter-community, mark it an show it in
+	the viewer. We will:</p>
+
+	<ol>
+		<li>Browse anew each edge in the same order.</li>
+		<li>Compare their length stored in the array of lengths with the average length.
+		<ol>
+			<li>If they are longer, mark them with a "<code>cut</code>" attribute and a "<code>cut</code>" <code>ui.class</code>.</li>
+			<li>Else, remove the "<code>cut</code>" attribute and <code>ui.class</code>.</li>
+		</ol>
+		</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 4 b</h2>
+<pre class="prettyprint lang-java">
+public void showCommunities() {
+	// ...
+	averageDist /= nEdges;
+	
+	for(int i=0; i&lt;nEdges; i++) {					<span class="nocode">// 1</span>
+		Edge edge = graph.getEdge(i);
+		
+		if(edgesDist[i] &gt; averageDist * cutThreshold) {		<span class="nocode">// 2</span>
+			edge.addAttribute("ui.class", "cut");		<span class="nocode">// 2a</span>
+			edge.addAttribute("cut");
+		} else {
+			edge.removeAttribute("ui.class");		<span class="nocode">// 2b</span>
+			edge.removeAttribute("cut");				
+		}
+	}
+}</pre>
+
+	<p>Run the program to see the communities.</p>
+</div>
+
+<div class="step">
+<h2>The Zachary Karate Club</h2>
+	<p>The graph we use as a demo comes from a well known social study
+	in a Karate Club.</p>
+
+	<p>Nodes represent members and edges their friendship ties.</p>
+
+	<p>At a given time one of the member left the club to create its own
+	club. Some members stayed in the old one, while others quit to join the
+	new one.</p>
+
+	<p>This graph usually admits at least two communities (the two clubs),
+	although smaller sub-communities can be observed.</p>
+</div>
+
+<div class="step">
+<h2>Computing the number of communities</h2>
+	<p>We will now compute the number of communities.</p>
+
+	<p>GraphStream contains a dynamic algorithm that allows to compute and update
+	the number of <em>connected components</em> of a graph.</p>
+
+	<p>This algorithm can consider some edges as inexistent if they have a specific
+	attribute, say here "<code>cut</code>".</p>
+
+	<p>In addition, we will use <em>sprites</em> in the viewer to have a visual
+	indication of the number of communities.</p>
+</div>
+
+<div class="step">
+<h2>Step 5 a</h2>
+	<p>We will anew proceed in two sub-steps:</p>
+
+	<p>first compute the number of connected components</p>
+
+	<ol>
+		<li>Add a connected component algorithm.</li>
+		<li>Initialize it on the graph.</li>
+		<li>Setup a <em>cut</em> attribute so that the algorithm ignore the long edges.</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 5 a</h2>
+<pre class="prettyprint lang-java">
+// ...
+<span class="hcode">private ConnectedComponents cc;</span>					<span class="nocode">// 1</span>
+public void findCommunities(String fileName) throws ... {
+	graph = new SingleGraph("communities");
+	viewer = graph.display(false);
+	fromViewer = viewer.newThreadProxyOnGraphicGraph();
+	layout = new LinLog(false);
+	<span class="hcode">cc = new ConnectedComponents(graph);</span>			<span class="nocode">// 2</span>
+	
+	layout.configure(a, r, true, force);
+	<span class="hcode">cc.setCutAttribute("cut");</span>				<span class="nocode">// 3</span>
+	// ...
+	while(! graph.hasAttribute("ui.viewClosed")) {
+		fromViewer.pump();
+		layout.compute();
+		showCommunities();
+	}
+}</pre>
+</div>
+
+<div class="step">
+<h2>Step 5 b</h2>
+<p>Then we display this number of connected components using a sprite:</p>
+	<ol>
+		<li>Create a sprite that will indicate the connected component count.</li>
+		<li>Position this sprite.</li>
+		<li>Update it regularly with the number of components.</li>
+		<li>Update the style sheet to display the sprite correctly.</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 5 b</h2>
+<pre class="prettyprint lang-java">
+// ...
+<span class="hcode">private SpriteManager sm;</span>
+<span class="hcode">private Sprite ccCount;</span>
+public void findCommunities(String fileName) throws ... {
+	// ...
+	cc = new ConnectedComponents(graph);
+	<span class="hcode">sm = new SpriteManager(graph);</span>				<span class="nocode">// 1</span>
+	<span class="hcode">ccCount = sm.addSprite("CC");</span>				<span class="nocode">// 1</span>
+	// ...	
+	cc.setCutAttribute("cut");
+	<span class="hcode">ccCount.setPosition(Units.PX, 20, 20, 0);</span>		<span class="nocode">// 2</span>
+	// ...
+	while(! graph.hasAttribute("ui.viewClosed")) {
+		//...
+		showCommunities();
+		<span class="hcode">ccCount.setAttribute("ui.label",</span>		<span class="nocode">// 3</span>
+			<span class="hcode">String.format("Modules %d", cc.getConnectedComponentsCount()));</span>
+	}
+}
+// ...
+protected static String styleSheet =				<span class="nocode">// 4</span>
+		"node { size: 7px; fill-color: rgb(150,150,150); }" +
+		"edge { fill-color: rgb(255,50,50); size: 2px; }" +
+		"edge.cut { fill-color: rgba(200,200,200,128); }" +
+		<span class="hcode">"sprite#CC { size: 0px; text-color: rgb(150,100,100); text-size: 20; }";</span></pre>
+</div>
+
+<div class="step">
+<h2>Computing the modularity</h2>
+	<p>Now that the communities are well identified we can measure the quality of the partition.</p>
+
+	<p>GraphStream provides a modularity algorithm that, like the connected components algorithm,
+	try to follow each update on the graph.</p>
+
+	<p>However the modularity algorithm needs that each node contain an attribute indicating its
+	community.</p>
+
+	<p>Fortunately, the connected components algorithm can identify each component.</p>
+</div>
+
+<div class="step">
+<h2>Step 6 a</h2>
+	<p>We will:</p>
+	<ol>
+		<li>Add the modularity algorithm.</li>
+		<li>Create it so that it uses the attribute "<code>module</code>" on nodes
+			to identify communities.</li>
+		<li>Initialise it on the graph.</li>
+		<li>Request that the connected components algorithm identify components/communities
+			with the attribute "<code>module</code>".</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 6 a</h2>
+<pre class="prettyprint lang-java">
+// ...
+<span class="hcode">private Modularity modularity;</span>			<span class="nocode">// 1</span>
+public void findCommunities(String fileName) throws ... {
+	cc = new ConnectedComponents(graph);
+	sm = new SpriteManager(graph);
+	ccCount = sm.addSprite("CC");
+	<span class="hcode">modularity = new Modularity("module");</span>	<span class="nocode">// 2</span>
+	
+	<span class="hcode">modularity.init(graph);</span>			<span class="nocode">// 3</span>
+	layout.configure(a, r, true, force);
+	cc.setCutAttribute("cut");
+	ccCount.setPosition(Units.PX, 20, 20, 0);
+	<span class="hcode">cc.setCountAttribute("module");</span>		<span class="nocode">// 4</span>
+	// ...
+}</pre>
+</div>
+
+<div class="step">
+<h2>Step 6 b</h2>
+	<p>We will:</p>
+	<ol>
+		<li>Add a sprite for the modularity.</li>
+		<li>Position it.</li>
+		<li>Update it regularly with the modularity value.</li>
+		<li>Update the style sheet for this other sprite.</li>
+	</ol>
+</div>
+
+<div class="step">
+<h2>Step 6 b</h2>
+<pre class="prettyprint lang-java">
+// ...
+<span class="hcode">private Sprite ccCount, modValue;</span>			<span class="nocode">// 1</span>
+public void findCommunities(String fileName) throws ... {
+	// ...
+	modularity = new Modularity("module");
+	<span class="hcode">modValue = sm.addSprite("M");</span>			<span class="nocode">// 1</span>
+	// ...
+	cc.setCutAttribute("cut");
+	ccCount.setPosition(Units.PX, 20, 20, 0);
+	cc.setCountAttribute("module");
+	<span class="hcode">modValue.setPosition(Units.PX, 20, 40, 0);</span>	<span class="nocode">// 2</span>
+	// ...
+	while(! graph.hasAttribute("ui.viewClosed")) {
+		//...
+		ccCount.setAttribute("ui.label",
+			String.format("Modules %d", cc.getConnectedComponentsCount()));
+		<span class="hcode">modValue.setAttribute("ui.label",</span>	<span class="nocode">// 3</span>
+			<span class="hcode">String.format("Modularity %f", modularity.getMeasure()));</span>
+	}
+}
+
+protected static String styleSheet =
+		// ...					<span class="nocode">// 4</span>
+		"sprite#CC { size: 0px; text-color: rgb(150,100,100); text-size: 20; }" +
+		<span class="hcode">"sprite#M  { size: 0px; text-color: rgb(100,150,100); text-size: 20; }";</span></pre>
+</div>
+
+<div class="step">
+<h2>That's it</h2>
+	<p>That is all for this tutorial.</p>
+
+	<p>Some other graphs are provided in the <code>data</code> directory of
+	the eclipse project.</p>
+
+	<p>You can experiment on them, and play with the
+	<code>cutThreshold</code> parameter as well as the \((a, r)\) and
+	<code>force</code> parameters. Here is a set of good values for these
+	graphs:</p>
+
+	<table align="center">
+		<tr><th>Graph</th>		<th>a</th>	<th>r</th>	<th>force</th>	<th>cutThreshold</th>	<th> expected modularity</th></tr>
+		<tr><td>karate.gml</td>		<td>0</td>	<td>-1.3</td>	<td>3</td>	<td>1</td>		<td>0.43 to 0.52</td></tr>
+		<tr><td>dolphins.gml</td>	<td>0</td>	<td>-1.2</td>	<td>8</td>	<td>0.8</td>		<td>0.44 to 0.52</td></tr>
+		<tr><td>polbooks.gml</td>	<td>0</td>	<td>-1.9</td>	<td>5</td>	<td>0.8</td>		<td>0.43 to 0.51</td></tr>
+	</table>
+</div>
+
+
+
+</div>
+
+<!-- build:js scripts/vendor/jmpress.js -->
+<script src="bower_components/jmpress/jmpress.js"></script>
+<!-- endbuild -->    
+
+<!-- build:js scripts/main.js -->
+<script type="text/javascript" src="scripts/prettify.js"></script>
+<script type="text/javascript" src="scripts/lang-css.js"></script>
+<script type="text/javascript" src="scripts/lecture.js"></script>
+<!-- endbuild -->   
+ 
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "GSTalkSimtools",
+  "version": "0.0.1",
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "jmpress": "0.4.5"
+  },
+  "devDependencies": {}
+}
