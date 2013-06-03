@@ -1,6 +1,1 @@
-*.mp4
-node_modules
-.DS_Store 
-.classpath 
-.metadata 
-.project
+.DS_Store
