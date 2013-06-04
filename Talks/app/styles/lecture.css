@@ -2,18 +2,18 @@
 /* = FONTS = */
 /* ========= */
 
-/*
+
 @font-face {
-    font-family: 'Play';
-    src: url('../fonts/Play/Play-Regular.ttf') format('truetype');
+    font-family: 'Muli';
+    src: url('../fonts/Muli/Muli-Regular.ttf') format('truetype');
     font-style: normal;
     font-weight: 400;
 }
 @font-face {
-    font-family: 'Play';
-    src: url('../fonts/Play/Play-Bold.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 700;
+    font-family: 'Muli';
+    src: url('../fonts/Muli/Muli-Italic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 400;
 }
 @font-face {
     font-family: 'Playfair Display';
@@ -21,6 +21,7 @@
     font-style: italic;
     font-weight: 700;
 }
+/*
 @font-face {
     font-family: 'Playfair Display';
     src: url('../fonts/Playfair_Display/PlayfairDisplay-Bold.ttf') format('truetype');
@@ -39,13 +40,13 @@
     font-style: normal;
     font-weight: 400;
 }
+*/
 @font-face {
     font-family: 'Oxygen Mono';
-    src: url('../fonts/OxygenMono-Regular.ttf') format('truetype');
+    src: url('../fonts/Oxygen_Mono/OxygenMono-Regular.ttf') format('truetype');
     font-style: normal;
     font-weight: 400;
 }
-*/
 
 /* ================== */
 /* = ELEMENTS STYLE = */
@@ -210,6 +211,9 @@ border-top: 1px solid #ccc;
 strong,em,b {
   color: #d0410f;
 }
+b {
+  font-weight: 700;
+}
 
 code {background-color: #eee; padding: 0px; border: 1px solid #aaa ; border-radius: 8px}
 
@@ -229,6 +233,7 @@ code {background-color: #eee; padding: 0px; border: 1px solid #aaa ; border-radi
   position: absolute;
   bottom: 0;
   display:block;
+  width:100%;
 }
 
 .below {

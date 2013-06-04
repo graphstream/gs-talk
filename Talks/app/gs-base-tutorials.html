@@ -12,7 +12,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
 
-  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Oxygen+Mono|Muli' rel='stylesheet' type='text/css'>
+ 
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	
@@ -118,7 +118,7 @@ an "Guilhelm Savin"</pre>
     </li>
     <li> Get the code:
     	<ul>
-    		<li>with the "Zip" button on github (will dowload an archive)</li>
+    		<li>with the "Zip" button on github (will download an archive)</li>
     		<li><b>or</b> through git: <br>
     		<code>git clone git://github.com/graphstream/gs-talk-simtools.git</code>
     		</li>
@@ -135,11 +135,11 @@ an "Guilhelm Savin"</pre>
 
     <ul>
       <li>Start Eclipse.</li>
-      <li>When asked about a workspace, indicate a new workspace or any exixting one.</li>
+      <li>When asked about a workspace, indicate a new workspace or any existing one.</li>
       <li>Go to menu <code>File &gt; Import &gt; General &gt; Existing projects into workspace</code>.</li>
       <li>Browse to the project (<code>Demos</code>  folder), Eclipse should recognize the project.</li>
       <li>Maven users: noting to do here</li>
-      </ul>
+      </ul> 
 </div>
 
 
@@ -147,12 +147,13 @@ an "Guilhelm Savin"</pre>
 <div class="step" >
   <h2>Get GraphStream binaries</h2>
     <ul>
-      <li>Go to the GraphStream Nightly Builds page at:<br>
-        <a href="http://graphstream-project.org/pub/1.x/nightly-build/last/">http://graphstream-project.org/pub/1.x/nightly-build/last/</a></li>
-      <li>We need the 3 binaries <ul><li><code>gs-algo-1.2-git-last.jar</code></li><li> <code>gs-core-1.2-git-last.jar</code></li><li><code>gs-ui-1.2-git-last.jar</code></li></ul> </li>
-      <li> Save those jar files in the <code>lib/</code> folder of project.</li>
+      <li>Go to the GraphStream Download page:<br>
+        <a href="http://graphstream-project.org/download/">http://graphstream-project.org/download/</a></li>
+      <li>We need the 3 binaries of the last 1.2 release: <br>
+      	<code>gs-algo-1.2.zip</code>, <code>gs-core-1.2.zip</code>, <code>gs-ui-1.2.zip</code>.</li>
+      <li> Extract those zip file, and copy  <code>gs-algo-1.2.jar</code>, <code>gs-core-1.2.jar</code>, <code>gs-ui-1.2.jar</code> to the <code>lib/</code> folder of the project.</li>
       <li>In Eclipse, select the project in the right panel and refrech the project (F5 key).</li>
-      <li>Right-clic on the project (<code>gs-talk-simtools)</code>, then <code>properties</code>, then <code>Java build path</code> (left panel), then <code>libraries</code> (right panel), then clic the <code>Add jars</code> button, and select our 3 jar files in the <code>gs-talk-simtools/lib</code> folder. </li>
+      <li>Right-clic on the project (<code>gs-talk-simtools</code>), then <code>properties</code>, then <code>Java build path</code> (left panel), then <code>libraries</code> (right panel), then clic the <code>Add jars</code> button, and select our 3 jar files in the <code>gs-talk-simtools/lib</code> folder. </li>
       <li>Maven : <code>mvn compile</code> </li>
         </ul>
 </div>
@@ -165,6 +166,7 @@ an "Guilhelm Savin"</pre>
 
 <div  class="step">
 <h1>Tutorial 1</h1>
+<br><br>
 <h2>Basic tasks with GraphStream</h2>
 	
 </div>
@@ -172,7 +174,7 @@ an "Guilhelm Savin"</pre>
 <div class="step">
 <h2>Create and display</h2>
 
-	<p>Open <code> src &gt; org &gt; graphstream &gt; demo &gt; tutorial1 &gt; Tutorial1.java</code>:</p>
+	<p>Open <code> src &gt; org &gt; graphstream &gt; demo &gt; tutorial1 &gt; Tutorial1.java</code></p>
 		
 	<pre class="prettyprint lang-java">
 import org.graphstream.graph.*;
@@ -203,7 +205,7 @@ public class Tutorial1 {
 ...
 graph.display();
 
-<span class="hcode">graph.addAttribute("ui.quality");
+<span class="codeh">graph.addAttribute("ui.quality");
 graph.addAttribute("ui.antialias");
 graph.addAttribute("ui.stylesheet",
 	"edge { fill-color: grey; }");
@@ -351,7 +353,6 @@ while(edges.hasNext()) {
 	
 	<p><pre class="prettyprint lang-java">
 int n = graph.getNodeCount();
-
 for(int i=0; i&lt;n; i++) {
 	System.out.println(graph.getNode(i).getId());
 }</pre></p>
@@ -360,15 +361,13 @@ for(int i=0; i&lt;n; i++) {
 	
 	<p><pre class="prettyprint lang-java">
 int n = graph.getEdgeCount();
-
 for(int i=0; i&lt;n; i++) {
 	System.out.println(graph.getEdge(i).getId());
-}
-		</pre></p>
+}</pre></p>
 
-	<p>Be careful: indices remains the same as long as the graph is
-	unchanged, but as soon as an addition or removal occurs, indices are no
-	more tied to their old node or edge.</p>
+	<p>Be careful: indices remain the same as long as the graph is
+	unchanged. But as soon as an addition or removal occurs, indices are no
+	longer tied to their old node or edge.</p>
 </div>
 	
 <div class="step">
@@ -389,8 +388,8 @@ for(Edge e: node.getEachEdge()) {
 </pre></p>
 
 	<ul>
-		<li><code>Toolkit</code> is a collection of often used methods and small algorithms.</li>
 		<li>Each node and edge allows to iterate on its neighbourhood.</li>
+		<li><code>Toolkit</code> is a collection of often used methods and small algorithms.</li>
 	</ul>
 </div>
 	
@@ -416,6 +415,7 @@ System.out.println(“Node degree %d (entering %d, leaving %d)%n”,
 
 <div id="home" class="step">
 <h1>Tutorial 2</h1>
+<br><br>
 <h2>A first dynamic graph</h2>
 	
 </div>
@@ -487,12 +487,10 @@ public interface Source {
 
 <div class="step">
 <h2>A first dynamic graph</h2>
-	<br/>
+	<br/><br><br>
 	<div class="text_center"><img style="width:20%" src="images/Source.png"/><img style="width:20%" src="images/Link.png"/><img style="width:20%" src="images/Sink.png"/></div>
 	<br/>
-	<div class="theBlock">
-	<center>These three interfaces are the most important of GraphStream.</center>
-	</div>
+	
 </div>
 
 <div class="step">
@@ -508,9 +506,9 @@ public interface Source {
 
 <div class="step">
 <h2>A first dynamic graph</h2>
-	<p>A DGS file looks like this. You can find it in the <code>Tutorial2 &gt; tutorial2.dgs</code></p>
+	<p>A DGS file looks like this. You can find it in the <code>data &gt; tutorial2.dgs</code></p>
 	<p><div class="left" style="width: 40%;">
-	<pre class="prettyprint lang-java">
+	<pre class="prettyprint lang-java nowatermark">
 DGS003
 "Tutorial 2" 0 0
 an "A"
@@ -651,7 +649,7 @@ an "E" x=-1 y=1</pre></p>
 	<ul>
 		<li>You have to tell the viewer it should not place nodes for you:</li>
 	</ul>
-	<p><pre class="prettyprint lang-java">
+	<p><pre class="prettyprint lang-java nowatermark">
 	graph.display(false);</pre></p>
 	<ul>
 		<li>You can now run the program anew.</li>
@@ -660,15 +658,15 @@ an "E" x=-1 y=1</pre></p>
 
 
 
-
-   <!-- ==== SLIDE ==== -->
-   <div class="step">
+  <!-- ==== SLIDE ==== -->
+   <div class="step" id="Slides_and_Material">
      <h2>Slides and Material</h2>
-<br><br><p>Get the Slides and Materials for this session on GraphStream tutorial page at:</p>
-<p>  <a href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/">http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/</a>
+<br><br><p>Get the Slides and Materials online:</p>
+<p>  <a href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/Simtools-2013/">http://graphstream-project.org/doc/Tutorials/Lab-Sessions/Simtools-2013/</a>
+
+<p>  <a href="http://github.com/graphstream/gs-talk-simtools">https://github.com/graphstream/gs-talk-simtools</a>
   </p>
   </div>
-  
   
 
 </div>
