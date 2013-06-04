@@ -19,7 +19,7 @@ import org.graphstream.graph.implementations.SingleGraph;
  */
 public class FunOrDull {
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("gs.ui.renderer",
+		System.setProperty("org.graphstream.ui.renderer",
 				"org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 		Graph graph = new SingleGraph("fun or dull");
 		graph.display();
