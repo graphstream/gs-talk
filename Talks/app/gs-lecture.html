@@ -12,7 +12,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
 
-  <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Oxygen+Mono|Muli' rel='stylesheet' type='text/css'>
 
   <!-- build:css styles/main.css -->
   <link href="styles/prettify.css" type="text/css" rel="stylesheet" />
@@ -49,7 +48,7 @@
     Paris, June  5<sup>th</sup> 2013</p>
     </div>
   </div>
-  <div class="bottom"><img src="images/gs-logo.png" alt="GS Logo"></div>
+  <div class="bottom"><img style="width:30%" src="images/gs-logo.png" alt="GS Logo"></div>
   
     <!-- <pre class="prettyprint lang-shell">DGS0004
  "GraphStream Team" 4 0 
@@ -65,7 +64,7 @@
 <!-- ============ -->
 
   <!-- ==== SLIDE ==== -->
-  <div class="step" >
+  <div class="step" id ="Outlook">
     <h2>Outlook</h2>  
       <ol class="x2">
         <li>Dynamic Graphs</li>
@@ -97,7 +96,7 @@
 
 <!-- ==== SLIDE ==== -->
 
-<div class="step anilib active">
+<div class="step anilib" id="Static_Graphs">
   <h2>First, static graphs</h2>
   <div class="left" style="width:50%">
     <p class="x2">Structure: </p>
@@ -107,7 +106,7 @@
       <li >(directed) Arcs</li>
     </ul>
     
-    <div class="text_center" style=""><img src="images/simpleGraph.png" style="height:45%;" /></div>
+    <div class="text_center" style=""><img src="images/simpleGraph.png" style="width:50%;" /></div>
   </div>
   <div class="right" style="width:50%">
     <p class="x2">Algorithms: Graphs Theory</p>
@@ -123,9 +122,10 @@
 
 <!-- ==== SLIDE ==== -->
 
-<div class="step">
+<div class="step" id="Dynamic_Graphs">
   <h2>When we add dynamics...</h2>
-  <div  class="left" style="width:70%">
+  <div class="threecols">
+  <div  class="firstsecond" >
     <p class="x2">What kind of dynamics?</p>
     <ul>
       <li class="">values/weight on edges or nodes? </li>
@@ -138,14 +138,15 @@
       <li class="">Depends on the dynamic graph model.</li>
     </ul>
   </div>
-  <div class="right" style="width:30%">
-    <div class="text_center" style=""><img src="images/simpleGraphSin.png" style="height:50%;" /></div>
+  <div class="third" >
+    <div class="" style=""><img src="images/simpleGraphSin.png" style="width:100%;" /></div>
+  </div>
   </div>
 </div>
 
   <!-- ==== SLIDE ==== -->
 
-	<div class="step">
+	<div class="step" id="Dynamic_Graphs_Models">
 	  <h2>Dynamic Graph Models</h2><br><br>
 	  <p class="x2">Many graph models consider in some ways the dynamics</p>
 	  <ul><li class="">but they are bounded to their application domain</li></ul>
@@ -153,7 +154,7 @@
   </div>
 
   <!-- ==== SLIDE ==== -->
-	<div class="step">
+	<div class="step" id="Complex_Networks">
 	  <h2>Complex Networks</h2>
 	  <p class="x2"><strong>Exploration</strong>: analysis of "real world" networks (web graphs, biological networks, social networks)</p>
     <p class="x2"><strong>Modelling</strong>: build artificial networks (preferential attachment)</p>
@@ -163,28 +164,28 @@
   </div>
   
   <!-- ==== SLIDE ==== -->
-	<div class="step">
+	<div class="step" id="Aggregative_Methods">
   <h2>Aggregative Methods</h2>
   <p>All the evolution is <em><strong>known</strong></em> in advance, the dynamic graph is aggregated into a static graph.</p>
   <p>Why? Because it allows the use of classical graph theory.</p>
   <div class="text_center" style="">
-    <img src="images/aggreg.png" style="height:55%;" />
+    <img src="images/aggreg.png" style="width:50%;" />
   </div>
   </div>
 
   <!-- ==== SLIDE ==== -->
-	<div class="step">
+	<div class="step" id="Reoptimisation">
   <h2>Re-optimisation</h2>
   <p>Build and maintain structures on dynamic graphs (e.g. spanning trees).</p>
   <p class=''>
-    Updating an existing structure after some modifications more effective that recomputing it from scratch.   
+    Updating an existing structure after some modifications is more effective that recomputing it from scratch.   
   </p>
-  <div class="text_center" style=""><img src="images/reop.png" style="height:55%;" /></div>
+  <div class="text_center" style=""><img src="images/reop.png" style="width:50%" /></div>
   
   </div>
 
   <!-- ==== SLIDE ==== -->
-	<div class="step">
+	<div class="step" id="GraphStream_Goals">
   <h2>GraphStream</h2>
   <br>
   <br>
@@ -201,11 +202,13 @@
 <li>Yoann Pigné</li>
 <li>Guilhelm Savin</li>
 </ul>
+<!-- <div class="bottom"><img style="width:30%" src="images/gs-logo.png" alt="GS Logo"></div> -->
+
   </div>
 
   <!-- ==== SLIDE ==== -->
 
-    <div class="step" >    <!-- <h2>Introduction</h2> -->
+    <div class="step" id="In_a_Nutshell">    <!-- <h2>Introduction</h2> -->
       
       <h2>In a nutshell</h2>
       <p>Java library with a handy public API<p>
@@ -221,8 +224,9 @@
         <li>Online: through the API or through a network connection</li>
       </ul>
     </div>
+
   <!-- ==== SLIDE ==== -->
-    <div class="step" >
+    <div class="step" id="Architecture">
       <h2>Architecture</h2>
       <div class="threecols">
         <div class="first">
@@ -256,7 +260,7 @@
     </div>
 
     <!-- ==== SLIDE ==== -->
-    <div class="step" >
+    <div class="step" id="Get_GS">
       <h2>Get GraphStream!</h2>
       <h3>On the website</h3>
         <ul>
@@ -279,7 +283,7 @@
 <!-- ==== SLIDE ==== -->
 
 
-<div class="step">
+<div class="step" id="Event_Model">
   <h2>GraphStream's Event Model</h2>
   <p class="x2">The dynamics of the graph is expressed by an event model</p>
   <p class="x2">Events can be:</p>
@@ -298,7 +302,7 @@
 
   <!-- ==== SLIDE ==== -->
 
-  <div class="step">
+  <div class="step" id="Event_Model_2">
     
     <h2>GraphStream's Event Model</h2>
     <div class="left" style="width:70%;">
@@ -310,16 +314,16 @@
       <h3>Pipes</h3>
       <p>They are both source and sink. A <strong><em>graph</em></strong> is a pipe.</p>
     </div>
-    <div class="right" style="width:30%;">
-      <div><img src="images/Source.png" style="vertical-align:middle;height:20%"/> Source</div>
-      <div><img src="images/Sink.png" style="vertical-align:middle;height:20%"/> Sink</div>
-      <div><img src="images/Pipe.png" style="vertical-align:middle;height:20%"/> Pipe</div>
+    <div class="right" style="width:30%; ">
+      <div><img src="images/Source.png" style="vertical-align:middle;width:40%"/> Source</div>
+      <div><img src="images/Sink.png" style="vertical-align:middle;width:40%"/> Sink</div>
+      <div><img src="images/Pipe.png" style="vertical-align:middle;width:40%"/> Pipe</div>
     </div>
   </div>
 
 <!-- ==== SLIDE ==== -->
 
-  <div class="step">
+  <div class="step" id="Pipeline">
   <h2>Pipelining</h2>
   <p>Sources send their events to sinks.</p>
     <ul>
@@ -347,7 +351,7 @@
         </table>
      -->		
      <div  class=" text_center" >
-        <img style="height:20%" src="images/Source.png"/><img style="height:20%" src="images/Link.png"/><img style="height:20%"  src="images/Pipe.png"/><img style="height:20%" src="images/Link.png"/><img style="height:20%" src="images/Sink.png"/>
+        <img style="width:15%" src="images/Source.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%"  src="images/Pipe.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%" src="images/Sink.png"/>
       </div>
       <div  class=" text_center" >
          <p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">File</p><p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Graph</p>
@@ -363,7 +367,7 @@
 
   <!-- ==== SLIDE ==== -->
 
-    <div class="step">
+    <div class="step" id="Pipeline2">
     <h2>Pipelining</h2>
     <pre class="prettyprint lang-java">
 Graph graph = new SingleGraph("Some Graph");	
@@ -376,14 +380,16 @@ while( source.nextEvents() ){
 }
 source.end();</pre>
 
-  <div  class="text_center" >
-     <img style="height:20%" src="images/Source.png"/><img style="height:20%" src="images/Link.png"/><img style="height:20%"  src="images/Pipe.png"/><img style="height:20%" src="images/Link.png"/><img style="height:20%" src="images/Sink.png"/>
-   </div>
-   <div  class="text_center" >
-      <p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">File</p><p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Graph</p>
-      <p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Viewer</p>
-      
-   </div>
+  <div  class=" text_center" >
+        <img style="width:15%" src="images/Source.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%"  src="images/Pipe.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%" src="images/Sink.png"/>
+      </div>
+      <div  class=" text_center" >
+         <p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">File</p><p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Graph</p>
+         <p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Viewer</p>
+         
+      </div>
+      <p style="clear:both;"></p>
+
 
 
 
@@ -392,7 +398,7 @@ source.end();</pre>
 
   <!-- ==== SLIDE ==== -->
 
-  <div class="step">
+  <div class="step" id="Pipeline3">
     <h2>Pipelining</h2>
   	<p>The stream of events can flow between sources and sinks:</p>
 
@@ -404,14 +410,14 @@ source.end();</pre>
 
     <p>For example a viewer can run in a distinct thread or machine, while a
       simulation on a graph runs on another.</p>
-    <div class="text_center"><img style="height:20%" src="images/LinkStart.png"/><img style="height:20%" src="images/PipeCloud.png"/><img style="height:20%" src="images/LinkEnd.png"/></div>
+    <div class="text_center"><img style="width:15%" src="images/LinkStart.png"/><img style="width:15%" src="images/PipeCloud.png"/><img style="width:15%" src="images/LinkEnd.png"/></div>
   </div>
 
 
 
   <!-- ==== SLIDE ==== -->
 
-  <div class="step">
+  <div class="step" id="Pipeline4">
     <h2>Pipelining</h2>
   	<p>Receive events from another some other process/thread/programme/machine</p>
   	
@@ -432,7 +438,7 @@ while (true) {
 
   <!-- ==== SLIDE ==== -->
 
-  <div class="step">
+  <div class="step" id="Graph_Components">
     <h2>Graph components</h2>
     <p>
     Several classes for various graph structures.
@@ -456,7 +462,7 @@ while (true) {
 
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Data_Attributes">
   <h2>Data Attributes</h2>
   <ul>
     <li>Any number of data attributes can be associated with any element of the graph.</li>
@@ -472,7 +478,7 @@ double w = e.getNumber("weight");</pre>
   </div>
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Algorithms">
   <h2>Algorithms</h2>
   <h3>Searches</h3>
   <p>
@@ -490,7 +496,7 @@ double w = e.getNumber("weight");</pre>
 
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Dynamic_Connected_Components">
   <h2>Focus on <strong><em>Dynamic Connected Components</em></strong></h2>
   <br><br><br>
   <pre class="prettyprint lang-java">
@@ -507,7 +513,7 @@ while(something) {
   
   
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Dynamic_Shortest_Paths">
     <h2>Focus on <strong><em>Dynamic Shortest Paths</em></strong></h2>
     <pre class="prettyprint lang-java">
 import org.graphstream.algorithm
@@ -526,7 +532,7 @@ while(something) {
 
   <!-- ==== SLIDE ==== -->
 
-  <div class="step">
+  <div class="step" id="Further_Algorithms">
   <h2>Algorithms</h2>
     <h3>Some tutorials to go farther</h3>
     <p><br>
@@ -538,7 +544,7 @@ while(something) {
 <!-- ================= -->
   
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Visualization">
     <h2>Visualization</h2>
     <h3>Aims</h3> 
     <ul>
@@ -557,10 +563,10 @@ while(something) {
   </div>
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="CSS">
     <h2>Extra visual information</h2>
       <h3>CSS</h3>
-         <div class="text_center"><img style="height:25%" src="images/stroke_mode2.png"/><img style="height:25%" src="images/text_bg_mode4.png"/><img style="height:25%" src="images/node_shape6.png"/><img style="height:25%" src="images/size_mode2_.png"/>
+         <div class="text_center"><img style="width:25%" src="images/stroke_mode2.png"/><img style="width:25%" src="images/text_bg_mode4.png"/><img style="width:25%" src="images/node_shape6.png"/><img style="width:25%" src="images/size_mode2_.png"/>
       </div>
       <pre class='prettyprint lang-css'>
 graph { padding: 50px; } 
@@ -574,7 +580,7 @@ node {
   </div>
   
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="CSS_Classes">
     <h2>Extra visual information</h2>
     <h3>CSS classes</h3>
       <pre class='prettyprint lang-java' style="font-size:smaller;">
@@ -596,18 +602,18 @@ c.addAttribute("ui.class", "dull");</pre>
 </div>
   				
 <!-- ==== SLIDE ==== -->
-<div class="step">
+<div class="step" id="CSS_Classes2">
   <h2>Extra visual information</h2>
   <h3>CSS classes</h3>
   <div class="text_center" style="">
-    <img src="images/funordull.png" style="height:55%;" />
+    <img src="images/funordull.png" style="width:40%" />
   </div>
   <p class="right">...and of course it is dynamic. </p>
   </div>
 
   <!-- ==== SLIDE ==== -->
   
-  <div class="step">
+  <div class="step" id="Sprites">
     <h2>Extra visual information</h2>
       <h3>Sprites</h3>
       <p>Graphical objects that give extra information on the application you deal with.</p>
@@ -625,19 +631,19 @@ Sprite pin = sman.addSprite("pin");</pre>
   </div>
   
   <!-- ==== SLIDE ==== -->
-  <div class="step">
-    <div class="text_center"><img style="height:100%" src="images/leHavreStep2_.png"></p></div>
+  <div class="step" id="LH">
+    <div class="text_center"><img style="width:100%" src="images/leHavreStep2_.png"></p></div>
   </div>
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
-    <div class="text_center"><img style="height:100%" src="images/leHavreStep7.png"></p></div>
+  <div class="step" id="LH2">
+    <div class="text_center"><img style="width:100%" src="images/leHavreStep7.png"></p></div>
   </div>
   
   
   
   <!-- ==== SLIDE ==== -->
-  <div class="step text_center">
+  <div class="step text_center" id="Video">
      <video width="100%"  controls="controls">
        <source src="images/video.mp4" type="video/mp4" />
        GraphStream Video 
@@ -646,7 +652,7 @@ Sprite pin = sman.addSprite("pin");</pre>
 
   <!-- ==== SLIDE ==== -->
   
-  <div class="step" id="visu_farther">
+  <div class="step" id="Farther_Visualisation">
     <h2>Extra visual information</h2>
     <h3>Some tutorials to go farther:</h3>
     <p>The CSS specification : <br>
@@ -658,7 +664,7 @@ Sprite pin = sman.addSprite("pin");</pre>
 
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Interactions">
     <br><br><br><br><br><br><br>
     <p class="x5 text_center"><strong>Interactions</strong></p>
   </div>
@@ -666,7 +672,7 @@ Sprite pin = sman.addSprite("pin");</pre>
 
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Offline_Interaction">
     <h2>Offline interactions</h2>
     <div class="twocols">
     <div class="first">
@@ -706,7 +712,7 @@ dn B</pre>
   </div>
   
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="NetStream"> 
     <h2>Online interactions: NetStream</h2>
         <ul>
         <li>Export streams of events to other applications / machines / languages</li>
@@ -728,7 +734,7 @@ while (true) {
   </div>
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="NetLogo">
     <h2>NetLogo Extension</h2>
     <ul class="x2">
       <li>NetLogo agents (turtles, links and observer) send graph events to external application</li>
@@ -738,7 +744,7 @@ while (true) {
     </ul>
     <br><br><br>
      <div class="right" >
-       <img   src="images/netlogo.jpg" style="height:15%;" />
+       <img   src="images/netlogo.jpg" style="width:100%;" />
      </div>
   </div>
 
@@ -746,7 +752,7 @@ while (true) {
 
 
   <!-- ==== SLIDE ==== -->
-  <div class="step">
+  <div class="step" id="Gephi">
     <h2>Interactions with Gephi</h2>
     <p class="left" style="width:70%"> GraphStream is co-mentoring a <em>Google Summer of Code</em> project with <em>André Panisson</em> along with the <em>Gephi consortium</em>.</p>
     <p class="right" style="width:30%"><img   src="images/GSoC2012.png" style="width:100%;" /></p>
@@ -755,18 +761,20 @@ while (true) {
       <li>Communication enabled with NetStream & Gephi's Graph Streaming API.</li>
     </ul> 
     <br>
-   <div class="left" >
-     <img   src="images/gephi.png" style="height:15%;" />  
+   <div class="text_center" >
+     <img   src="images/gephi.png" style="width:40%;" />  
    </div>
      
    </div>
 
 
    <!-- ==== SLIDE ==== -->
-   <div class="step">
+   <div class="step" id="Slides_and_Material">
      <h2>Slides and Material</h2>
-<br><br><p>Get the Slides and Materials for this session on GraphStream tutorial page at:</p>
-<p>  <a href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/">http://graphstream-project.org/doc/Tutorials/Lab-Sessions/CSSS-2012/</a>
+<br><br><p>Get the Slides and Materials online:</p>
+<p>  <a href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/Simtools-2013/">http://graphstream-project.org/doc/Tutorials/Lab-Sessions/Simtools-2013/</a>
+
+<p>  <a href="http://github.com/graphstream/gs-talk-simtools">https://github.com/graphstream/gs-talk-simtools</a>
   </p>
   </div>
   

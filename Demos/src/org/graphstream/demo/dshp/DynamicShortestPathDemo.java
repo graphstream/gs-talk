@@ -17,7 +17,7 @@ public class DynamicShortestPathDemo {
 
 	public static void main(String[] args) {
 		// create and display a graph
-		System.setProperty("gs.ui.renderer",
+		System.setProperty("org.graphstream.ui.renderer",
 				"org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 		Graph graph = new SingleGraph("test");
 		graph.addAttribute("ui.quality");
