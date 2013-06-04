@@ -275,8 +275,7 @@ public class RWPViewer {
         g.display(false);
         
         while (true) {
-            pipe.pump();
-            Thread.sleep(1);
+            pipe.blockingPump();
         }
     }
 }
