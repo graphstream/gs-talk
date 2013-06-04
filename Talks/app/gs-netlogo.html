@@ -34,7 +34,7 @@
   <div id="simple" data-template="mytemplate">
 
 
-<div id="home" class="step">
+<div class="step" id="home">
 <h1>GraphStream and the rest of the world</h1>
 
 <div class="text_right right clearfix">
@@ -51,21 +51,23 @@ Paris, June  5<sup>th</sup> 2013</p>
 
 
 
-<div class="step">
+<div class="step" id="Motivation">
 <h2>Motivation</h2>
 <ul>
+<li>NetLogo is just a use case, GraphStream connects easily to other applications using the NetStream protocol</li>
 <li>NetLogo is good for <em>spatial simulations</em></li>
 <li>Agents move and <em>interact</em></li>
 <li>This creates a <em>dynamic graph</em></li>
 <li>Despite some basic graph capabilities, it is tricky and not very efficient to analyze this graph from NetLogo</li>
 <li>And that is where GraphStream comes into play</li>
+
 </ul>
 </div>
 
 
 
-<div class="step">
-<h2>How does it work</h2>
+<div class="step" id="gs_extension">
+<h2>How does it work?</h2>
 <b>gs</b> is a NetLogo extension
 <ul>
 <li>NetLogo agents can use its primitives to send graph events</li>
@@ -78,16 +80,16 @@ Download and documentation <a href="https://github.com/graphstream/gs-netlogo/wi
 
 
 
-<div class="step">
+<div class="step" id="gs_in_nutshell">
 <h2>In a nutshell</h2>
-<div class="centered">
+<div class="text_center">
 <img src="images/nlgsprinciple.svg" style="width:80%"/>
 </div>
 </div>
 
 
 
-<div class="step">
+<div class="step" id="RWP">
 <h2>Example NetLogo Model: Random Waypoint</h2>
 
 <p><em>Random Waypoint</em> is simple mobility model</p>
@@ -108,7 +110,7 @@ Download and documentation <a href="https://github.com/graphstream/gs-netlogo/wi
 
 
 
-<div class="step">
+<div class="step" id="RWP_dynamic_graph">
 <h2>The agents form <em>dynamic graph</em></h2>
 
 <div class="left" style="width:50%"><img src="images/RWP_Initial.png" style="width:80%"/></div>
@@ -124,14 +126,14 @@ Download and documentation <a href="https://github.com/graphstream/gs-netlogo/wi
 
 
 
-<div class="step">
+<div class="step" id="Goal">
 <h2>Our goal</h2>
-<div class="centered"><img src="images/RWP_Final.png" style="width:75%"/></div>
+<div class="text_center"><img src="images/RWP_Final.png" style="width:75%"/></div>
 </div>
 
 
 
-<div class="step">
+<div class="step" id="Summary">
 <h2>We will learn how to</h2>
 <ul>
 <li>Send graph events from NetLogo</li>
@@ -145,10 +147,10 @@ Download and documentation <a href="https://github.com/graphstream/gs-netlogo/wi
 
 
 
-<div class="step">
+<div class="step" id="Install">
 <h2>Installing the extension</h2>
 
-<p>Create a sub-folder <code>gs</code> in <code>extensions</code> folder of your NetLogo installation and put inside <a href="http://scott.univ-lehavre.fr/~balev/gs-netlogo/gs.jar"><code>gs.jar</code></a> and <code>gs-core.jar</code></p>
+<p>Create a sub-folder <code>gs</code> in <code>extensions</code> folder of your NetLogo installation and put inside <code>netlogo/gs.jar</code> and <code>gs-core.jar</code></p>
 
 <p>To load the extension, put this at the beginning of your NetLogo code</p>
 
@@ -159,7 +161,7 @@ Download and documentation <a href="https://github.com/graphstream/gs-netlogo/wi
 
 
 
-<div class="step">
+<div class="step" id="Senders_NetLogo">
 <h2>Senders in NetLogo</h2>
 <ul>
 <li>Senders connect to external receivers</li>
@@ -176,7 +178,7 @@ Download and documentation <a href="https://github.com/graphstream/gs-netlogo/wi
 
 
 
-<div class="step">
+<div class="step" id="setup-sender">
 <h2>Create a sender</h2>
 
 <pre class="prettyprint">
@@ -203,7 +205,7 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="turtles-1">
 <p>Turtles inform the external application that they are created</p>
 <pre class="prettyprint">
 <span class="nocode">to setup
@@ -223,7 +225,7 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="turtles-2">
 <p>... and when they change their coordinates</p>
 <pre class="prettyprint">
 <span class="nocode">to move
@@ -238,7 +240,7 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="links">
 <p>Links inform the external application when created and removed</p>
 <pre class="prettyprint">
 <span class="nocode">to update-links
@@ -258,10 +260,10 @@ end
 
 
 
-<div class="step">
+<div class="step" id="RWPViewer">
 <h2>External application to visualize the graph</h2>
 
-<p>This class is in <code>org.graphstream.csssdemo.tutorial3</code> package in your project.</p>
+<p>This class is in <code>org.graphstream.demo.tutorial3</code> package in your project.</p>
 
 <pre class="prettyprint">
 public class RWPViewer {
@@ -273,8 +275,7 @@ public class RWPViewer {
         g.display(false);
         
         while (true) {
-            pipe.pump();
-            Thread.sleep(1);
+            pipe.blockingPump();
         }
     }
 }
@@ -283,7 +284,7 @@ public class RWPViewer {
 
 
 
-<div class="step">
+<div class="step" id="RWPAnalyzer">
 <h2>Analyzing the graph</h2>
 
 <pre class="prettyprint">
@@ -313,7 +314,7 @@ public class RWPAnalyzer {
 
 
 
-<div class="step">
+<div class="step" id="tick">
 <p>Our NetLogo simulation sends step event at each "tick"</p>
 
 <pre class="prettyprint">
@@ -329,7 +330,7 @@ end</span>
 </div>
 
 
-<div class="step">
+<div class="step" id="SinkAdapter">
 <p>... and our analyzer processes these events</p>
 
 <pre class="prettyprint">
@@ -337,7 +338,7 @@ public class RWPAnalyzer <span class="codeh">extends SinkAdapter</span> {
     ...
     public RWPAnalyzer(Graph graph) {
         ...
-        <span class="codeh">graph.addSink(this);</span>
+        <span class="codeh">graph.addElementSink(this);</span>
     }
     
     <span class="codeh">@Override</span>
@@ -350,7 +351,7 @@ public class RWPAnalyzer <span class="codeh">extends SinkAdapter</span> {
 
 
 
-<div class="step">
+<div class="step" id="new_RWPAnalyzer">
 <p>Don't forget to instantiate an analyzer:
 
 <pre class="prettyprint">
@@ -374,10 +375,10 @@ public class RWPViewer {
 
 
 
-<div class="step">
+<div class="step" id="oneway_picture">
 <h2>What do we have at this point?</h2>
 
-<div class="centered">
+<div class="text_center">
 <img src="images/nltogs.svg" style="width:90%"/>
 </div>
 
@@ -386,7 +387,7 @@ public class RWPViewer {
 
 
 
-<div class="step">
+<div class="step" id="RWPAnalyzer_with_sender">
 <p>At GraphStream side we create a sender</p>
 <pre class="prettyprint">
 public class RWPAnalyzer extends SinkAdapter {
@@ -408,7 +409,7 @@ public class RWPAnalyzer extends SinkAdapter {
 
 
 
-<div class="step">
+<div class="step" id="reportResults">
 <p>... and slightly change the method reporting results</p>
 <pre class="prettyprint">
 private void reportResults() {
@@ -427,7 +428,7 @@ private void reportResults() {
 
 
 
-<div class="step">
+<div class="step" id="Receivers_NetLogo">
 <h2>Receivers in NetLogo</h2>
 <ul>
 <li>External senders can connect to them and send attribute events</li>
@@ -440,7 +441,7 @@ private void reportResults() {
 
 
 
-<div class="step">
+<div class="step" id="setup-receiver1">
 <p>At NetLogo side we create a receiver</p>
 
 <pre class="prettyprint">
@@ -455,11 +456,11 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="setup-receiver2">
 <p>In <b>setup</b> we just flush the receiver and initialize a global variable that keeps the size of the giant component</p>
 
 <pre class = "prettyprint">
-<span class="nocode"><span class="codeh">globals [ gc-size ]</span></span>
+<span class="nocode"><span class="codeh">globals [ gc-size ]</span>
 ...
 to setup
   ...
@@ -467,12 +468,13 @@ to setup
   <span class="codeh">gs:flush "rcv"</span>
   reset-ticks
 end
+</span>
 </pre>
 </div>
 
 
 
-<div class="step">
+<div class="step" id="get-attributes">
 <p>Agents retrieve their attributes in the following procedure</p>
 
 <pre class="prettyprint"><span class="nocode">to get-attributes
@@ -491,7 +493,7 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="plot">
 <p>... which is called at each step</p>
 <pre class="prettyprint">
 <span class="nocode">to go
@@ -514,16 +516,16 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="full_picture">
 <h2>The full picture</h2>
-<div class="centered">
+<div class="text_center">
 <img src="images/nlandgs.svg" style="width:90%"/>
 </div>
 </div>
 
 
 
-<div class="step">
+<div class="step" id="order">
 <h2>The order is important</h2>
 
 <p>When a sender is created there must be a receiver running on the other side. We have senders and receivers on both sides. So run in the following order:</p>
@@ -536,7 +538,7 @@ end</span>
 </div>
 
 
-<div class="step">
+<div class="step" id="sync1">
 <h2>Synchronization</h2>
 <ul>
 <li>The NetLogo simulation and the external application are <em>asynchronous</em></li>
@@ -547,7 +549,7 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="sync2">
 <p>After sending the attributes, the external application sends a step event</p>
 <pre class="prettyprint">
     public void stepBegins(String sourceId, long timeId, double step) {
@@ -571,7 +573,7 @@ end</span>
 
 
 
-<div class="step">
+<div class="step" id="Exercice">
 <h2>Exercise</h2>
 
 <p>Make another plot for the the connected components count.</p>
