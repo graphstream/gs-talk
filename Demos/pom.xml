@@ -40,9 +40,7 @@
     <dependency>
       <groupId>org.graphstream</groupId>
       <artifactId>gs-boids</artifactId>
-      <version>0.1-SNAPSHOT</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/lib/gs-boids-git.jar</systemPath>
+      <version>1.0</version>
     </dependency>
 
   </dependencies>
