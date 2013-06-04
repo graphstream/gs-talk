@@ -13,28 +13,28 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-<repositories>
+<!-- <repositories>
       <repository>
   <id>sonatype</id>
   <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
       </repository>
-    </repositories>
+    </repositories> -->
 
   <dependencies>
     <dependency>
       <groupId>org.graphstream</groupId>
       <artifactId>gs-core</artifactId>
-      <version>1.2-SNAPSHOT</version>
+      <version>1.2</version>
     </dependency>
     <dependency>
       <groupId>org.graphstream</groupId>
       <artifactId>gs-algo</artifactId>
-      <version>1.2-SNAPSHOT</version>
+      <version>1.2</version>
     </dependency>
     <dependency>
       <groupId>org.graphstream</groupId>
       <artifactId>gs-ui</artifactId>
-      <version>1.2-SNAPSHOT</version>
+      <version>1.2</version>
     </dependency>
 
     <dependency>
