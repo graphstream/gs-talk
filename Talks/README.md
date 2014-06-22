@@ -1,6 +1,6 @@
-## GraphStream Talk & Demo @ Simtools June 5th 2013
+## GraphStream Talk & Demo 
 
-Sources for the talks at the Jue 5th Simtools workshop. 
+Sources for the talks 
 
 ## Edit the slides
 
