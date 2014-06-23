@@ -79,6 +79,10 @@ pre.prewrap {
   white-space : pre-wrap;
 }
 
+.highlight {
+  background-color: rgb(253, 252, 208);
+}
+
 small {
   font-size: 50%;
   font-style: italic;
@@ -380,10 +384,6 @@ body.bad{
   margin:0;
 }
 
-
-.highlight {
-  color: rgba(255,255,255,.5);  
-}
 
 
 
