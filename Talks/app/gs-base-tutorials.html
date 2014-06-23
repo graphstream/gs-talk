@@ -114,13 +114,13 @@ an "Guilhelm Savin"</pre>
   <h2>Get the tutorial workspace</h2>
   <ul>
   <li>Go to the tutorial page at github:<br>
-    <a href="http://github.com/graphstream/gs-talk-simtools">http://github.com/graphstream/gs-talk-simtools</a>
+    <a href="http://github.com/graphstream/gs-talk/tree/iccsa2014">http://github.com/graphstream/gs-talk/tree/iccsa2014</a>
     </li>
     <li> Get the code:
     	<ul>
     		<li>with the "Zip" button on github (will download an archive)</li>
     		<li><b>or</b> through git: <br>
-    		<code>git clone git://github.com/graphstream/gs-talk-simtools.git</code>
+    		<code>git clone -b iccsa2014 git://github.com/graphstream/gs-talk.git</code>
     		</li>
     	</ul>
     </li>
@@ -206,7 +206,7 @@ public class Tutorial1 {
 ...
 graph.display();
 
-<span class="codeh">graph.addAttribute("ui.quality");
+<span class="highlight">graph.addAttribute("ui.quality");
 graph.addAttribute("ui.antialias");
 graph.addAttribute("ui.stylesheet",
 	"edge { fill-color: grey; }");
