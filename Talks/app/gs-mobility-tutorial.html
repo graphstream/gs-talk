@@ -123,8 +123,7 @@ public MobilitySimulation() {
         showConnectedComponents();
         sleep();
     }
-}
-        </pre>
+}</pre>
 
         <!--p>This creates an empty graph and displays it.</p-->
     </div>
@@ -162,8 +161,7 @@ public MobileDevice(Graph graph, String name) {
     this.y = Math.random();
     nextTarget();
     <span class="highlight">node = graph.addNode(name);</span>
-}
-        </pre>
+}</pre>
     </div>
 
     <div class="step">
@@ -178,9 +176,7 @@ protected void move() {
     y += (targety-y)*speed;
     <span class="highlight">node.setAttribute("x", x);</span> 
     <span class="highlight">node.setAttribute("y", y);</span>
-}
-
-        </pre>
+}</pre>
 
         <p>We use specific UI attributes to specify the abscissa and ordinate of the node.</p>
     </div>
@@ -205,7 +201,7 @@ protected void move() {
 
         <p>We need first to know when a node is close to another.</p>
 
-        <p>We could use the $x$ and $y$ of the mobile device, but to show you how it works, we will
+        <p>We could use the <code>x</code> and <code>y</code> of the mobile device, but to show you how it works, we will
         use the coordinates of the node in the graph we set previously in <code>move()</code>.</p>
 
         <p>Remove the code in the <code>closeTo()</code> method and change it with:</p>
@@ -214,8 +210,7 @@ protected void move() {
 protected boolean closeTo(Node other) {
     <span class="highlight">double otherxy[] = nodePosition(other);</span>        
     <span class="highlight">return(Math.abs(x-otherxy[0]) < 0.07 && Math.abs(y-otherxy[1]) < 0.07);</span>
-}
-        </pre>
+}</pre>
 
         <p><code>nodePosition()</code> is a static method in the <code>GraphPosLengthUtils</code>
         class that allows easy retrieval of the coordinate attributes in nodes. This class
@@ -234,14 +229,13 @@ protected boolean closeTo(Node other) {
 protected void checkConnections() {
     removeConnections();
     createConnections();
-}
-        </pre>
+}</pre>
     </div>
 
     <div class="step">
         <h2>Removing connections</h2>
 
-        <p>If a device moves to far away, the connections must disappear.</p>
+        <p>If a device moves too far away, the connections must disappear.</p>
 
         <pre class="prettyprint lang-java">
 protected void removeConnections() {
@@ -253,8 +247,7 @@ protected void removeConnections() {
             edges.remove();
         }
     }
-}
-        </pre>
+}</pre>
 
         <p>We use an iterator on the set of edges of the graph, and get the opposite node
         of the edge. Using <code>closeTo()</code> we know if we must remove the edge with
@@ -279,8 +272,7 @@ protected void createConnections() {
             }
         }
     }
-}   
-        </pre>
+}</pre>
 
         <p>We iterate on each node of the graph. We then test if the node is not us, and if it is close
             enough. If so, we check if no edge already exist (<code>node.hasEdgeToward()</code>), and then create the new connection with
@@ -303,10 +295,9 @@ protected void createConnections() {
         for the algorithm that will observe the graph and constantly update the number of components:</p>
 
         <pre class="prettyprint lang-java">
-    protected Sprite cc;
+protected Sprite cc;
     
-    ConnectedComponents ccalgo;
-        </pre>
+ConnectedComponents ccalgo; </pre>
 
         <p>The <code>ConnectedComponents</code> class comes from the <code>gs-algo</code> package which
         contains lots of such algorithms.</p>
@@ -329,8 +320,7 @@ protected void initConnectedComponents() {
     SpriteManager sm = new SpriteManager(graph);
     cc = sm.addSprite("cc");
     cc.setPosition(Units.PX, 10, 10, 0);
-}
-        </pre>
+}</pre>
     </div>
 
     <div class="step">
@@ -339,11 +329,10 @@ protected void initConnectedComponents() {
         <p>Now we display the measure, by updating the sprite at each simulation step:</p>
 
         <pre class="prettyprint lang-java">
-    protected void showConnectedComponents() {
-        cc.setAttribute("ui.label", "Connected components " +
-            ccalgo.getConnectedComponentsCount());
-    }
-        </pre>
+protected void showConnectedComponents() {
+    cc.setAttribute("ui.label", "Connected components " +
+        ccalgo.getConnectedComponentsCount());
+}</pre>
     </div>
 
     <div class="step">
@@ -354,18 +343,16 @@ protected void initConnectedComponents() {
             add:</p>
 
         <pre class="prettyprint lang-java">
-graph.addAttribute("ui.antialias");
-graph.addAttribute("ui.stylesheet",
-    "edge { fill-color: grey; } sprite { size: 0px; }");
-        </pre>
+...
+graph.display(false);
+<span class="highlight">graph.addAttribute("ui.antialias");</span>
+<span class="highlight">graph.addAttribute("ui.stylesheet",
+    "edge { fill-color: grey; } sprite { size: 0px; }");</span>
+addMobileDevices(deviceCount);
+...</pre>
 
         <h1><div class="text_center"><em>Try it !</em></div></h1>
     </div>
-
-    <div class="step">
-        <h2></h2>
-    </div>
-
 
    <!-- ==== SLIDE ==== -->
    <div class="step" id="Slides_and_Material">
