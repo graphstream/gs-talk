@@ -1,4 +1,4 @@
-package mobility;
+package org.graphstream.demo.mobility;
 
 import java.util.Iterator;
 

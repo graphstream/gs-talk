@@ -1,4 +1,4 @@
-package mobility.finished;
+package org.graphstream.demo.mmobility.finished;
 
 import java.util.ArrayList;
 
