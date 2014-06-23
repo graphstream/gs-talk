@@ -113,8 +113,8 @@
 
         <pre class="prettyprint lang-java">
 public MobilitySimulation() {
-    <em>graph = new SingleGraph("mobility model");</em>
-    <em>graph.display(false);</em>
+    <span class="highlight">graph = new SingleGraph("mobility model");</span>
+    <span class="highlight">graph.display(false);</span>
     addMobileDevices(deviceCount);
     initConnectedComponents();
     for(int step=0; step&lt;steps; step++) {
@@ -157,11 +157,11 @@ public MobilitySimulation() {
 <em>protected Node node;</em>
     
 public MobileDevice(Graph graph, String name) {
-    <em>this.graph = graph;</em>
+    <span class="highlight">this.graph = graph;</span>
     this.x = Math.random();
     this.y = Math.random();
     nextTarget();
-    <em>node = graph.addNode(name);</em>
+    <span class="highlight">node = graph.addNode(name);</span>
 }
         </pre>
     </div>
@@ -176,8 +176,8 @@ public MobileDevice(Graph graph, String name) {
 protected void move() {
     x += (targetx-x)*speed;     // Move a little (slow down at arrival).
     y += (targety-y)*speed;
-    <em>node.setAttribute("x", x);</em> 
-    <em>node.setAttribute("y", y);</em>
+    <span class="highlight">node.setAttribute("x", x);</span> 
+    <span class="highlight">node.setAttribute("y", y);</span>
 }
 
         </pre>
@@ -212,8 +212,8 @@ protected void move() {
 
         <pre class="prettyprint lang-java">
 protected boolean closeTo(Node other) {
-    <em>double otherxy[] = nodePosition(other);</em>        
-    <em>return(Math.abs(x-otherxy[0]) < 0.07 && Math.abs(y-otherxy[1]) < 0.07);</em>
+    <span class="highlight">double otherxy[] = nodePosition(other);</span>        
+    <span class="highlight">return(Math.abs(x-otherxy[0]) < 0.07 && Math.abs(y-otherxy[1]) < 0.07);</span>
 }
         </pre>
 
