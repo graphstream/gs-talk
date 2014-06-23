@@ -208,7 +208,7 @@ protected void move() {
         <pre class="prettyprint lang-java">
 protected boolean closeTo(Node other) {
     <span class="highlight">double otherxy[] = nodePosition(other);</span>        
-    <span class="highlight">return(Math.abs(x-otherxy[0]) < 0.07 && Math.abs(y-otherxy[1]) < 0.07);</span>
+    <span class="highlight">return(Math.abs(x-otherxy[0]) &lt; 0.07 &amp;&amp; Math.abs(y-otherxy[1]) &lt; 0.07);</span>
 }</pre>
 
         <p><code>nodePosition()</code> is a static method in the <code>GraphPosLengthUtils</code>
