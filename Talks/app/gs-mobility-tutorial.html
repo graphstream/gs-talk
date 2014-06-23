@@ -340,7 +340,8 @@ protected void initConnectedComponents() {
 
         <pre class="prettyprint lang-java">
     protected void showConnectedComponents() {
-        cc.setAttribute("ui.label", "Connected components " + ccalgo.getConnectedComponentsCount());
+        cc.setAttribute("ui.label", "Connected components " +
+            ccalgo.getConnectedComponentsCount());
     }
         </pre>
     </div>
@@ -354,7 +355,8 @@ protected void initConnectedComponents() {
 
         <pre class="prettyprint lang-java">
 graph.addAttribute("ui.antialias");
-graph.addAttribute("ui.stylesheet", "edge { fill-color: grey; } sprite { size: 0px; }");
+graph.addAttribute("ui.stylesheet",
+    "edge { fill-color: grey; } sprite { size: 0px; }");
         </pre>
 
         <h1><div class="text_center"><em>Try it !</em></div></h1>
