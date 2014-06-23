@@ -43,8 +43,7 @@ public class MobileDevice {
 	
 	/** Is the device close enough to another to be connected ? */
 	protected boolean closeTo(Node other) {
-		double otherxy[] = nodePosition(other);		
-		return(Math.abs(x-otherxy[0]) < 0.07 && Math.abs(y-otherxy[1]) < 0.07);
+		return false;
 	}
 	
 	/** Change the target destination of the device. */
