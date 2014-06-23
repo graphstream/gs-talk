@@ -26,7 +26,7 @@ public class MobilitySimulationFinished {
 	protected Sprite cc;
 	
 	/** The connected components algorithm. */
-	ConnectedComponents ccalgo;
+	protected ConnectedComponents ccalgo;
 
 	/** Initialize the simulation, and run it. */
 	public MobilitySimulationFinished() {
