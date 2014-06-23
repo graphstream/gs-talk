@@ -1,4 +1,4 @@
-package org.graphstream.demo.mmobility;
+package org.graphstream.demo.mobility;
 
 import java.util.ArrayList;
 

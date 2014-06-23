@@ -1,4 +1,4 @@
-package org.graphstream.demo.mmobility.finished;
+package org.graphstream.demo.mobility.finished;
 
 import java.util.Iterator;
 
