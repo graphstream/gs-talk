@@ -83,7 +83,7 @@ pre.prewrap {
   background-color: rgb(253, 252, 208);
 }
 
-small {
+small,.small {
   font-size: 50%;
   font-style: italic;
   color: #555;
