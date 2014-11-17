@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <title>GraphStream - Introduction</title>
+  <meta name="description" content="Présentation de la librairie GraphStream">
+  <meta name="author" content="The GraphStream Team" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+
+
+  <!-- build:css styles/main.css -->
+  <link href="styles/prettify.css" type="text/css" rel="stylesheet" />
+  <link href="styles/lecture.css" rel="stylesheet" type="text/css" />
+  <!-- endbuild -->     
+
+   <!-- build:js scripts/vendor/jquery.js -->
+   <script src="bower_components/jquery/jquery.js"></script>
+   <!-- endbuild -->     
+  
+</head>
+
+
+<body>
+  <div id="menu_handle" class="x2">»</div>
+  <div id="menu" class="x-2">
+    <ul>
+      <li><a  style="text-decoration:none" href="http://graphstream-project.org/doc/Tutorials/Lab-Sessions/ICCSA-2014/">Back to main page</a></li>
+    </ul>
+  </div>
+
+  <div id="simple" data-template="mytemplate">
+
+<!-- ==== TITRE ==== -->
+
+<div id="home" class="step" >
+    
+    <h1>Graphes dynamiques...<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;...un outil pour les manipuler</h1>
+    <div class="text_right right clearfix">
+    <br>
+    <h2>GraphStream</h2>
+    <br>
+    <!-- <div class="left" style="width:70%;">E</div> -->
+    <div  style="">
+    	<p><em>GdT Graphes</em><br>
+    	Rouen, 27 Novembre 2014</p>
+    </div>
+</div>
+ <div class="bottom"><img style="width:30%" src="images/gs-logo.png" alt="GS Logo"></div>
+  
+ <!--pre class="prettyprint lang-shell">DGS0004
+ "GraphStream Team" 4 0 
+ an "Stefan Balev"
+ an "Antoine Dutot" 
+ an "Yoann Pigné"
+ an "Guilhelm Savin"</pre-->
+ 
+		<!--ul class="right x2" style="list-style-type:none">
+			<li>Stefan Balev</li>
+			<li>Antoine Dutot</li>
+			<li>Yoann Pigné</li>
+			<li>Guilhelm Savin</li>
+		</ul-->
+
+<!-- <div class="bottom"><img style="width:30%" src="images/gs-logo.png" alt="GS Logo"></div> -->
+</div>
+
+
+<!-- ==== GRAPHES DYNAMIQUES ==== -->
+
+
+<div class="step" id="Graphes_Dynamiques">
+	<h2>Graphes dynamiques ?</h2>
+
+	<div class="threecols">
+		<div  class="firstsecond" >
+			<p class="x2">Quel type de dynamique ?</p>
+			<ul>
+ 				<li>des valeurs associées aux sommets et arcs ?</li>
+				<li>apparition et disparition de sommets ou arcs ?</li>
+			</ul>
+			<p class="x2">Le problème avec les algorithmes :</p>
+			<ul>
+				<li class="">Dès qu'un résultat est calculé, il est invalidé par la dynamique.</li>
+				<li class="">Peut-on stopper la dynamique et recalculer ?</li>
+				<li class="">Tout dépend du modèle de dynamique...</li>
+			</ul>
+		</div>
+		<div class="third" >
+			<div class="" style=""><img src="images/simpleGraphSin.png" style="width:100%;" /></div>
+		</div>
+	</div>
+</div>
+
+<!-- ==== SLIDE ==== -->
+
+<!-- 	<div class="step" id="Dynamic_Graphs_Models">
+	  <h2>Dynamic Graph Models</h2><br><br>
+	  <p class="x2">Many graph models consider in some ways the dynamics</p>
+	  <ul><li class="">but they are bounded to their application domain</li></ul>
+	  <p class="x2">What about <em>Dynamic Graph Theory</em>?</p>
+  </div>
+ -->
+
+<!-- ==== SLIDE ==== -->
+
+<!-- 	<div class="step" id="Complex_Networks">
+	  <h2>Complex Networks</h2>
+	  <p class="x2"><strong>Exploration</strong>: analysis of "real world" networks (web graphs, biological networks, social networks)</p>
+    <p class="x2"><strong>Modelling</strong>: build artificial networks (preferential attachment)</p>
+    <p class="x2">Measures on graphs: community, distribution, dimensions, etc.</p>
+    <p class="x2">Iterative Construction/Iteration: graphs' dynamics</p>
+  </div>
+ -->  
+
+<!-- ==== SLIDE ==== -->
+
+<div class="step" id="Aggregative_Methods">
+	<h2>Images de graphes</h2>
+
+	<p>Chaque évolution du graphe est considérée comme un graphe à part entière.</p>
+
+	<p>Pratique, les algorithmes classiques de la théorie des graphes sont utilisables</p>
+
+	<p>Problème il faut recalculer les solutions pour chaque changement.</p>
+</div>
+	
+<div class="step" id="Aggregative_Methods">
+	<h2>Méthodes agrégatives</h2>
+
+	<p>L'évolution complète du graphes est <strong>connue par avance</strong>, le graphe dynamique est agrégé en un graphe statique.</p>
+
+	<p>Cela nous permet aussi d'utiliser les algorithmes classiques de la théorie des graphes.</p>
+
+	<p>Mais il faut connaître l'intégralité du graphe par avance.</p>
+
+	<div class="text_center">
+		<img src="images/aggreg.png" style="width:50%;"/>
+	</div>
+</div>
+
+<!-- ==== SLIDE ==== -->
+
+<div class="step" id="Reoptimisation">
+	<h2>Ré-optimisation</h2>
+
+	<p>On construit et maintient des structures dans le graphe dynamique (e.g. un arbre couvrant)</p>
+	
+	<p>La mise-à-jour de la structure existante après modifications est souvent moins coûteuse que de tout recalculer de zéro.</p>
+
+	<div class="text_center"><img src="images/reop.png" style="width:50%"/></div>
+</div>
+
+  <!-- ==== SLIDE ==== -->
+<div class="step" id="Buts_de_GraphStream">
+
+	<h2>GraphStream</h2>
+
+	<br/>
+	<h3>Étude des réseaux d'interaction et de leur dynamique</h3>
+	<br/>
+	<dl>
+		<dt><strong>Générer :</strong></dt><dd>Attachement préférentiel, petit-monde, aléatoire...</dd>
+		<dt><strong>Mesurer :</strong></dt><dd>Diamètre du graphe, centralités, communautés...</dd>
+		<dt><strong>Explorer :</strong></dt><dd>Chemins, arbre couvrant, cliques, composantes connexes...</dd>
+		<dt><strong>Simuler :</strong></dt><dd>Trafic routier, modèle de diffusion...</dd>
+	</dl>
+ </div>
+
+<!-- ==== SLIDE ==== -->
+
+    <div class="step" id="En_Bref">
+      
+		<h2>En bref</h2>
+		<p>Une bibliothèque Java avec une API publique pratique<p>
+		<pre class="prettyprint lang-java">
+  Graph g = new SingleGraph("MyGraph");
+  g.read("some-file.tlp");
+  g.getDegree();
+  g.display();</pre>
+
+		<p>Basée sur un modèle <strong>événementiel</strong> : les sommets et les arcs sont ajoutés, retirés, modifiés.</p>
+      
+		<p>Interaction avec d'autres outils :</p>
+		<ul>
+			<li>Offline : plusieurs formats d'import / export de fichier</li>
+			<li>Online : à travers une API de connexion réseau</li>
+		</ul>
+	</div>
+
+  <!-- ==== SLIDE ==== -->
+    <div class="step" id="Architecture">
+      <h2>Architecture</h2>
+      <div class="threecols">
+        <div class="first">
+      <h3>API publique</h3>
+      <ul>
+        <li>org.graphstream
+          <ul>
+            <li>.graph</li>
+            <li>.stream</li>
+            <li>.ui</li>
+            <li>.algorithm</li>
+            <li>.util</li>
+          </ul>
+        </li>
+      </ul>
+      </div>
+      <div  class="secondthird">
+      <h3>Organisée en sous-projets</h3>
+      <ul>
+        <li>gs-core</li>
+        <li>gs-algo</li>
+        <li>gs-ui</li>
+        <li>gs-netstream</li>
+        <li>gs-deps</li>
+        <li>gs-boids</li>
+        <li>gs-netlogo</li>
+        <li>gs-geography</li>
+      </ul>
+      </div>
+    </div>  
+    </div>
+
+    <!-- ==== SLIDE ==== -->
+    <div class="step" id="Get_GS">
+      <h2>Obtenir GraphStream !</h2>
+      <h3>Sur le site web</h3>
+        <ul>
+          <li><a href="http://graphstream-project.org">graphstream-project.org</a></li>
+          <li>releases officielles (v1.2) de gs-core, gs-algo, gs-ui</li>
+          <li>nightly-builds</li>
+        </ul>
+      <h3>Sur Github</h3>
+        <ul>
+          <li><a href="http://github.com/graphstream/">github.com/graphstream</a></li>
+          <li>bug tracker de gs-core</li> 
+        </ul>
+      <h3>Sur Maven</h3>
+        <pre class="prettyprint lang-xml">&lt;groupId&gt;org.graphstream&lt;/groupId&gt;
+  &lt;artifactId&gt;gs-core&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;</pre>        
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Event_Model">
+	<h2>Le modèle événementiel</h2>
+
+	<p class="x2">La dynamique du graphe est exprimée par une flux d'événements</p>
+	<p class="x2">Ces derniers peuvent être :</p>
+	<ul>
+		<li>Addition ou retrait de sommets.</li>
+		<li>Addition ou retrait d'arcs.</li>
+		<li>Addition, mise-à-jour ou retrait d'attributs associés aux sommets, arcs ou au graphe.</li>
+		<li>Étape temporelle.</li>
+	</ul>
+	<p class="x2"><strong>Le flux d'événements modifie l'état d'un graphe.</strong></p>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Event_Model_2">
+    
+	<h2>Modèle événementiel</h2>
+	
+	<div class="left" style="width:70%;">
+		<h3>Sources</h3>
+		<p>Produisent un flux d'événements.</p>
+		
+		<h3>Sinks</h3> 
+		<p>Reçoivent un flux d'événements et le traitent..</p>
+	
+		<h3>Pipes</h3>
+		<p>Sont à la fois une source et un sink. Un <strong><em>graphe</em></strong> est un pipe.</p>
+	</div>
+	
+	<div class="right" style="width:30%; ">
+		<div><img src="images/Source.png" style="vertical-align:middle;width:40%"/> Source</div>
+		<div><img src="images/Sink.png" style="vertical-align:middle;width:40%"/> Sink</div>
+		<div><img src="images/Pipe.png" style="vertical-align:middle;width:40%"/> Pipe</div>
+	</div>
+</div>
+
+<!-- ==== SLIDE ==== -->
+
+<div class="step" id="Pipeline">
+	<h2>Pipelining</h2>
+
+	<p>Les sources envoient leurs événements vers des sinks.</p>
+
+	<ul>
+		<li>Design pattern Observer</li>
+		<li>Publish / Subscribe</li>
+		<li>Listeners Java Swing</li>
+	</ul>
+
+	<p>Les sources, pipes et sinks peuvent être connectés en un pipeline d'éléments.</p>
+	
+	<p>Exemple d'un pipeline très courant :</p>
+
+	<div  class=" text_center" >
+		<img style="width:15%" src="images/Source.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%"  src="images/Pipe.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%" src="images/Sink.png"/>
+	</div>
+
+	<div  class=" text_center" >
+		<p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">File</p>
+		<p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Graph</p>
+		<p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Viewer</p>
+	</div>
+	
+	<p style="clear:both;"></p>
+</div>
+
+
+ <!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Pipeline2">
+	<h2>Pipelining</h2>
+
+	<pre class="prettyprint lang-java">
+Graph graph = new SingleGraph("Some Graph");	
+graph.display();
+FileSource source = new FileSourceDGS();
+source.addSink( graph );
+source.begin("someFile.dgs");
+while( source.nextEvents() ){
+	// Do whatever between two events
+}
+source.end();</pre>
+
+	<div  class=" text_center" >
+		<img style="width:15%" src="images/Source.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%"  src="images/Pipe.png"/><img style="width:15%" src="images/Link.png"/><img style="width:15%" src="images/Sink.png"/>
+	</div>
+
+	<div  class=" text_center" >
+		<p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">File</p><p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Graph</p><p style="width:23%;text-align: center;display:inline-block;margin:0 0%;">Viewer</p>
+	</div>
+
+	<p style="clear:both;"></p>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Pipeline3">
+	<h2>Pipelining</h2>
+
+	<p>Le flux d'événements peut transiter entre les sources et les sinks :</p>
+
+	<ul>
+		<li>à travers le réseau,</li>
+		<li>entre processus,</li>
+		<li>entre threads.</li>
+	</ul>
+
+	<p>Par exemple, la visualisation s'éxécute dans un thread distinct, mais peut aussi s'exécuter sur une autre machine, alors que la simulation et le graphe principal du modèle fonctionnent sur une autre.</p>
+
+	<div class="text_center">
+		<img style="width:15%" src="images/LinkStart.png"/><img style="width:15%" src="images/PipeCloud.png"/><img style="width:15%" src="images/LinkEnd.png"/>
+	</div>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Pipeline4">
+	<h2>Pipelining</h2>
+	
+	<p>Recevoir des événements d'un autre processus/thread/machine :</p>
+  	
+	<pre class="prettyprint lang-java">
+Graph g = new SingleGraph("RWP");
+ThreadProxyPipe pipe = getPipeFromElsewhere(); //fake function
+pipe.addSink(g);
+g.display(false);
+
+while (true) {
+    pipe.pump();
+    Thread.sleep(1);
+}</pre>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Graph_Components">
+	<h2>Graphes</h2>
+
+	<p>Plusieurs classes permettent de modéliser différentes structures de graphe.</p>
+
+	<ul>
+		<li>"single" graph (1-graph), "multigraph" (p-graphes, ayant potentiellement plusieurs arcs entre deux nœuds).</li>
+		<li>Graphes dirigés, non dirigés...</li>
+	</ul>
+
+	<p>Représentation d'un graphe à un temps donné, mais cette représentation est évolutive.</p>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Data_Attributes">
+	<h2>Attributs de données</h2>
+
+	<ul>
+		<li>Une quantité arbitraire d'attributs peut être associée à n'importe quel élément du graphe ou au graphe lui-même.</li>
+		<li>Un attribut est composé d'un identifiant et d'une valeur qui peut-être n'importe quel objet Java.</li>
+	</ul>
+
+<pre class="prettyprint lang-java">g.addAttribute("My attribute", aValue);
+Node n = g.getNode("A");
+n.setAttribute("xy", 23.4, 55.0);
+Edge e = g.getEdge("AB");
+e.removeAttribute("selected");
+double w = e.getNumber("weight");</pre>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Algorithms">
+	<h2>Algorithmes</h2>
+
+	<h3>Recherche, exploration</h3>
+
+	<p>plus court chemin, aléatoire, arbres couvrants, <em>etc.</em></p>
+  
+  	<h3>Métriques, mesures</h3>
+
+	<p>modularité, centralité, distributions de degrés, connectivité, densité, <em>etc.</em></p>
+
+	<h3>Génération</h3>
+
+	<p>Aléatoires, réguliers, par attachement préférentiel, petit monde, à partir de données géographiques, <em>etc.</em></p>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Dynamic_Connected_Components">
+	<h2>Exemple : <strong><em>Composantes connexes dynamiques</em></strong></h2>
+	<br><br><br>
+	
+	<pre class="prettyprint lang-java">
+import org.graphstream.algorithm.ConnectedComponents;
+//...
+ConnectedComponents cc = new ConnectedComponents();
+cc.init(graph);
+while(something) {
+  cc.getConnectedComponentsCount();
+  canDoSomethingWithGraph();
+}</pre>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Dynamic_Shortest_Paths">
+	<h2>Exemple : <strong><em>Plus court chemin dynamique</em></strong></h2>
+
+	<pre class="prettyprint lang-java">
+import org.graphstream.algorithm
+      .networksimplex.DynamicOneToAllShortestPath;
+//...
+DynamicOneToAllShortestPath algorithm = 
+            new DynamicOneToAllShortestPath(null);
+algorithm.init(graph);
+algorithm.setSource("0");
+while(something) {
+algorithm.compute();
+canDoSomethingWithGraph();
+}</pre>
+</div>
+
+
+<!-- ================= -->
+<!-- = VISUALISATION = -->
+<!-- ================= -->
+
+  
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Visualization">
+	<h2>Visualization du graphe et des données</h2>
+	
+	<h3>Buts</h3> 
+	
+	<ul>
+		<li>Visualisation dynamique, la visualisation évolue avec le graphe.</li>
+		<li>Fournit une visualisation des données accompagnant le graphe.</li>
+	</ul> 
+
+	<div class="center text_center" >
+
+		<video width="50%"  controls="controls">
+            <source src="images/boids.mp4" type="video/mp4" />
+                        Boids Video 
+		</video>                
+       	<img  width="30%" src="images/CSS.png"/>
+	</div>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="CSS">
+	<h2>Visualisation des données</h2>
+	
+	<h3>CSS</h3>
+	
+	<div class="text_center"><img style="width:25%" src="images/stroke_mode2.png"/><img style="width:25%" src="images/text_bg_mode4.png"/><img style="width:25%" src="images/node_shape6.png"/>
+		<img style="width:25%" src="images/size_mode2_.png"/>
+	</div>
+	
+	<pre class='prettyprint lang-css'>
+graph { padding: 50px; } 
+node {
+size-mode: fit; shape: rounded-box; 
+fill-color: white; stroke-mode: plain; 
+padding: 5px, 4px; icon-mode: at-left; 
+icon: url('data/Smiley_032.png'); 
+}</pre>    
+</div>
+  
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="CSS_Classes">
+	<h2>Visualisation des données</h2>
+
+	<h3>Classes CSS</h3>
+
+	<pre class='prettyprint lang-java' style="font-size:smaller;">
+graph.addAttribute("stylesheet", 
+"graph {padding : 50px;}"
++ "node {size: 100px; fill-mode: image-scaled;}"
++ "node.fun {fill-image: url('fun.gif');}"
++ "node.dull {fill-image: url('dull.png');}");
+
+Node a = graph.addNode("A");
+Node b = graph.addNode("B");
+Node c = graph.addNode("C");
+graph.addEdge("AB", "A", "B");
+graph.addEdge("CB", "C", "B");
+graph.addEdge("AC", "A", "C");
+a.addAttribute("ui.class", "fun");
+b.addAttribute("ui.class", "fun");
+c.addAttribute("ui.class", "dull");</pre>
+</div>
+  				
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="CSS_Classes2">
+	<h2>Visualisation des données</h2>
+	
+	<h3>Classes CSS</h3>
+
+	<div class="text_center" style="">
+		<img src="images/funordull.png" style="width:40%" />
+	</div>
+
+	<p class="right">... et bien sûr c'est dynamique.</p>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+  <div class="step" id="Sprites">
+	<h2>Visualisation des données</h2>
+
+	<h3>Sprites</h3>
+
+	<p>Objets graphiques qui fournissent une information visuelle sur l'application ou la simulation.</p>
+
+	<pre class="prettyprint lang-css">
+SpriteManager sman = new SpriteManager(graph);
+Sprite pin = sman.addSprite("pin");</pre>
+
+	<p>Les sprites utilisent aussi CSS :
+		<img  class="right" src="images/mapPinSmall.png"></p>
+
+	<pre class="prettyprint lang-css">sprite#pin {
+shape: box;
+size: 32px, 52px;
+fill-mode: image-scaled;
+fill-image: url('mapPinSmall.png');
+}</pre>
+</div>
+  
+
+<!-- ==== SLIDE ==== -->
+
+<div class="step" id="LH">
+	<div class="text_center"><img style="width:100%" src="images/leHavreStep2_.png"></p></div>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="LH2">
+	<div class="text_center"><img style="width:100%" src="images/leHavreStep7.png"></p></div>
+</div>  
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step text_center" id="Video">
+	<video width="100%"  controls="controls">
+		<source src="images/video.mp4" type="video/mp4"/>
+		GraphStream Video 
+	</video>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Offline_Interaction">
+	<h2>Interactions Offline</h2>
+
+	<div class="twocols">
+		<div class="first">
+			<h3>files</h3>
+			<ul>
+				<li>Tulip</li>
+				<li>Gephi</li>
+				<li>GML</li>
+				<li>Pajek</li>
+				<li>DOT</li>
+				<li>LGL</li>
+				<li>ncol</li>
+				<li>DGS</li>  
+			</ul>
+			<h3>DataBase(s)</h3>
+			<ul>
+				<li>Neo4J</li>
+			</ul>
+		</div>
+		<div class="second">
+		<pre class="prettyprint lang-shell">
+DGS004
+"graph.dgs" 0 0
+an A x:1 y:2.3 label:"Node A"
+an B x:0 y:0
+an C xy:2.3,1
+an D xyz:1,1
+ae AB A B weight:23.3
+ae AC A C weight:2
+st 1.0
+ae BC B > C 
+ae BD B > D
+st 1.1
+dn B</pre>
+		</div>
+	</div>
+</div>
+  
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="NetStream"> 
+	<h2>Interactions Online : NetStream</h2>
+    <ul>
+    <li>Exporte un flux d'événements à d'autres applications / machines, langages.</li>
+		<li>Both ways. From GS to other and from other to GS</li>
+		<li>Bidirectionnel, à partir et vers GS.</li>
+		<li>Protocole réseau binaire.</li>
+		<li>Implementation TCP socket (et WebSocket).</li>
+		<li>Mutli-langages (Java, C++, Python, JS, ...)</li>
+	</ul>
+	<pre class="prettyprint lang-java">
+import org.graphstream.stream.netstream.NetStreamReceiver;
+//...
+NetStreamReceiver net = new NetStreamReceiver(2001);
+ThreadProxyPipe pipe = net.getDefaultStream();
+pipe.addSink(graph);
+while (true) {
+pipe.pump();
+Thread.sleep(100);
+}</pre>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="NetLogo">
+	<h2>Extension NetLogo</h2>
+
+	<ul class="x2">
+		<li>Les agents NetLogo (tortues, liens et observateur) envoient des événements graphe à une application externe.</li>
+		<li>Cette dernière maintient un graphe dynamique et peut appliquer les algorithmes et outils de GraphStream sur celui-ci.</li>
+		<li>Les résultats sont retournés à NetLogo.</li>
+		<li>Les agents peuvent les recevoir et les utiliser pour prendre leurs décisions.</li>
+	</ul>
+	<br><br><br>
+
+	<div class="right" >
+		<img src="images/netlogo.jpg" style="width:100%;"/>
+	</div>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="Futur">
+	<h2>Futur</h2>
+
+	<dl>
+    	<dt><strong>Taille des graphes et Big-Data</strong></dt>
+    		<dd>Gestion de graphes plus importants, connexion à des bases de données graphes de type NOSQL, telles que Neo4j.</dd></dt>
+    	<dt><strong>Visualisation multi-niveau</strong></dt>
+    		<dd>Pour les volumes de données trop importants, la visualisation du graphe entier n'est plus envisageable, une visualisation multi-niveau (associée à des méthodes de décomposition) permettrait de contourner le problème.</dd>
+    	<dt><strong>Langage de gestion très simplifié</strong></dt>
+    		<dd>Associer un langage de script ou DSL (Domain Specific Language) simple pour la description de tâches ou pipelines basiques.</dd>
+    	<dt><strong>API JavaScript et visualisation dans le navigateur</strong></dt>
+    		<dd>Le projet est déjà bien avancé pour porter une partie de l'API GS dans le navigateur.</dd>
+    </dl>
+</div>
+
+
+<!-- ==== SLIDE ==== -->
+
+
+<div class="step" id="We_Need_You">
+	<h2>Futur</h2>
+
+	<div class="text_center">
+		<img src="images/weneedyou2.jpg" style="width:60%;"/>
+	</div>
+
+	<div class="text_center">
+		<p>GraphStream est OpenSource, participez !</p>
+	</div>
+</div>
+
+
+  
+
+</div>
+
+<!-- build:js scripts/vendor/jmpress.js -->
+<script src="bower_components/jmpress/jmpress.js"></script>
+<!-- endbuild -->    
+
+<!-- build:js scripts/main.js -->
+<script type="text/javascript" src="scripts/prettify.js"></script>
+<script type="text/javascript" src="scripts/lang-css.js"></script>
+<script type="text/javascript" src="scripts/lecture.js"></script>
+<!-- endbuild -->   
+ 
+</body>
+</html>
