@@ -702,8 +702,8 @@ NetStreamReceiver net = new NetStreamReceiver(2001);
 ThreadProxyPipe pipe = net.getDefaultStream();
 pipe.addSink(graph);
 while (true) {
-pipe.pump();
-Thread.sleep(100);
+	pipe.pump();
+	Thread.sleep(100);
 }</pre>
 </div>
 
