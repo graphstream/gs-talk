@@ -11,7 +11,7 @@ The ```Talks``` folder contains the sources of the slides.
 
 ### Authors
 
-- Sefan Balen
+- Sefan Balev
 - Antoien Dutot
 - Yoann Pigné
 - Guilhelm Savin
