@@ -1,4 +1,4 @@
-## GraphStream Talk & Demo @ ICCSA June 22nd 2014
+## GraphStream Talk & Demo @ NeX Days'2015 
 
 This projext contains both the sources of the talks and the sources of the demo examples used for the presentation of GraphStream of the NeX talk on April 28-30 2015.
 
