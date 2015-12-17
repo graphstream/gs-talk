@@ -2,8 +2,9 @@
 'use strict';
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var serveStatic = require('serve-static');
 var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
+    return serveStatic(require('path').resolve(dir));
 };
 
 // # Globbing
@@ -60,12 +61,11 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app),
-                            lrSnippet
-                        ];
+                    middleware: function (connect, options, middlewares) {
+                        middlewares.unshift(lrSnippet);
+                          middlewares.unshift(   mountFolder(connect, '.tmp'));
+			   middlewares.unshift(        mountFolder(connect, yeomanConfig.app));
+                    	return middlewares;
                     }
                 }
             },
