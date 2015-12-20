@@ -1,38 +1,31 @@
 {
-  "name": "GSTalk",
-  "version": "0.0.1",
-  "dependencies": {},
+  "name": "gs-talk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.html",
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm install ",
+    "start": "gulp serve",
+    "build": "gulp "
+  },
+  "author": "Yoann Pigné",
+  "license": "CC-BY",
   "devDependencies": {
-    "connect-livereload": "*",
-    "grunt": "~0.4.5",
-    "grunt-concurrent": "*",
-    "grunt-contrib-clean": "*",
-    "grunt-contrib-coffee": "*",
-    "grunt-contrib-compass": "*",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-connect": "^0.11.2",
-    "grunt-contrib-copy": "*",
-    "grunt-contrib-cssmin": "*",
-    "grunt-contrib-htmlmin": "*",
-    "grunt-contrib-imagemin": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-mocha": "*",
-    "grunt-open": "*",
-    "grunt-rev": "*",
-    "grunt-svgmin": "*",
-    "grunt-usemin": "*",
-    "matchdep": "*",
-    "serve-static": "^1.10.0"
-  },
-  "engines": {
-    "node": ">=0.12.0"
-  },
-  "licenses": [
-    {
-      "type": "Creative Commons (CC BY 3.0)",
-      "url": "http://http://creativecommons.org/licenses/by/3.0/"
-    }
-  ]
+    "bower": "^1.7.1",
+    "browser-sync": "^2.10.1",
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-copy": "0.0.2",
+    "gulp-debug": "^2.1.2",
+    "gulp-filter": "^3.0.1",
+    "gulp-pandoc": "^0.2.1",
+    "gulp-ruby-sass": "^2.0.6",
+    "gulp-sass": "^2.1.1",
+    "gulp-svgmin": "^1.2.0",
+    "gulp-util": "^3.0.7"
+  }
 }

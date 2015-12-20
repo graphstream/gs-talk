@@ -1,0 +1,128 @@
+
+
+
+/**
+ * inspired from Sky theme for reveal.js.
+ * */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// My colors :
+//
+$primary: #8facb4; // #8facb4;
+$secondary : #fbfff2; // #fffbf2;
+$tertiary: #b47f68;
+
+// Include theme-specific fonts
+@import 'fonts';
+
+
+// Background of the presentation
+$backgroundColor: transparent;
+
+// Primary/body text
+$mainFont: 'Arimo',  sans-serif;
+$mainFontSize: 36px;
+$mainColor: #333;
+
+// Vertical spacing between blocks of text
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Lobster', serif;
+$headingColor: #333;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 3.77em;
+$heading2Size: 2.11em;
+$heading3Size: 1.55em;
+$heading4Size: 1.00em;
+
+// Links and actions
+$linkColor: $tertiary;
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #134674;
+$selectionColor: #fff;
+
+
+
+// Fix links so they are not cut off
+.reveal a {
+	line-height: 1.3em;
+}
+
+// Background generator
+@mixin bodyBackground() {
+  background-image: url('../img/gs-logo-white.svg'); // fallback
+  background-image: url('../img/gs-logo-white.svg'), linear-gradient( to bottom, $secondary 0%, $primary 100% );;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-origin: padding-box;
+   //background-size: 50%;
+   //@include vertical-gradient( #add9e4, #f7fbfc );
+
+
+}
+
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+.reveal .slides {
+  figure img {
+    width     : 95%;
+    max-height: 80%;
+  }
+  section img {
+    border    : none;
+    box-shadow: none;
+  }
+  dt {
+    font-weight: bold;
+  }
+  dd {
+    margin-left: 1em;
+  }
+  input {
+    font-size: inherit;
+  }
+  pre {
+    display    : block;
+    position   : relative;
+    width      : 95%;
+    /*margin: 0;*/
+    text-align : left;
+    font-size  : 0.75em;
+    font-family: monospace;
+    line-height: 1.2em;
+    word-wrap  : break-word;
+    //	box-shadow: 0 0 6px rgba(0,0,0,.3);
+  }
+  table tr {
+    background: transparent;
+    //border    : none;
+  }
+  thead tr {
+    background: "none";
+  }
+  table tr:nth-child(odd) {
+    background: transparent;
+    border    : none;
+  }
+}
