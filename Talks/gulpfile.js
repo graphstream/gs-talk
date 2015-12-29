@@ -14,7 +14,7 @@ var paths = {
   md: ['src/**.md'],
   scss: ['src/css/*.scss'],
   css: 'src/css/*.css',
-  bitmaps: ['src/img/**/*', '!src/img/**/*.svg'],
+  bitmaps: ['src/img/**/*', '!src/img/**/*.svg', '!src/img/**/*.graffle'],
   svg: 'src/img/**/*.svg',
   fonts: 'src/fonts/**/*',
   dist: 'app'
@@ -26,7 +26,11 @@ gulp.task('copy', function() {
 
 gulp.task('svg', function() {
   return gulp.src([paths.svg])
-  .pipe(svgmin())
+  .pipe(svgmin({plugins: [{
+      cleanupIDs: false
+    },
+    {convertStyleToAttrs:false
+  }]}))
   .pipe(gulp.dest(paths.dist+'/img'));
   });
 
