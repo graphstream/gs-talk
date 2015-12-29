@@ -83,4 +83,48 @@ width: 1280
 
 ![Time-Varying Network](/img/varying-network.svg)
 
+
+#Dynamic Graph Models
+
+
+Many graph models consider dynamics in some ways. But they are usually bounded to their application domain.
+
+- Is there a general-enough model that can be used in a broad range of applications?
+- What about a **Dynamic Graph Theory** with algorithms for colouring, routing, flows, etc.?
+
+# Complex Networks
+
+1. **Exploration**: Analysis of "real world" networks (web graphs, biological networks, social networks)
+
+2. **Modelling**: Build artificial networks (Barabasi-Albert, Watts-Strogatz, Dorogovtsev-Mendes, Golomb
+, etc.)
+
+
+- Measures on graphs: community, distribution, dimensions, etc.
+- Iterative Construction/Iteration: we see dynamic graphs here!
+
+# Aggregative Methods
+All the evolution is known **in advance**, the dynamic graph is aggregated into a static graph. (Temporal Networks, Evolving Graphs, Time-Varying Graphs, etc.)
+
+Why? Because it allows the use of classical graph theory.
+
+![Aggregative Methods](/img/temporal-network.svg)
+
+
+
+#Re-optimisation
+
+Build and maintain structures on dynamic graphs (e.g. spanning trees) **without** prior knowledge of the evolution.
+
+**Hypothesis**: Updating an existing structure after some modifications is more effective that recomputing it from scratch.
+
+
+![Re-optimization](/img/re-optimization.svg)
+
+#test {data-background="url('/img/leHavreStep2_.png')"}
+
+----
+<section data-background="url('/img/leHavreStep2_.png')" data-background-repeat="no-repeat" data-background-size="100%">
+</section>
+
 <!-- END -->

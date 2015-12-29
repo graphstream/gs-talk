@@ -1,13 +1,13 @@
 ---
 title: GraphStream <small>A Dynamic Graph Library</small>
 author:
-  - Yoann Pigné
+- Yoann Pigné
 date: NetSciX2016 -- School of Code
 center: 0
 controls: 0
 height: 800
 hideAddressBar: true
-history: false
+history: true
 keyboard: true
 loop: true
 margin: 0.1
@@ -27,8 +27,17 @@ transitionSpeed: fast
 width: 1280
 
 ---
+# Sources
 
-# Outline {data-background="url('/img/tmp.png')"}
+Codes and Presentations are on GitHub
+
+- Code : [github.com/graphstream/gs-talk](https://github.com/graphstream/gs-talk)
+- Slides : [graphstream.github.io/gs-talk](https://graphstream.github.io/gs-talk)
+
+![Sources for Codes and Presentations](img/qr-github-gs-talk.svg)
+
+# Outline
+<!--  {data-background="url('/img/tmp.png')"} -->
 
 
 - [Presentation of GraphStream](lecture.html)
