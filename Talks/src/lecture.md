@@ -51,7 +51,7 @@ width: 1280
 - (directed) Arcs
 
 
-![Simple Network](/img/simple-network.svg)
+![Simple Network](img/simple-network.svg)
 
 
 #First, static graphs
@@ -72,7 +72,7 @@ width: 1280
 - values/weight on edges or nodes?
 - nodes and/or edges added/removed?
 
-![Weighted Network](/img/weighted-network.svg)
+![Weighted Network](img/weighted-network.svg)
 
 
 # When we add dynamics...
@@ -83,7 +83,7 @@ width: 1280
 - Depends on the dynamic graph model.
 
 
-![Time-Varying Network](/img/varying-network.svg)
+![Time-Varying Network](img/varying-network.svg)
 
 
 #Dynamic Graph Models
@@ -110,7 +110,7 @@ All the evolution is known **in advance**, the dynamic graph is aggregated into 
 
 Why? Because it allows the use of classical graph theory.
 
-![Aggregative Methods](/img/temporal-network.svg)
+![Aggregative Methods](img/temporal-network.svg)
 
 
 
@@ -120,7 +120,7 @@ Build and maintain structures on dynamic graphs (e.g. spanning trees) **without*
 
 **Hypothesis**: Updating an existing structure after some modifications is more effective that recomputing it from scratch.
 
-![Re-optimization](/img/re-optimization.svg)
+![Re-optimization](img/re-optimization.svg)
 
 
 #GraphStream
@@ -203,17 +203,17 @@ A **stream of events** modifies the structure of a graph.
 ###Sources
 
 Produce streams of events.
-![](/img/source.svg)
+![](img/source.svg)
 
 
 ###Sinks
 Receive streams of events.
-![](/img/sink.svg)
+![](img/sink.svg)
 
 
 ###Pipes
 Both source and sink. A **graph** is a pipe.
-![](/img/pipe.svg)
+![](img/pipe.svg)
 
 
 # Pipelining
@@ -225,7 +225,7 @@ Sources send events to sinks.
 
 Sources, pipes and sinks can be connected to form pipelines.
 
-![Example Pipeline](/img/pipeline.svg)
+![Example Pipeline](img/pipeline.svg)
 
 #Pipelining
 
@@ -240,7 +240,7 @@ while( source.nextEvents() ){
 }
 source.end();
 ```
-![File-Graph-Viewer Pipeline](/img/pipeline.svg)
+![File-Graph-Viewer Pipeline](img/pipeline.svg)
 
 
 #Pipelining
@@ -253,7 +253,7 @@ The stream of events can flow between sources and sinks:
 
 For example a viewer can run in a distinct thread or machine, while a simulation on a graph runs on another.
 
-![Proxy Pipe](/img/proxy-pipe.svg)
+![Proxy Pipe](img/proxy-pipe.svg)
 
 
 
@@ -362,7 +362,7 @@ Some tutorials to go farther
 2. Get more information than the graph itself: sprites.
 
 ![CSS](img/CSS.png)   <!--video controls  >
-  <source src="/img/boids.mp4" type="video/mp4">
+  <source src="img/boids.mp4" type="video/mp4">
 </video-->  <iframe width="560" height="315" src="https://www.youtube.com/embed/hv8vrvzG9y0" frameborder="0" allowfullscreen></iframe>
 
 
@@ -381,7 +381,7 @@ node {
 
 ```
 
-![css1](/img/size_mode2_.png)![css2](/img/stroke_mode2.png)![css3](/img/edge_shape1.png)![css4](/img/node_shape6.png)
+![css1](img/size_mode2_.png)![css2](img/stroke_mode2.png)![css3](img/edge_shape1.png)![css4](img/node_shape6.png)
 
 
 
@@ -408,7 +408,7 @@ c.addAttribute("ui.class", "dull");
 
 #Extra visual information
 ##CSS classes
-![...and of course it is dynamic.](/img/funordull.png)
+![...and of course it is dynamic.](img/funordull.png)
 
 
 #Extra visual information
@@ -421,7 +421,7 @@ SpriteManager sman = new SpriteManager(graph);
 Sprite pin = sman.addSprite("pin");
 ```
 
-Sprites are also customised with CSS ![pin](/img/mapPinSmall.png)
+Sprites are also customised with CSS ![pin](img/mapPinSmall.png)
 
 ```css
 sprite#pin {
@@ -434,13 +434,13 @@ sprite#pin {
 
 ----
 <section data-background=" white">
-<img alt="LH" src="/img/leHavreStep2.png" style height="800px"/>
+<img alt="LH" src="img/leHavreStep2.png" style height="800px"/>
 </section>
 
 ----
 
 <section data-background=" white">
-<img alt="LH" src="/img/leHavreStep7.png" style height="800px"/>
+<img alt="LH" src="img/leHavreStep7.png" style height="800px"/>
 </section>
 
 
@@ -448,7 +448,7 @@ sprite#pin {
 <section data-background=" #efedef">
 
 <!-- <video controls  width="1280" height="800">
-  <source src="/img/graphstream-1.0.mp4" type="video/mp4">
+  <source src="img/graphstream-1.0.mp4" type="video/mp4">
 </video> -->
 <iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
 </section>
