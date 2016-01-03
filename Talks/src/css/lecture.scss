@@ -30,8 +30,10 @@ $mainFont: 'Arimo',  sans-serif;
 $mainFontSize: 36px;
 $mainColor: #333;
 
+$monoFont: 'Monospace';
+
 // Vertical spacing between blocks of text
-$blockMargin: 40px;
+$blockMargin: 30px;
 
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
@@ -44,7 +46,7 @@ $headingTextShadow: none;
 $headingFontWeight: normal;
 $heading1TextShadow: $headingTextShadow;
 
-$heading1Size: 3.1em;
+$heading1Size: 3em;
 $heading2Size: 2.11em;
 $heading3Size: 1.55em;
 $heading4Size: 1.00em;
@@ -67,7 +69,7 @@ $selectionColor: #fff;
 // Background generator
 @mixin bodyBackground() {
   background-image: url('../img/gs-logo-white.svg'); // fallback
-  background-image: url('../img/gs-logo-white.svg'), linear-gradient( to bottom, $secondary 0%, $primary 100% );;
+  background-image: url('../img/gs-logo-white.svg'), linear-gradient( to bottom, $secondary 0%, $primary 100% ) /*linear-gradient(to right, #efedef, #f5f4f6, #efedef)*/;
   background-repeat: no-repeat;
   background-position: bottom right;
   background-origin: padding-box;
@@ -85,10 +87,19 @@ $selectionColor: #fff;
 
 
 .reveal .slides {
+	.sourceCode {
+  		overflow-x: visible;
+	}
 	em,b,strong {
 		color: darken($primary,20);
 	}
+	h2,h3,h4 {
 
+		margin-bottom: $blockMargin/2;
+	}
+	h3,h4{
+				font-family: $mainFont;
+	}
   .mid-height {
 	  max-height: 25%;
   }
@@ -96,8 +107,8 @@ $selectionColor: #fff;
     //max-width     : 100%;
     //max-height: 50%;
   }
-  >section{
-	 // height:100%;
+  section{
+	 padding:0;
   }
 
 figure{
@@ -108,6 +119,7 @@ figure{
     border    : none;
     box-shadow: none;
 	background: transparent;
+	margin :0;
   }
   dt {
     font-weight: bold;
@@ -121,14 +133,17 @@ figure{
   pre {
     display    : block;
     position   : relative;
-    width      : 95%;
-    /*margin: 0;*/
+    //width      : 95%;
+    margin: $blockMargin/2;
     text-align : left;
-    font-size  : 0.75em;
-    font-family: monospace;
+    font-size  : 0.8em;
+    font-family: $monoFont;
     line-height: 1.2em;
     word-wrap  : break-word;
     //	box-shadow: 0 0 6px rgba(0,0,0,.3);
+    code {
+		max-height: 600px;
+	}
   }
   table tr {
     background: transparent;

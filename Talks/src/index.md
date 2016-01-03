@@ -1,6 +1,7 @@
 ---
-title: GraphStream <small>A Dynamic Graph Library</small>
+title: GraphStream
 author:
+- A Dynamic Graph Library
 - Yoann Pigné
 date: NetSciX2016 -- School of Code
 center: 0
@@ -9,7 +10,7 @@ height: 800
 hideAddressBar: true
 history: true
 keyboard: true
-loop: true
+loop: false
 margin: 0.1
 #maxScale: 3.0
 #minScale: 0.1
@@ -18,7 +19,7 @@ overview: true
 #parallaxBackgroundImage: none
 #parallaxBackgroundSize: '4995px 135px'
 progress: 0
-slideNumber: 1
+slideNumber: 0
 theme: none
 touch: true
 transition: linear
@@ -40,7 +41,4 @@ Codes and Presentations are on GitHub
 <!--  {data-background="url('/img/tmp.png')"} -->
 
 
-- [Presentation of GraphStream](lecture.html)
-- [Hands On -- Basic Tutorials](basic-tutorials.html)
-- [Hands On -- ???](mobility-tutorials.html)
-- Hands on 2
+- [General Presentation of GraphStream](lecture.html)

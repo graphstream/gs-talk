@@ -8,7 +8,6 @@ var reload = browserSync.reload;
 var del = require('del');
 var prefix = require('gulp-autoprefixer');
 var svgmin = require('gulp-svgmin');
-var gutil = require('gulp-util');
 
 var paths = {
   md: ['src/**.md'],
@@ -40,12 +39,14 @@ gulp.task('sass', ['clean-css'],function() {
       includePaths: [
         'app/bower_components/reveal.js/css/theme/source',
         'src/css'],
-        errLogToConsole: true
+        errLogToConsole: true,
+        outputStyle: 'compressed'
       }).on('error', sass.logError))
     .pipe(prefix('last 5 versions', '> 1%'))
     .pipe(concat('main.css'))
     .pipe(gulp.dest(paths.dist+'/css/'))
-    .pipe(reload({ stream:true }));
+    .pipe(browserSync.stream());
+
 });
 
 gulp.task('clean-css', function() {
@@ -53,8 +54,11 @@ gulp.task('clean-css', function() {
 });
 
 gulp.task('clean', function() {
-    return del([paths.dist+'/*', '!'+paths.dist+'/bower_components']);
+    return del([paths.dist+'/*', '!'+paths.dist+'/bower_components', '!'+paths.dist+'/.git']);
 });
+
+
+gulp.task('pandoc-watch', ['pandoc'], reload);
 
 gulp.task('pandoc', function() {
   return gulp.src(paths.md)
@@ -64,15 +68,14 @@ gulp.task('pandoc', function() {
       ext: '.html',
       args: ['--smart',
         '--standalone',
-        '--section-divs',
+        //'--section-divs',
         '--css=css/main.css',
         // '--template=pandoc-templates/default.revealjs',
         '-V',
         'revealjs-url=bower_components/reveal.js'
       ]
     }))
-    .pipe(gulp.dest(paths.dist))
-    .pipe(reload({ stream:true }));
+    .pipe(gulp.dest(paths.dist));
 });
 
 
@@ -81,12 +84,13 @@ gulp.task('pandoc', function() {
 gulp.task('serve', function() {
   browserSync({
     server: {
-      baseDir: paths.dist
+      baseDir: paths.dist,
+      ghostMode:true
     }
   });
 
   gulp.watch(paths.scss, ['sass']);
-  gulp.watch(paths.md, ['pandoc']);
+  gulp.watch(paths.md, ['pandoc-watch']);
   gulp.watch(paths.svg, ['svg']);
 
 });

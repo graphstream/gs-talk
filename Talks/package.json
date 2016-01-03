@@ -1,14 +1,14 @@
 {
   "name": "gs-talk",
   "version": "1.0.0",
-  "description": "",
+  "description": "GraphStream Presentation slideshow",
   "main": "app/index.html",
   "scripts": {
     "postinstall": "bower install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "npm install ",
     "start": "gulp serve",
-    "build": "gulp "
+    "build": "gulp",
+    "prebuild": "npm install"
   },
   "author": "Yoann Pigné",
   "license": "CC-BY",
@@ -20,12 +20,8 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-copy": "0.0.2",
-    "gulp-debug": "^2.1.2",
-    "gulp-filter": "^3.0.1",
     "gulp-pandoc": "^0.2.1",
-    "gulp-ruby-sass": "^2.0.6",
     "gulp-sass": "^2.1.1",
-    "gulp-svgmin": "^1.2.0",
-    "gulp-util": "^3.0.7"
+    "gulp-svgmin": "^1.2.0"
   }
 }
