@@ -84,9 +84,13 @@ $selectionColor: #fff;
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
-
+.reveal .slide-number {
+	background:none;
+	color:black;
+}
 
 .reveal .slides {
+
 	.sourceCode {
   		overflow-x: visible;
 	}
