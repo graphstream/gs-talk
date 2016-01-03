@@ -35,7 +35,7 @@ Codes and Presentations are on GitHub
 - Code : [github.com/graphstream/gs-talk](https://github.com/graphstream/gs-talk)
 - Slides : [graphstream.github.io/gs-talk](https://graphstream.github.io/gs-talk)
 
-![Sources for Codes and Presentations](img/qr-github-gs-talk.svg)
+![Sources for Codes and Presentations](img/qr-graphstream.github.io-gs-talk.svg)
 
 # Outline
 <!--  {data-background="url('/img/tmp.png')"} -->
