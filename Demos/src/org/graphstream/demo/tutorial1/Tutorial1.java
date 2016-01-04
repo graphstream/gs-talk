@@ -4,10 +4,11 @@ import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 public class Tutorial1 {
 	public static void main(String args[]) {
-		Graph graph = new SingleGraph("Tutorial 1");
-		
-		graph.display();
-		
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+
+        Graph graph = new SingleGraph("Tutorial 1");
+        graph.display();
+
 		graph.addNode("A");
 		graph.addNode("B");
 		graph.addEdge("AB", "A", "B");
