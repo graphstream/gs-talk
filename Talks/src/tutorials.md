@@ -7,9 +7,9 @@ center: 1
 controls: 0
 height: 800
 hideAddressBar: true
-history: true
+history: false
 keyboard: true
-loop: false
+loop: true
 margin: 0.1
 #maxScale: 3.0
 #minScale: 0.1

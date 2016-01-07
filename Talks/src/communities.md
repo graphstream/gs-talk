@@ -8,9 +8,9 @@ center: 1
 controls: 0
 height: 800
 hideAddressBar: true
-history: true
+history: false
 keyboard: true
-loop: false
+loop: true
 margin: 0.1
 #maxScale: 3.0
 #minScale: 0.1
@@ -18,7 +18,7 @@ overview: true
 #parallaxBackgroundHorizontal: 1
 #parallaxBackgroundImage: none
 #parallaxBackgroundSize: '4995px 135px'
-progress: 0
+progress: 1
 slideNumber: 0
 theme: none
 touch: true
