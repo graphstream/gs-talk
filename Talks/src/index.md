@@ -18,7 +18,7 @@ overview: true
 #parallaxBackgroundHorizontal: 1
 #parallaxBackgroundImage: none
 #parallaxBackgroundSize: '4995px 135px'
-progress: 0
+progress: 1
 slideNumber: 0
 theme: none
 touch: true
