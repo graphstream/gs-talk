@@ -5,13 +5,13 @@ author:
 - Yoann Pigné
 date: NetSciX2016 -- School of Code
 
-center: 0
+center: 1
 controls: 0
 height: 800
 hideAddressBar: true
 history: true
 keyboard: true
-loop: false
+loop: true
 margin: 0.1
 #maxScale: 3.0
 #minScale: 0.1
@@ -38,9 +38,6 @@ width: 1280
 - Algorithms
 - Visualisation
 - Interaction with other tools
-- Demos
-    * basic demos
-    * simulation of a mobile ad hoc network  
 
 
 #First, static graphs
@@ -452,6 +449,77 @@ sprite#pin {
 </video> -->
 <iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
 </section>
+
+
+
+
+
+
+
+
+# Offline interactions
+
+### File formats
+
+Tulip, Gephi, GML, Pajek, DOT, LGL, ncol, DGS
+
+```C
+DGS004
+"graph.dgs" 0 0
+an A x:1 y:2.3 label:"Node A"
+an B x:0 y:0
+an C xy:2.3,1
+an D xyz:1,1
+ae AB A B weight:23.3
+ae AC A C weight:2
+st 1.0
+ae BC B > C
+ae BD B > D
+st 1.1
+dn B
+```
+
+# OnLine interactions
+
+### NetStream
+
+- Export streams of events to other applications / machines / languages
+- Both ways. From GS to other and from other to GS
+- Binary network protocol
+- TCP socket (and WebSocket) implementation
+- Several languages (Java, C++, Python, JS)
+
+```java
+import org.graphstream.stream.netstream.NetStreamReceiver;
+//...
+NetStreamReceiver net = new NetStreamReceiver(2001);
+ThreadProxyPipe pipe = net.getDefaultStream();
+pipe.addSink(graph);
+while (true) {
+  pipe.blockingPump();
+}
+```
+
+# NetLogo Extension
+
+- NetLogo agents (turtles, links and observer) send graph events to external application
+- The external application maintains a dynamic graph and runs algorithms on it
+- It sends the computed results back to NetLogo
+- Agents can receive and use them to take their decisions
+
+
+![NetLogo Extension](img/netlogo.jpg)
+
+
+
+
+# Slides and Material
+
+Get the Slides and Materials online:
+
+- code [github.com/graphstream/gs-talk](https://github.com/graphstream/gs-talk)
+- slides [graphstream.github.io/gs-talk](https://graphstream.github.io/gs-talk)
+
 
 
 <!-- END -->

@@ -202,7 +202,7 @@ The default Layout algorithm is a derivative of the Frutcherman-Reingold one.
 
 
 # Step 1
-Open the `tutorial3` package, then the `LinLogLayout.java` file.
+Open the ` modularity` package, then the `LinLogLayout.java` file.
 
 ```java
 public class LinLogLayout {
@@ -625,4 +625,4 @@ Consider a [Boids](http://www.red3d.com/cwr/boids/) Simulation.
 
 
 
-The `LinLogLayoutAndBoids.java` file in the `tutorial3` package contains a working example of LinLog analysis of a Boids simulation.
+The `LinLogLayoutAndBoids.java` file in the ` modularity` package contains a working example of LinLog analysis of a Boids simulation.

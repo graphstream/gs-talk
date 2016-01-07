@@ -1,4 +1,4 @@
-package org.graphstream.demo.tutorial3;
+package org.graphstream.demo.modilarity;
 
 import java.io.IOException;
 
