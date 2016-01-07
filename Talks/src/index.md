@@ -42,4 +42,5 @@ Codes and Presentations are on GitHub
 
 
 - [General Presentation of GraphStream](lecture.html)
-- [GraphStream Tutorials](tutorials.html)
+- [First Tutorials](tutorials.html)
+- [Community Structures Tutorial](communities.html)
