@@ -70,6 +70,7 @@ gulp.task('pandoc', function() {
         '--standalone',
         //'--section-divs',
         '--css=css/main.css',
+        '--mathjax',
         // '--template=pandoc-templates/default.revealjs',
         '-V',
         'revealjs-url=bower_components/reveal.js'
