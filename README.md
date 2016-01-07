@@ -1,6 +1,6 @@
-## GraphStream Talk & Demo @ ICCSA June 22nd 2014
+## GraphStream Talk & Demo @NetSciX2016
 
-This projext contains both the sources of the talks and the sources of the demo examples used for the presentation of GraphStream of the ICCSA talk on June 22nd 2014
+This project contains both the sources of the talks and the sources of the demo examples used for the presentation of GraphStream for the NetSciX 2016 conference in Wroclaw, Poland January 10-13 2016.
 
 
 The ```Demos``` folder contains the examples and materials used int he course.
