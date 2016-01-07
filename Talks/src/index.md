@@ -2,9 +2,9 @@
 title: GraphStream
 author:
 - A Dynamic Graph Library
-- Yoann Pigné
+
 date: NetSciX2016 -- School of Code
-center: 0
+center: 1
 controls: 0
 height: 800
 hideAddressBar: true
