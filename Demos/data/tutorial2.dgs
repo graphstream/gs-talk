@@ -1,8 +1,11 @@
 DGS003
 "Tutorial 2" 0 0
 an "A"
+cn "A" label="A"
 an "B" 
-an "C" 
+cn "B" label="C"
+an "C"
+cn "C" label="C"
 ae "AB" "A" "B"
 ae "BC" "B" "C"
 ae "CA" "C" "A"

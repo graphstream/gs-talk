@@ -1,9 +1,22 @@
 {
-  "name": "GSTalkSimtools",
-  "version": "0.0.1",
+  "name": "gs-talk",
+  "description": "",
+  "main": "app/index.html",
+  "authors": [
+    "Yoann Pigné"
+  ],
+  "license": "CC-BY",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
-    "modernizr": "~2.6.2",
-    "jmpress": "0.4.5"
-  },
-  "devDependencies": {}
+    "reveal.js": "~3.2.0"
+  }
 }

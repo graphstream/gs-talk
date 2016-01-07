@@ -1,54 +1,45 @@
-## GraphStream Talk & Demo @ Simtools June 5th 2013
+# GraphStream Talk & Demo
 
-Sources for the talks at the Jue 5th Simtools workshop. 
+Sources for the talks
 
 ## Edit the slides
 
-The sources of the slides are located in the ```app/``` folder. 
+The sources of the slides are located in the `src/` folder.
 
 
-	app
-	├── gs-base-tutorials.html
-	├── gs-communities.html
-	├── gs-lecture.html
-	├── gs-netlogo.html
-	├── images
-	├── scripts
-	└── styles
+``` sh
+src
+├── *.md
+├── img/
+├── fonts/
+└── css/
+
+```
+
+## Dependencies
+
+
+### pandoc
+This project uses the [pandoc](http://pandoc.org) document convertor in order to created [rejeal.js](http://lab.hakim.se/reveal-js/) slideshows from markdown documents.
+
+You need `pandoc` installed on your system first.
+
+### node
+
+ the [node.js](nodejs.org) javascript server-side interpreter is used to automate the build. You need `node.js` in your system to build the project.
 
 ## Build the slides
+Once node is installed run the build command that will install all the server-side and client-side dependencies and then build the web site in the `app/` folder.
 
-### Node
-
-First of all, you need the ```node``` javascript serverside interpretter installed on your system to build the project. This repends on your system. 
-
-### Grunt & Bower
-
-Second, if not already installed you need ```grunt``` and ```bower```:
-
-```
-npm install -g yo grunt-cli bower
+```sh
+npm run build
 ```
 
-### This talk's dependencies
 
-Get al the dependencies resolved:
+A local server can be run locally with the slides. Run the following command:
 
-```
-npm install && bower install 
-```
-
-### Build the project
-
-```
-grunt build
+```sh
+npm run serve
 ```
 
-Then an optimised and compressed version of the slides should be available unr the ```dist``` folder.
-
-### Run the talk locally
-
-```
-grunt server
-```
-
+This will serve the web site locally and reload it after any change in the source code.
