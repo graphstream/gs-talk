@@ -3,7 +3,7 @@ title: GraphStream Tutorials
 author:
 - Detect Community Structures in Networks
 - <img style="width:60%;" src="img/zachary.png"/>
-date: NetSciX2016 -- School of Code
+date: NetSci-X 2016 -- School of Code
 center: 1
 controls: 0
 height: 800
@@ -18,8 +18,8 @@ overview: true
 #parallaxBackgroundHorizontal: 1
 #parallaxBackgroundImage: none
 #parallaxBackgroundSize: '4995px 135px'
-progress: 1
-slideNumber: 0
+progress: 0
+slideNumber: 1
 theme: none
 touch: true
 transition: linear
@@ -33,6 +33,7 @@ width: 1280
 We will try to detect community structure in networks.
 
 **Intuitively**, communities are groups of nodes in a network, where:
+
 - There are more links between nodes from the same community,
 - Fewer links between nodes from different communities.
 
@@ -202,7 +203,7 @@ The default Layout algorithm is a derivative of the Frutcherman-Reingold one.
 
 
 # Step 1
-Open the ` modularity` package, then the `LinLogLayout.java` file.
+Open the `modularity` package (`src/org/graphstream/demo/modularity`), then the `LinLogLayout.java` file.
 
 ```java
 public class LinLogLayout {

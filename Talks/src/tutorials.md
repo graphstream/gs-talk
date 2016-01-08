@@ -2,7 +2,7 @@
 title: GraphStream Tutorials
 author:
 - Let's get some coding done
-date: NetSciX2016 -- School of Code
+date: NetSci-X 2016 -- School of Code
 center: 1
 controls: 0
 height: 800
@@ -52,7 +52,7 @@ Basic steps to install GraphStream
 
 # Get the tutorial workspace
 - Go to the tutorial page at github:
-http://github.com/graphstream/gs-talk/
+[github.com/graphstream/gs-talk/tree/NetSciX2016](https://github.com/graphstream/gs-talk/tree/NetSciX2016)
 - Get the code:
     - with the "Download Zip" button on github (will download an archive)
     - or through git:
@@ -509,7 +509,7 @@ while(source.nextStep()) { Thread.sleep(1000); }
 - One can do this using the `x` and `y` attributes:
 
 ```c
-an "A" x=0 y=1
+an "A" x=0 y=0.86
 an "B" x=1 y=-1
 an "C" x=-1 y=-1
 // ...
