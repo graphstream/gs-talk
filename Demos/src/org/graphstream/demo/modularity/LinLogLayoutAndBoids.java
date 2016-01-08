@@ -1,4 +1,4 @@
-package org.graphstream.demo.modilarity;
+package org.graphstream.demo.modularity;
 
 import java.awt.*;
 import java.io.IOException;

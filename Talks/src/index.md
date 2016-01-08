@@ -2,8 +2,8 @@
 title: GraphStream
 author:
 - A Dynamic Graph Library
-
-date: NetSciX2016 -- School of Code
+- <img style="width:80%;" src="img/logo_NetSci_X_2016.png"/>
+date: NetSci-X 2016 -- School of Code
 center: 1
 controls: 0
 height: 800
@@ -18,8 +18,8 @@ overview: true
 #parallaxBackgroundHorizontal: 1
 #parallaxBackgroundImage: none
 #parallaxBackgroundSize: '4995px 135px'
-progress: 1
-slideNumber: 0
+progress: 0
+slideNumber: 1
 theme: none
 touch: true
 transition: linear
@@ -147,8 +147,13 @@ Build and maintain structures on dynamic graphs (e.g. spanning trees) **without*
 - Dynamic Algorithms
 - Dynamic Visualisation
 
+A free and open-Source project supported by the University of Le Havre.
 
-<!-- XXX -->
+- Stefan Balev
+- Antoine Dutot
+- Yoann Pigné
+- Guilhelm Savin
+
 
 #In a nutshell
 
@@ -178,7 +183,7 @@ Interaction with over tools
 
 
 ###Organised into sub-projects <small>[github.com/graphstream](https://github.com/graphstream)</small>
-- `gs-core`, `gs-algo`, `gs-ui`
+- `gs-core`, `gs-algo`, `gs-ui`,
 -  `gs-netstream`, `gs-boids`, `gs-netlogo`, `gs-geography`, ...
 
 
