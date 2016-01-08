@@ -464,17 +464,9 @@ sprite#pin {
 </section>
 
 
-----
-<section data-background=" #efedef">
-
-<!-- <video controls  width="1280" height="800">
-  <source src="img/graphstream-1.0.mp4" type="video/mp4">
-</video> -->
-<iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
-</section>
 
 
-
+# Interactions with other Tools
 
 
 
@@ -534,6 +526,15 @@ while (true) {
 ![NetLogo Extension](img/netlogo.jpg)
 
 
+----
+
+<section data-background=" #efedef">
+
+<!-- <video controls  width="1280" height="800">
+  <source src="img/graphstream-1.0.mp4" type="video/mp4">
+</video> -->
+<iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
+</section>
 
 
 
