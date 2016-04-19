@@ -67,7 +67,7 @@ $selectionColor: #fff;
 }
 
 // Background generator
-@mixin bodyBackground() {
+@mixin _bodyBackground() {
   background-image: url('../img/gs-logo-white.svg'); // fallback
   background-image: url('../img/gs-logo-white.svg'), linear-gradient( to bottom, $secondary 0%, $primary 100% ) /*linear-gradient(to right, #efedef, #f5f4f6, #efedef)*/;
   background-repeat: no-repeat;
@@ -78,7 +78,13 @@ $selectionColor: #fff;
 
 
 }
-
+@mixin bodyBackground() {
+	background-color: white;	
+	background-image: url('../img/gs-logo-white.svg');
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	background-origin: padding-box;
+}
 
 
 // Theme template ------------------------------
