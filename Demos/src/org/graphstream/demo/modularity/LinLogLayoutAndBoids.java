@@ -26,7 +26,7 @@ import javax.swing.*;
 
 public class LinLogLayoutAndBoids {
     public static void main(String args[]) throws IOException, GraphParseException, InterruptedException {
-        (new LinLogLayoutAndBoids()).findCommunities("data/config.gml");
+        (new LinLogLayoutAndBoids()).findCommunities("data/config.dgs");
     }
 
     private Graph graph;

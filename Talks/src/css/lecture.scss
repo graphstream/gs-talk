@@ -14,8 +14,8 @@
 
 // My colors :
 //
-$primary: #8facb4; // #8facb4;
-$secondary : #f9f3d7; // #fffbf2;
+$primary: #6b95a4; // #8facb4;
+$secondary : #f9d7d7; // #fffbf2;
 $tertiary: #b47f68;
 
 // Include theme-specific fonts
@@ -79,7 +79,7 @@ $selectionColor: #fff;
 
 }
 @mixin bodyBackground() {
-	background-color: white;	
+	background-color: white;
 	background-image: url('../img/gs-logo-white.svg');
 	background-repeat: no-repeat;
 	background-position: bottom right;
@@ -99,6 +99,9 @@ $selectionColor: #fff;
 
 	.sourceCode {
   		overflow-x: visible;
+	}
+	a {
+		color: $primary;
 	}
 	em,b,strong {
 		color: darken($primary,30);

@@ -50,7 +50,7 @@ public class NetStreamDemoReceiver {
             "graph { " +
             "   padding: 50px; " +
             "   fill-mode: image-scaled-ratio-min;" +
-            "   fill-image: url('data/logo_NetSci_X_2016.png');" +
+            "   fill-image: url('data/jediHeader.png');" +
             "} " +
             "node { " +
             "   size: 64px; " +

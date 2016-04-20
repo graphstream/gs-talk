@@ -2,7 +2,7 @@
 title: GraphStream Tutorials
 author:
 - Let's get some coding done
-date: NetSci-X 2016 -- School of Code
+date: Formations JEDI -- April 21 2016
 center: 1
 controls: 0
 height: 800
@@ -30,13 +30,14 @@ width: 1280
 
 
 
-# Outlook
+# Outline
+<!--  {data-background="url('/img/tmp.png')"} -->
 
-- Installation of GraphStream
 
-- Tutorial 1: Basic tasks with GraphStream
+- [General Presentation of GraphStream](index.html)
+- First Tutorials (this presentation)
+- [Community Structures Tutorial](communities.html)
 
-- Tutorial 2: A first dynamic graph
 
 
 # Installation of GraphStream

@@ -2,8 +2,8 @@
 title: GraphStream
 author:
 - A Dynamic Graph Library
-- <img style="width:80%;" src="img/logo_NetSci_X_2016.png"/>
-date: NetSci-X 2016 -- School of Code
+- <img style="width:80%;" src="img/jediHeader.png"/>
+date: Formations JEDI -- April 21 2016
 center: 1
 controls: 0
 height: 800

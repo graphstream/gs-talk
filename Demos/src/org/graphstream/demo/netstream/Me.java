@@ -1,5 +1,7 @@
 package org.graphstream.demo.netstream;
 
+import org.graphstream.stream.netstream.NetStreamSender;
+
 import java.io.IOException;
 
 

@@ -1,7 +1,6 @@
-## GraphStream Talk & Demo @NetSciX2016
+## GraphStream Talk & Demo
 
-This project contains both the sources of the talks and the sources of the demo examples used for the presentation of GraphStream for the NetSciX 2016 conference in Wroclaw, Poland January 10-13 2016.
-
+This project contains both the sources of the talks and the sources of the demo examples used for the presentation of GraphStream.
 
 The ```Demos``` folder contains the examples and materials used int he course.
 

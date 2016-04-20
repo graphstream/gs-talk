@@ -3,7 +3,7 @@ title: GraphStream Tutorials
 author:
 - Detect Community Structures in Networks
 - <img style="width:60%;" src="img/zachary.png"/>
-date: NetSci-X 2016 -- School of Code
+date: Formations JEDI -- April 21 2016
 center: 1
 controls: 0
 height: 800
@@ -28,6 +28,16 @@ transitionSpeed: fast
 width: 1280
 
 ---
+
+# Outline
+<!--  {data-background="url('/img/tmp.png')"} -->
+
+
+- [General Presentation of GraphStream](index.html)
+- [First Tutorials](tutorials.html)
+- Community Structures Tutorial (this presentation)
+
+
 
 #Community structure
 We will try to detect community structure in networks.
