@@ -220,7 +220,6 @@ public class LinLogLayout {
   // ...
   private Graph graph;
   private Viewer viewer;
-
   public void findCommunities(String fileName)
       throws IOException, GraphParseException {
     graph = new SingleGraph("communities");

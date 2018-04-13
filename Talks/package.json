@@ -4,24 +4,30 @@
   "description": "GraphStream Presentation slideshow",
   "main": "app/index.html",
   "scripts": {
-    "postinstall": "bower install",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp serve",
-    "build": "gulp",
-    "prebuild": "npm install"
+    "serve": "serve app",
+    "watch": "nodemon --exec 'npm run html && npm run serve'  src/*.md",
+    "build": "npm run clean && npm run css && npm run fonts && npm run img && npm run svg && npm run assets && npm run html",
+    "clean": "rm -rf app/*",
+    "css": "node-sass --include-path node_modules/reveal.js/css/theme/source src/css --output-style  compressed -o app/css/  src/css",
+    "postcss": "postcss app/css/main.css  --use autoprefixer -b 'last 2 versions' -r --no-map",
+    "fonts": "cp -r src/fonts app/",
+    "img": "mkdir -p app/img/ && cp -r src/img/*.png app/img",
+    "svg": "svgo --disable={cleanupIDs,convertStyleToAttrs} -q -f src/img/ -o app/img/ ",
+    "assets": "mkdir -p app/assets && cp -r node_modules/reveal.js app/assets/",
+    "html": "for file in `ls src/*.md`; do filebase=${file##*/}; pandoc -f markdown+smart -t revealjs  --standalone --css=css/main.css  --mathjax -V revealjs-url=assets/reveal.js $file -o app/${filebase%.*}.html; done"
   },
   "author": "Yoann Pigné",
   "license": "CC-BY",
   "devDependencies": {
-    "bower": "^1.7.1",
-    "browser-sync": "^2.10.1",
-    "del": "^2.2.0",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-copy": "0.0.2",
-    "gulp-pandoc": "^0.2.1",
-    "gulp-sass": "^2.1.1",
-    "gulp-svgmin": "^1.2.0"
+    "autoprefixer": "^8.2.0",
+    "cssnano": "^3.10.0",
+    "node-sass": "^4.8.3",
+    "nodemon": "^1.17.3",
+    "postcss-cli": "^5.0.0",
+    "serve": "^6.5.5",
+    "svgo": "^1.0.5"
+  },
+  "dependencies": {
+    "reveal.js": "^3.6.0"
   }
 }

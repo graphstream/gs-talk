@@ -2,8 +2,8 @@
 title: GraphStream
 author:
 - A Dynamic Graph Library
-- <img style="width:80%;" src="img/jediHeader.png"/>
-date: Formations JEDI -- April 21 2016
+- <img style="width:30%;" src="img/gs-logo.svg"/>
+date: Politechnika Poznańska -- April 24th 2018
 center: 1
 controls: 0
 height: 800
@@ -26,8 +26,8 @@ transition: linear
 #transition: none/fade/slide/convex/concave/zoom
 transitionSpeed: fast
 width: 1280
-
 ---
+
 # Sources
 
 Codes and Presentations are on GitHub
@@ -37,18 +37,14 @@ Codes and Presentations are on GitHub
 
 ![Sources for Codes and Presentations](img/qr-graphstream.github.io-gs-talk.svg)
 
-
-# Outline
-<!--  {data-background="url('/img/tmp.png')"} -->
-
+# Outline 
+<!-- {data-background="url('/img/tmp.png')"} -->
 
 - General Presentation of GraphStream (this presentation)
 - [First Tutorials](tutorials.html)
 - [Community Structures Tutorial](communities.html)
 
-
-
-#Outlook
+# Outlook
 
 - Dynamic Graphs
 - GraphStream
@@ -57,28 +53,25 @@ Codes and Presentations are on GitHub
 - Visualisation
 - Interaction with other tools
 
+# First, static graphs
 
-#First, static graphs
-## Structure:{data-xx="ok"}
+##  Structure:{data-xx="ok"}
 
 - Nodes, Vertices
 - (undirected) Edges, Links
 - (directed) Arcs
 
-
 ![Simple Network](img/simple-network.svg)
 
+# First, static graphs
 
-#First, static graphs
-##Algorithms: Graphs Theory
+## Algorithms: Graphs Theory
 
 - graph colouring problems
 - routing problems
 - flow problems
 - covering problems
-- subgraphs problems
-
-
+- sub-graphs problems
 
 # When we add dynamics...
 
@@ -89,7 +82,6 @@ Codes and Presentations are on GitHub
 
 ![Weighted Network](img/weighted-network.svg)
 
-
 # When we add dynamics...
 ## Problem with algorithms
 
@@ -97,12 +89,9 @@ Codes and Presentations are on GitHub
 - Can we stop the graph and recompute?
 - Depends on the dynamic graph model.
 
-
 ![Time-Varying Network](img/varying-network.svg)
 
-
-#Dynamic Graph Models
-
+# Dynamic Graph Models
 
 Many graph models consider dynamics in some ways. But they are usually bounded to their application domain.
 
@@ -116,20 +105,18 @@ Many graph models consider dynamics in some ways. But they are usually bounded t
 2. **Modelling**: Build artificial networks (Barabasi-Albert, Watts-Strogatz, Dorogovtsev-Mendes, Golomb
 , etc.)
 
-
 - Measures on graphs: community, distribution, dimensions, etc.
 - Iterative Construction/Iteration: we see dynamic graphs here!
 
 # Aggregative Methods
+
 All the evolution is known **in advance**, the dynamic graph is aggregated into a static graph. (Temporal Networks, Evolving Graphs, Time-Varying Graphs, etc.)
 
 Why? Because it allows the use of classical graph theory.
 
 ![Aggregative Methods](img/temporal-network.svg)
 
-
-
-#Re-optimisation
+# Re-optimisation
 
 Build and maintain structures on dynamic graphs (e.g. spanning trees) **without** prior knowledge of the evolution.
 
@@ -137,31 +124,23 @@ Build and maintain structures on dynamic graphs (e.g. spanning trees) **without*
 
 ![Re-optimization](img/re-optimization.svg)
 
-
-#GraphStream
-
+# GraphStream
 
 **Study interaction networks and their dynamics**
-
 
 - Dynamic Algorithms
 - Dynamic Visualisation
 
 A free and open-Source project supported by the University of Le Havre.
 
-- Stefan Balev
-- Antoine Dutot
-- Yoann Pigné
-- Guilhelm Savin
-
-
-#In a nutshell
+# In a nutshell
 
 A Java library with a handy public API
+
 ```java
 Graph g = new SingleGraph("MyGraph");
 g.read("some-file.tlp");
-g.getDegree();
+System.out.println("Average Degree: "+g.getDegree());
 g.display();
 ```
 
@@ -172,40 +151,59 @@ Interaction with over tools
 - Offline: several import / export file formats
 - Online: through the API or through a network connection
 
+# Architecture
 
-#Architecture
-###Public API <small>[graphstream-project.org/doc/API](http://graphstream-project.org/doc/API)</small>
+### Public API <small>[graphstream-project.org/doc/API](http://graphstream-project.org/doc/API)</small>
+
 - `org.graphstream`
     - `.graph`
     - `.stream`
     - `.ui`
     - `.algorithm`
 
+### Organised into sub-projects <small>[github.com/graphstream](https://github.com/graphstream)</small>
 
-###Organised into sub-projects <small>[github.com/graphstream](https://github.com/graphstream)</small>
-- `gs-core`, `gs-algo`, `gs-ui`,
--  `gs-netstream`, `gs-boids`, `gs-netlogo`, `gs-geography`, ...
+- `gs-core`, `gs-algo`,
+- `gs-ui-swing`, `gs-ui-javafx`,`gs-ui-android`
+- `gs-netstream`, `gs-boids`, `gs-netlogo`, `gs-geography`, ...
 
 
 # Get GraphStream!
+
 ### On the Website
+
 - [graphstream-project.org](http://graphstream-project.org)
-- official releases (v1.3) of gs-core, gs-algo, gs-ui
-- nightly-builds
+- legacy release (v1.3) of `gs-core`, `gs-algo`, `gs-ui`
 
 ### On Github
+
 - [github.com/graphstream](https://github.com/graphstream)
 - bug tracker on the `gs-core` project
+- New Official Releases (v2.0)
+
+---
 
 ### On Maven
+
+Use any version of GraphStream with  `jitpack.io`
+
 ```xml
-<groupId>org.graphstream</groupId>
-<artifactId>gs-core</artifactId>
-<version>1.3</version>
+<repositories>
+  <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+  </repository>
+</repositories>
 ```
 
+```xml
+<groupId>com.github..graphstream</groupId>
+<artifactId>gs-core</artifactId>
+<version>2.0</version>
+```
 
-#GraphStream's Event Model
+# GraphStream's Event Model
+
 The dynamics of the graph is expressed by an **event model**
 
 Events
@@ -215,26 +213,26 @@ Events
 - Addition, update or removal of data attributes
 - Time steps
 
-
 A **stream of events** modifies the structure of a graph.
 
-#GraphStream's Event Model
+# GraphStream's Event Model
 
-###Sources
+### Sources
 
 Produce streams of events.
 ![](img/source.svg)
 
 
-###Sinks
+### Sinks
+
 Receive streams of events.
 ![](img/sink.svg)
 
 
-###Pipes
+### Pipes
+
 Both source and sink. A **graph** is a pipe.
 ![](img/pipe.svg)
-
 
 # Pipelining
 Sources send events to sinks.
@@ -247,7 +245,7 @@ Sources, pipes and sinks can be connected to form pipelines.
 
 ![Example Pipeline](img/pipeline.svg)
 
-#Pipelining
+# Pipelining
 
 ```java
 Graph graph = new SingleGraph("Some Graph");
@@ -260,10 +258,10 @@ while( source.nextEvents() ){
 }
 source.end();
 ```
+
 ![File-Graph-Viewer Pipeline](img/pipeline.svg)
 
-
-#Pipelining
+# Pipelining
 
 The stream of events can flow between sources and sinks:
 
@@ -275,10 +273,7 @@ For example a viewer can run in a distinct thread or machine, while a simulation
 
 ![Proxy Pipe](img/proxy-pipe.svg)
 
-
-
-
-#Pipelining
+# Pipelining
 
 Receive events from another some other process/thread/programme/machine
 
@@ -294,20 +289,18 @@ while (true) {
 }
 ```
 
+# Graph components
 
-#Graph components
-
-###Various graph structures
+### Various graph structures
 
 - "Single" graphs (1-graph),
 - "multigraphs" (p-graphs, that are graphs where several edges can connect two nodes).
 - Directed and/or undirected graphs.
 
-###Several internal representations
+### Several internal representations
 
 - fast data retrieval,
 - data compactness.
-
 
 Representation of a graph at a given time (static). But this representation can evolve.
 
@@ -319,7 +312,7 @@ Representation of a graph at a given time (static). But this representation can 
 
 
 ```java
-g.addAttribute("My attribute", aValue);
+g.setAttribute("My attribute", aValue);
 Node n = g.getNode("A");
 n.setAttribute("xy", 23.4, 55.0);
 Edge e = g.getEdge("AB");
@@ -327,19 +320,19 @@ e.removeAttribute("selected");
 double w = e.getNumber("weight");
 ```
 
-#Algorithms
-###Searches
+# Algorithms
+### Searches
 random searches, shortest paths, spanning trees, etc.
 
-###Metrics
+### Metrics
 modularity, centrality, degree distributions, connectivity, density, etc.
 
-###Generators
+### Generators
 random, regular, preferential attachment, small world, from GIS, from the web, etc.
 
 
 
-#Focus on Dynamic Connected Components
+# Focus on Dynamic Connected Components
 
 ```java
 import org.graphstream.algorithm.ConnectedComponents;
@@ -352,7 +345,7 @@ while(something) {
 }
 ```
 
-#Focus on Dynamic Shortest Paths
+# Focus on Dynamic Shortest Paths
 
 ```java
 import org.graphstream.algorithm
@@ -368,27 +361,28 @@ while(something) {
 }
 ```
 
+# Algorithms
 
-#Algorithms
 Some tutorials to go farther
 
 [graphstream-project.org/doc/Algorithms/](http://graphstream-project.org/doc/Algorithms/)
 
 
 
-#Visualization
+# Visualization
 
 1. Dynamic Visualization: the graph is evolving, so does the visualization.
 2. Get more information than the graph itself: sprites.
 
-![CSS](img/CSS.png)   <!--video controls  >
+![CSS](img/CSS.png)   <!-- <video controls  >
   <source src="img/boids.mp4" type="video/mp4">
-</video-->  <iframe width="560" height="315" src="https://www.youtube.com/embed/hv8vrvzG9y0" frameborder="0" allowfullscreen></iframe>
+</video>   -->
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/hv8vrvzG9y0" frameborder="0" allowfullscreen></iframe> -->
 
 
 # Extra visual information
 
-##CSS
+## CSS
 
 ```css
 graph { padding: 50px; }
@@ -397,18 +391,17 @@ node {
   fill-color: white; stroke-mode: plain;
   padding: 5px, 4px; icon-mode: at-left;
   icon: url('data/Smiley_032.png');
-}    
-
+}
 ```
 
 ![css1](img/size_mode2_.png)![css2](img/stroke_mode2.png)![css3](img/edge_shape1.png)![css4](img/node_shape6.png)
 
+# Extra visual information
 
+## CSS classes
 
-#Extra visual information
-##CSS classes
 ```java
-graph.addAttribute("stylesheet",
+graph.setAttribute("stylesheet",
   "graph {padding : 50px;}"
   + "node {size: 100px; fill-mode: image-scaled;}"
   + "node.fun {fill-image: url('fun.gif');}"
@@ -420,19 +413,21 @@ Node c = graph.addNode("C");
 graph.addEdge("AB", "A", "B");
 graph.addEdge("CB", "C", "B");
 graph.addEdge("AC", "A", "C");
-a.addAttribute("ui.class", "fun");
-b.addAttribute("ui.class", "fun");
-c.addAttribute("ui.class", "dull");
+a.setAttribute("ui.class", "fun");
+b.setAttribute("ui.class", "fun");
+c.setAttribute("ui.class", "dull");
 
 ```
 
-#Extra visual information
-##CSS classes
+# Extra visual information
+
+## CSS classes
+
 ![...and of course it is dynamic.](img/funordull.png)
 
+# Extra visual information
 
-#Extra visual information
-##Sprites
+## Sprites
 
 Graphical objects that give extra information on the application you deal with.
 
@@ -464,12 +459,7 @@ sprite#pin {
 </section>
 
 
-
-
 # Interactions with other Tools
-
-
-
 
 
 # Offline interactions
@@ -522,9 +512,7 @@ while (true) {
 - It sends the computed results back to NetLogo
 - Agents can receive and use them to take their decisions
 
-
 ![NetLogo Extension](img/netlogo.jpg)
-
 
 ----
 
@@ -533,10 +521,7 @@ while (true) {
 <!-- <video controls  width="1280" height="800">
   <source src="img/graphstream-1.0.mp4" type="video/mp4">
 </video> -->
-<iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
+<!-- <iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe> -->
 </section>
-
-
-
 
 <!-- END -->

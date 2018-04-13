@@ -53,7 +53,7 @@ Basic steps to install GraphStream
 
 # Get the tutorial workspace
 - Go to the tutorial page at github:
-[github.com/graphstream/gs-talk/tree/NetSciX2016](https://github.com/graphstream/gs-talk/tree/NetSciX2016)
+[github.com/graphstream/gs-talk](https://github.com/graphstream/gs-talk)
 - Get the code:
     - with the "Download Zip" button on github (will download an archive)
     - or through git:
@@ -114,9 +114,9 @@ Browse to the project (`Demos/` folder), Eclipse should recognize the project.
 Binaries can be found on the GraphStream Download page  [graphstream-project.org/download/](http://graphstream-project.org/download/) :
 
 - `gs-algo-1.3.zip`, `gs-core-1.3.zip`, `gs-ui-1.3.zip`.
-- Extract those zip file, and copy `gs-algo-1.3.jar`, `gs-core-1.3.jar`, `gs-ui-1.3.jar` to the `gs-talk-NetSciX2016/Demos/lib` folder of the project.
+- Extract those zip file, and copy `gs-algo-1.3.jar`, `gs-core-1.3.jar`, `gs-ui-1.3.jar` to the `gs-talk-master/Demos/lib` folder of the project.
 - In Eclipse, select the project in the left panel and refresh the project (F5 key).
-- Right-clic on the project (`gs-talk`), then properties, then Java build path (left panel), then libraries (right panel), then clic the `Add Jars` button, and select our 3 jar files in the `gs-talk-NetSciX2016/Demos/lib/` folder.
+- Right-clic on the project (`gs-talk`), then properties, then Java build path (left panel), then libraries (right panel), then clic the `Add Jars` button, and select our 3 jar files in the `gs-talk-master/Demos/lib/` folder.
 
 
 #Tutorial 1
