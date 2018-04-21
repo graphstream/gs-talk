@@ -16,6 +16,7 @@ import org.graphstream.ui.spriteManager.SpriteManager;
  */
 public class BoidsCC {
   public static void main(String args[]) {
+    System.setProperty("org.graphstream.ui", "swing");
     BoidGraph graph = new BoidGraph();
 
     // Load the boids configuration and configure the boids simulator.

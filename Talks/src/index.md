@@ -41,8 +41,7 @@ Codes and Presentations are on GitHub
 <!-- {data-background="url('/img/tmp.png')"} -->
 
 - General Presentation of GraphStream (this presentation)
-- [First Tutorials](tutorials.html)
-- [Community Structures Tutorial](communities.html)
+- [Demonstrations and Examples](demos.html)
 
 # Outlook
 
@@ -164,7 +163,7 @@ Interaction with over tools
 ### Organised into sub-projects <small>[github.com/graphstream](https://github.com/graphstream)</small>
 
 - `gs-core`, `gs-algo`,
-- `gs-ui-swing`, `gs-ui-javafx`,`gs-ui-android`
+- `gs-ui-swing`, `gs-ui-javafx`, `gs-ui-android`
 - `gs-netstream`, `gs-boids`, `gs-netlogo`, `gs-geography`, ...
 
 
@@ -222,12 +221,10 @@ A **stream of events** modifies the structure of a graph.
 Produce streams of events.
 ![](img/source.svg)
 
-
 ### Sinks
 
 Receive streams of events.
 ![](img/sink.svg)
-
 
 ### Pipes
 
@@ -293,8 +290,8 @@ while (true) {
 
 ### Various graph structures
 
-- "Single" graphs (1-graph),
-- "multigraphs" (p-graphs, that are graphs where several edges can connect two nodes).
+- Single graph (1-graph),
+- Multi-graph (p-graph), graphs where several edges can connect two given nodes.
 - Directed and/or undirected graphs.
 
 ### Several internal representations
@@ -307,7 +304,7 @@ Representation of a graph at a given time (static). But this representation can 
 # Data Attributes
 
 - Any number of data attributes can be associated with any element of the graph.
-- An attribute is made of a **key** and a **value** that can be any Java Object.
+- An attribute is **key**, **value** pair that can be any Java Object.
 - You can place attributes on nodes, edges and on the graph itself.
 
 
@@ -321,13 +318,17 @@ double w = e.getNumber("weight");
 ```
 
 # Algorithms
+
 ### Searches
+
 random searches, shortest paths, spanning trees, etc.
 
 ### Metrics
+
 modularity, centrality, degree distributions, connectivity, density, etc.
 
 ### Generators
+
 random, regular, preferential attachment, small world, from GIS, from the web, etc.
 
 

@@ -2,7 +2,7 @@
 title: GraphStream Tutorials
 author:
 - Let's get some coding done
-date: Formations JEDI -- April 21 2016
+date: Politechnika Poznańska -- April 24th 2018
 center: 1
 controls: 0
 height: 800
@@ -85,11 +85,10 @@ Browse to the project (`Demos/` folder), Eclipse should recognize the project.
 
 ![eclipse-import-maven-projects](img/eclipse-import-maven-projects.png)
 
-
-
-
 # Get GraphStream binaries
+
 ### With Maven
+
 - Dependencies are automatically resolved by maven in the `pom.xml` file :
 
 ```xml
@@ -106,11 +105,14 @@ Browse to the project (`Demos/` folder), Eclipse should recognize the project.
 <artifactId>gs-ui</artifactId>
 <version>1.3</version>
 ```
+
 - In Eclipse : nothing to do!
 - Or on the command line : `mvn compile`
 
 # Get GraphStream binaries
+
 ### Without Maven
+
 Binaries can be found on the GraphStream Download page  [graphstream-project.org/download/](http://graphstream-project.org/download/) :
 
 - `gs-algo-1.3.zip`, `gs-core-1.3.zip`, `gs-ui-1.3.zip`.
@@ -119,12 +121,12 @@ Binaries can be found on the GraphStream Download page  [graphstream-project.org
 - Right-clic on the project (`gs-talk`), then properties, then Java build path (left panel), then libraries (right panel), then clic the `Add Jars` button, and select our 3 jar files in the `gs-talk-master/Demos/lib/` folder.
 
 
-#Tutorial 1
+# Tutorial 1
 
 
-###Basic tasks with GraphStream
+### Basic tasks with GraphStream
 
-#Create and display
+# Create and display
 
 - Open
 `src/org/graphstream/demo/tutorial1/Tutorial1.java`

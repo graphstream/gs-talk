@@ -17,12 +17,11 @@ public class DynamicShortestPathDemo {
 
 	public static void main(String[] args) {
 		// create and display a graph
-		System.setProperty("org.graphstream.ui.renderer",
-				"org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+		System.setProperty("org.graphstream.ui", "javafx");
 		Graph graph = new SingleGraph("test");
-		graph.addAttribute("ui.quality");
-		graph.addAttribute("ui.antialias");
-		graph.addAttribute("ui.stylesheet", "url('data/style_shp.css')");
+		graph.setAttribute("ui.quality");
+		graph.setAttribute("ui.antialias");
+		graph.setAttribute("ui.stylesheet", "url('data/style_shp.css')");
 		graph.display();
 		
 		// initialize the algorithm

@@ -19,12 +19,11 @@ import org.graphstream.graph.implementations.SingleGraph;
  */
 public class FunOrDull {
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("org.graphstream.ui.renderer",
-				"org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+		System.setProperty("org.graphstream.ui", "swing");
 		Graph graph = new SingleGraph("fun or dull");
 		graph.display();
-		graph.addAttribute("ui.antialias");
-		graph.addAttribute("stylesheet", "graph {padding : 50px;}"
+		graph.setAttribute("ui.antialias");
+		graph.setAttribute("stylesheet", "graph {padding : 50px;}"
 				+ "node {size: 100px; fill-mode: image-scaled;}"
 				+ "node.fun {fill-image: url('data/fun.gif');}"
 				+ "node.dull {fill-image: url('data/dull.png');}");
@@ -36,19 +35,19 @@ public class FunOrDull {
 		graph.addEdge("CB", "C", "B");
 		graph.addEdge("AC", "A", "C");
 
-		a.addAttribute("ui.class", "fun");
-		b.addAttribute("ui.class", "fun");
-		c.addAttribute("ui.class", "fun");
+		a.setAttribute("ui.class", "fun");
+		b.setAttribute("ui.class", "fun");
+		c.setAttribute("ui.class", "fun");
 		while(true){
 			Thread.sleep(1000);
-			a.addAttribute("ui.class", "fun");
-			c.addAttribute("ui.class", "dull");
+			a.setAttribute("ui.class", "fun");
+			c.setAttribute("ui.class", "dull");
 			Thread.sleep(1000);
-			b.addAttribute("ui.class", "dull");
-			c.addAttribute("ui.class", "fun");
+			b.setAttribute("ui.class", "dull");
+			c.setAttribute("ui.class", "fun");
 			Thread.sleep(1000);
-			b.addAttribute("ui.class", "fun");
-			a.addAttribute("ui.class", "dull");
+			b.setAttribute("ui.class", "fun");
+			a.setAttribute("ui.class", "dull");
 				
 		}
 
