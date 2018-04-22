@@ -1,0 +1,32 @@
+DGS003
+"Tutorial 2" 0 0
+
+st 0
+
+an "A" x=0 y=0.86
+an "B" x=1 y=-1
+an "C" x=-1 y=-1
+cn "A" label="A"
+cn "B" label="C"
+cn "C" label="C"
+
+st 1
+
+ae "AB" "A" "B"
+ae "BC" "B" "C"
+ae "CA" "C" "A"
+ce "AB" label="AB"
+ce "BC" label="BC"
+ce "CA" label="CA"
+
+st 2
+
+an "D" label="D" xy=1,-2
+an "E" label="E" xy=-1,-2
+ae "BD" "B" "D" label="BD"
+ae "CE" "C" "E" label="CE"
+ae "DE" "D" "E" label="DE"
+st 3
+de "AB"
+st 4
+dn "C"

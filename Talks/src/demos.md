@@ -78,10 +78,10 @@ In that project, we want the `Demos/` folder.
 # Create and display
 
 ```java
-public class Tutorial1 {
+public class Demo1 {
 	public static void main(String args[]) {
 		System.setProperty("org.graphstream.ui", "swing");
-		Graph graph = new SingleGraph("Tutorial 1");
+		Graph graph = new SingleGraph("Demo 1");
 		graph.display();
 		graph.addNode("A");
 		graph.addNode("B");
@@ -92,6 +92,11 @@ public class Tutorial1 {
 	}
 }
 ```
+
+---
+
+![Simple triangle](img/triangle1.png)
+
 
 # Change the Display with CSS
 
@@ -105,27 +110,42 @@ graph.setAttribute("ui.quality");
 graph.setAttribute("ui.antialias");
 graph.setAttribute("ui.stylesheet", "" +
                    "edge {" +
-                   "   size: 3px;" +
+                   "   size: 4px;" +
+                   "   arrow-size: 5px, 5px;" +
                    "   fill-color: #2c7fb8;" +
                    "}");
 
 ```
 
+---
+
+![Triangle with CSS](img/triangle2.png)
+
+
 # Access Elements
 
-- Each node, edge and attribute is identified by an unique string.
-- The node and edge elements are created for you.
-- You can access them however, when created: `Node n = graph.addNode("A");`
-- Or after creation: `Node n = graph.getNode("A");`
+- Nodes and edges are identified by an unique string.
+- They are accessible at creation time:
+  ```java
+Node n = graph.addNode("A");
+  ```
+- Or after creation:
+  ```java
+Node n = graph.getNode("A");
+  ```
 
-#Constructive API vs. Events
+# Constructive API vs. Events
 
-- You can remove nodes and edges the same way: `graph.removeNode("A");`
-- You can change the graph this way at any time. Each change is considered as an “event”.
+- Nodes and edges are removed the same way:
+  ```java
+  graph.removeNode("A");
+  ```
+- Each change, at anytime, is considered as an “event”.
 - The sequence of changes is seen as the dynamics of the graph.
 - There are many other ways to modify the graph.
 
-#Attributes
+# Attributes
+
 Data stored in the graph, on nodes and edges, are called “attributes”.
 An attribute is a pair (name,value).
 
@@ -145,11 +165,14 @@ graph.setAttribute("ui.stylesheet", "url(data/style.css);");
 
 ```
 
+---
 
-#Define Attributes
+![Triangle with more CSS](img/triangle3.png)
 
-- But you can add any kind of data on each graph element.
-- However not all attributes appear in the viewer.
+
+# Define Attributes
+
+- Not all attributes appear in the viewer.
 - Notice the way you can add arrays with `setAttribute()` and a variable number of arguments:
 
 ```java
@@ -158,65 +181,44 @@ bc.setAttribute("anObject", new Double(10));
 ca.setAttribute("anArrayOfThings", 1, 2, 3);
 ```
 
-#Retrieve Attributes
+# Retrieve Attributes
 
 Several ways to retrieve attributes:
 
 ```java
 int value1 = ((Number) ab.getAttribute("aNumber")).intValue();
-double value2 = bc.getAttribute("anObject");
-Object[] value3 = ca.getAttribute("anArrayOfThings");
-
+double value2 = (double) bc.getAttribute("anObject");
+Object[] value3 = (Object[]) ca.getAttribute("anArrayOfThings");        
 ```
-Special methods are here to simplify things:
+
+Special methods are here to simplify access:
 
 ```java
 double value4 = ab.getNumber("aNumber");
-double value5 = bc.getNumber("anObject");
-
+Object[] value5 = bc.getArray("anArrayOfThings");
 ```
 
 
-#Traversing the graph
-Iterating through all nodes of the graph is easy:
+# Traversing the graph
+
+GraphStream 2.0 uses Java 8 *streams*.
+
+Access all nodes:
+
 ```java
-for(Node n: graph) {
-	System.out.println(n.getId());
-}
-
+graph.nodes()
+    	.forEach(node -> System.out.println(node.getId()));
 ```
+
 Equally for edges:
 ```java
-for(Edge e: graph.getEachEdge()) {
-	System.out.println(e.getId());
-}
-
+graph.edges()
+    	.forEach(edge -> System.out.println(edge.getId()));
 ```
 
 
-#Other iterators
-Iterators for nodes:
-```java
-Iterator<? extends Node> nodes = graph.getNodeIterator();
 
-while(nodes.hasNext()) {
-	System.out.println(nodes.next().getId());
-}
-
-```
-
-Iterators for edges:
-
-```java
-Iterator<? extends Edge> edges = graph.getEdgeIterator();
-
-while(edges.hasNext()) {
-	System.out.println(edges.next().getId());
-}
-```
-
-
-#Index-based  access
+# Index-based  access
 
 Indices for nodes:
 
@@ -237,11 +239,11 @@ for(int i=0; i<n; i++) {
 }
 
 ```
-⚠ indices remain the same as long as the graph is unchanged. But as soon as an addition or removal occurs, indices are no longer tied to their old node or edge ⚠
+⚠ indices remain the same as long as the graph is unchanged. ⚠
 
 
 
-#Travers from nodes and edges
+# Travers from nodes and edges
 
 You can also travel the graph using nodes:
 
@@ -250,47 +252,48 @@ import static org.graphstream.algorithm.Toolkit.*;
 //...
 Node node = randomNode(graph);
 
-for(Edge e: node.getEachEdge()) {
+node.edges().forEach(e -> {
 	System.out.printf("neighbor %s via %s%n",
 		e.getOpposite(node).getId(),
 		e.getId() );
-}
-
+})
 ```
 
 
-- Each node and edge allow to iterate on their neighbourhood.
+- Each node and edge allow to iterate on their neighborhood.
 - `Toolkit` is set of often used functions and small algorithms (see the [API](http://www.graphstream-project.org/api/gs-algo/org/graphstream/algorithm/Toolkit.html)).
 
 
 # Orientation-based interaction
-You can iterate on directed edges:
+
+Directed edges stream from a given node:
 
 ```java
 Node node = getRandomNode(graph);
-Iterator<? extends Edge> edges = node.getLeavingEdgeIterator();
+
+node.leavingEdges().map(...)
+
+node.enterigEdges().map(...)
 ```
 
-Or:
-```java
-Iterator<? extends Edge> edges = node.getEnteringEdgeIterator();
-```
-And get the node degree, entering or leaving:
+
+Get a node's degree, entering degree  or leaving degree:
 
 ```java
-System.out.println(“Node degree %d (entering %d, leaving %d)%n”,
+System.out.printf("Node degree %d (entering %d, leaving %d)%n",
 	node.getDegree(),
 	node.getInDegree(),
 	node.getOutDegree());
 
 ```
 
-#Tutorial 2
+# Demo 2
 
 
-###A first dynamic graph
+### Dynamic Graphs
 
-#Sinks
+# Sinks
+
 - A graph can receive events. It is a _sink_.
 - A _sink_  is connected to a _source_ using the `Source.addSink(Sink)` method.
 - Events are filtered by type (_Elements Events_ and _Attributes Events_) :
@@ -298,9 +301,8 @@ System.out.println(“Node degree %d (entering %d, leaving %d)%n”,
     - `addAttributeSink(AttributeSink)`. Data attributes are stored on every element.
 - A `Sink` is both an `ElementSink` and `AttributeSink`.
 
+# ElementSink
 
-
-#ElementSink
 ElementSink is an interface
 ```java
 public interface ElementSink {
@@ -314,7 +316,8 @@ public interface ElementSink {
 ```
 
 
-#AttributeSink
+# AttributeSink
+
 An attribute sink must follow the interface:
 
 ```java
@@ -333,7 +336,7 @@ public interface AttributeSink {
 }
 ```
 
-#Source
+# Source
 A source is an interface that only defines methods to handle a set of sinks.
 
 ```java
@@ -351,7 +354,7 @@ public interface Source {
 
 ```
 
-#A first dynamic graph
+# A first dynamic graph
 
 Since Graph is a _sink_ let's create a graph from a set of events generated by a _source_.
 
@@ -364,17 +367,13 @@ Since Graph is a _sink_ let's create a graph from a set of events generated by a
 # The GDS File Format
 
 - `an` for "add node".
-- `ae` for "add edge".
-- `ae "AB" "A" > "B"` adds a directed edge between nodes `A` and `B`.
+- `ae` for "add edge". `ae "AB" "A" > "B"` adds a directed edge between nodes `A` and `B`.
 - `cn`, `ce` and `cg` change or add one or more attributes on a node, an edge or the graph.
 - `dn` and `de` allow to remove nodes, edges.
 
-
-Open the example DGS file in  `data/tutorial2.dgs`.
-
 ```c
 DGS003
-"Tutorial 2" 0 0
+"Demo 2" 0 0
 an "A"
 an "B"
 an "C"
@@ -382,8 +381,8 @@ ae "AB" "A" "B"
 ...
 ```
 
-
 # How to handle dynamics
+
 - Storing temporal information is tricky.
 - Timestamps on events is a  good way to encode time
 - But some events occur at the same time.
@@ -392,9 +391,8 @@ ae "AB" "A" "B"
 
 # Steps in DGS
 
-The ability to remove nodes and edges make the format dynamic.
+The ability to remove nodes and edges makes the format support dynamic.
 
-Add this to the  `data/tutorial2.dgs`  file:
 ```c
 st 2
 an "D" label="D"
@@ -405,52 +403,50 @@ ae "DE" "D" "E" label="DE"
 st 3
 de "AB"
 st 4
-dn "A"
+dn "C"
 ```
-And save it.
 
-#Read the whole file
+# Read the whole file
 
 The file can be read entirely :
 
 ```java
-graph.read("tutorial2.dgs");
+graph.read("demo2.dgs");
 ```
 
 - However this will send all events as fast as possible.
 - We have no control over the speed at which events occur.
 
 
-#Read the file event by event
+# Read the file event by event
+
 We can read the DGS file event by event using an input source:
+
 ```java
-Graph graph = new SingleGraph("Tutorial2");
+Graph graph = new SingleGraph("Demo2");
 graph.display();
 FileSource source = new FileSourceDGS();
 source.addSink( graph );
-source.begin("data/tutorial2.dgs");
+source.begin("data/demo2.dgs");
 while( source.nextEvents() );
 source.end();
 ```
 ![FileSource Pipeline](img/pipeline.svg)
 
 
-#Read the file step by step
-- We read the file event by event (line by line in the file), however it still does it as fast as it can.
-- Note the line `while(source.nextEvents());`
-- Also note that we have to call the `begin()` and `end()` methods before and after reading to cleanly open and close the file.
-- Let's slow down the process :
-``` java
-while(source.nextEvents()) { Thread.sleep(1000); }
-```
-- We can also run it step by step so that events between two step appear together
-```java
-while(source.nextStep()) { Thread.sleep(1000); }
-```
+# Read the file step by step
+- The `nextEvents()` method reads the file event by event (line by line in the file)
+- The `nextStep()`methods reads events up to the next `st` command (all the lines between two `st` lines)
 
+```java
+while(source.nextStep()) { 
+	/* Do something... Compute an algorithms... Sleep...*/
+ }
+```
 
 # Graph Layout
-- By default the graph the spacial position of nodes on the display is automatically computed.
+
+- By default spacial positions of nodes on the display are automatically computed.
 - However one may want to position nodes by ourself.
 - One can do this using the `x` and `y` attributes:
 
@@ -459,10 +455,46 @@ an "A" x=0 y=0.86
 an "B" x=1 y=-1
 an "C" x=-1 y=-1
 // ...
-an "D" x=1 y=1
-an "E" x=-1 y=1
+an "D" xy=1,-2
+an "E" xy=-1,-2
 ```
-Then one have to tell the viewer  not to compute nodes positions:
+
+Then one have to tell the viewer not to compute nodes positions:
+
 ```java
 graph.display(false);
 ```
+
+# Demo 3
+
+
+### Geographic Graphs
+
+# Working with geographic data
+
+The `gs-geography` project brings the opportunity to read geographical data file format and produce graphs. 
+
+For instance, one can read an OpenStreetMap  map to produce a graph of the road network, where nodes would be intersections and edges would be roads.
+
+
+---
+
+![Simplifies road network of Poznan](img/geography1.png)
+
+# Graph Algorithms for geographic data
+
+---
+
+![Betweenness Centrality of the  road network of Poznan](img/geography2.png)
+
+
+
+----
+
+<section data-background=" #efedef">
+
+ <!-- <video controls  width="1280" height="800" >
+  <source data-src="img/GraphStream 1.0.mp4" type="video/mp4">
+</video> -->
+<iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
+</section>

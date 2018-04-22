@@ -17,7 +17,7 @@ public class DynamicShortestPathDemo {
 
 	public static void main(String[] args) {
 		// create and display a graph
-		System.setProperty("org.graphstream.ui", "javafx");
+		System.setProperty("org.graphstream.ui", "swing");
 		Graph graph = new SingleGraph("test");
 		graph.setAttribute("ui.quality");
 		graph.setAttribute("ui.antialias");

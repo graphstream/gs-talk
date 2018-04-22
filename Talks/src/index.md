@@ -41,16 +41,16 @@ Codes and Presentations are on GitHub
 <!-- {data-background="url('/img/tmp.png')"} -->
 
 - General Presentation of GraphStream (this presentation)
+  - Dynamic Graphs
+  - GraphStream
+  - The Event Model
+  - Algorithms
+  - Visualisation
+  - Interaction with other tools
+ 
 - [Demonstrations and Examples](demos.html)
 
-# Outlook
 
-- Dynamic Graphs
-- GraphStream
-- The Event Model
-- Algorithms
-- Visualisation
-- Interaction with other tools
 
 # First, static graphs
 
@@ -364,7 +364,7 @@ while(something) {
 
 # Algorithms
 
-Some tutorials to go farther
+Some tutorials to go further
 
 [graphstream-project.org/doc/Algorithms/](http://graphstream-project.org/doc/Algorithms/)
 
@@ -375,10 +375,10 @@ Some tutorials to go farther
 1. Dynamic Visualization: the graph is evolving, so does the visualization.
 2. Get more information than the graph itself: sprites.
 
-![CSS](img/CSS.png)   <!-- <video controls  >
-  <source src="img/boids.mp4" type="video/mp4">
-</video>   -->
-<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/hv8vrvzG9y0" frameborder="0" allowfullscreen></iframe> -->
+ ![CSS](img/CSS.png)<!-- <video controls autoplay loop>
+  <source data-src="img/boids.mp4" type="video/mp4">
+</video> -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hv8vrvzG9y0" frameborder="0" allowfullscreen></iframe>
 
 
 # Extra visual information
@@ -495,17 +495,6 @@ dn B
 - TCP socket (and WebSocket) implementation
 - Several languages (Java, C++, Python, JS)
 
-```java
-import org.graphstream.stream.netstream.NetStreamReceiver;
-//...
-NetStreamReceiver net = new NetStreamReceiver(2001);
-ThreadProxyPipe pipe = net.getDefaultStream();
-pipe.addSink(graph);
-while (true) {
-  pipe.blockingPump();
-}
-```
-
 # NetLogo Extension
 
 - NetLogo agents (turtles, links and observer) send graph events to external application
@@ -519,10 +508,10 @@ while (true) {
 
 <section data-background=" #efedef">
 
-<!-- <video controls  width="1280" height="800">
-  <source src="img/graphstream-1.0.mp4" type="video/mp4">
+ <!-- <video controls  width="1280" height="800" >
+  <source data-src="img/GraphStream 1.0.mp4" type="video/mp4">
 </video> -->
-<!-- <iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe> -->
+<iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
 </section>
 
 <!-- END -->

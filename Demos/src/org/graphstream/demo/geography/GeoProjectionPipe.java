@@ -240,23 +240,5 @@ public class GeoProjectionPipe extends PipeBase {
         public void stepBegins(String graphId, long timeId, double step) {
             sendStepBegins(graphId, timeId, step);
         }
-        public static void main(String[] args) {
-
-		/*
-		GeoProjectionPipe pipe = new GeoProjectionPipe();
-		pipe.resetProjection();
-		Point2D.Double geoCoords = new Point2D.Double();
-		geoCoords.x=1;
-		geoCoords.y=45;
-		Point2D.Double xyCoords  = pipe.computeProjection(geoCoords);
-		*/
-
-
-        }
-
-
-
-
-
 
 }
