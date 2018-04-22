@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="A Dynamic Graph Library">
+  <meta name="author" content="">
+  <title>GraphStream</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="assets/reveal.js/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="assets/reveal.js/css/theme/none.css" id="theme">
+  <link rel="stylesheet" href="css/main.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'assets/reveal.js/css/print/pdf.css' : 'assets/reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="assets/reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">GraphStream</h1>
+  <p class="author">A Dynamic Graph Library</p>
+  <p class="author"><img style="width:30%;" src="img/gs-logo.svg"/></p>
+  <p class="date">Politechnika Poznańska – April 24th 2018</p>
+</section>
+
+<section id="sources" class="slide level1">
+<h1>Sources</h1>
+<p>Codes and Presentations are on GitHub</p>
+<ul>
+<li>Code : <a href="https://github.com/graphstream/gs-talk">github.com/graphstream/gs-talk</a></li>
+<li>Slides : <a href="https://graphstream.github.io/gs-talk">graphstream.github.io/gs-talk</a></li>
+</ul>
+<figure>
+<img data-src="img/qr-graphstream.github.io-gs-talk.svg" alt="Sources for Codes and Presentations" /><figcaption>Sources for Codes and Presentations</figcaption>
+</figure>
+</section>
+<section id="outline" class="slide level1">
+<h1>Outline</h1>
+<!-- {data-background="url('/img/tmp.png')"} -->
+<ul>
+<li>General Presentation of GraphStream (this presentation)
+<ul>
+<li>Dynamic Graphs</li>
+<li>GraphStream</li>
+<li>The Event Model</li>
+<li>Algorithms</li>
+<li>Visualisation</li>
+<li>Interaction with other tools</li>
+</ul></li>
+<li><a href="demos.html">Demonstrations and Examples</a></li>
+</ul>
+</section>
+<section id="first-static-graphs" class="slide level1">
+<h1>First, static graphs</h1>
+<h2 id="structure" data-xx="ok">Structure:</h2>
+<ul>
+<li>Nodes, Vertices</li>
+<li>(undirected) Edges, Links</li>
+<li>(directed) Arcs</li>
+</ul>
+<figure>
+<img data-src="img/simple-network.svg" alt="Simple Network" /><figcaption>Simple Network</figcaption>
+</figure>
+</section>
+<section id="first-static-graphs-1" class="slide level1">
+<h1>First, static graphs</h1>
+<h2 id="algorithms-graphs-theory">Algorithms: Graphs Theory</h2>
+<ul>
+<li>graph colouring problems</li>
+<li>routing problems</li>
+<li>flow problems</li>
+<li>covering problems</li>
+<li>sub-graphs problems</li>
+</ul>
+</section>
+<section id="when-we-add-dynamics" class="slide level1">
+<h1>When we add dynamics…</h1>
+<h2 id="what-kind-of-dynamics">What kind of dynamics?</h2>
+<ul>
+<li>values/weight on edges or nodes?</li>
+<li>nodes and/or edges added/removed?</li>
+</ul>
+<figure>
+<img data-src="img/weighted-network.svg" alt="Weighted Network" /><figcaption>Weighted Network</figcaption>
+</figure>
+</section>
+<section id="when-we-add-dynamics-1" class="slide level1">
+<h1>When we add dynamics…</h1>
+<h2 id="problem-with-algorithms">Problem with algorithms</h2>
+<ul>
+<li>As soon as it gets computed, the result has vanished.</li>
+<li>Can we stop the graph and recompute?</li>
+<li>Depends on the dynamic graph model.</li>
+</ul>
+<figure>
+<img data-src="img/varying-network.svg" alt="Time-Varying Network" /><figcaption>Time-Varying Network</figcaption>
+</figure>
+</section>
+<section id="dynamic-graph-models" class="slide level1">
+<h1>Dynamic Graph Models</h1>
+<p>Many graph models consider dynamics in some ways. But they are usually bounded to their application domain.</p>
+<ul>
+<li>Is there a general-enough model that can be used in a broad range of applications?</li>
+<li>What about a <strong>Dynamic Graph Theory</strong> with algorithms for colouring, routing, flows, etc.?</li>
+</ul>
+</section>
+<section id="complex-networks" class="slide level1">
+<h1>Complex Networks</h1>
+<ol type="1">
+<li><p><strong>Exploration</strong>: Analysis of “real world” networks (web graphs, biological networks, social networks)</p></li>
+<li><p><strong>Modelling</strong>: Build artificial networks (Barabasi-Albert, Watts-Strogatz, Dorogovtsev-Mendes, Golomb , etc.)</p></li>
+</ol>
+<ul>
+<li>Measures on graphs: community, distribution, dimensions, etc.</li>
+<li>Iterative Construction/Iteration: we see dynamic graphs here!</li>
+</ul>
+</section>
+<section id="aggregative-methods" class="slide level1">
+<h1>Aggregative Methods</h1>
+<p>All the evolution is known <strong>in advance</strong>, the dynamic graph is aggregated into a static graph. (Temporal Networks, Evolving Graphs, Time-Varying Graphs, etc.)</p>
+<p>Why? Because it allows the use of classical graph theory.</p>
+<figure>
+<img data-src="img/temporal-network.svg" alt="Aggregative Methods" /><figcaption>Aggregative Methods</figcaption>
+</figure>
+</section>
+<section id="re-optimisation" class="slide level1">
+<h1>Re-optimisation</h1>
+<p>Build and maintain structures on dynamic graphs (e.g. spanning trees) <strong>without</strong> prior knowledge of the evolution.</p>
+<p><strong>Hypothesis</strong>: Updating an existing structure after some modifications is more effective that recomputing it from scratch.</p>
+<figure>
+<img data-src="img/re-optimization.svg" alt="Re-optimization" /><figcaption>Re-optimization</figcaption>
+</figure>
+</section>
+<section id="graphstream" class="slide level1">
+<h1>GraphStream</h1>
+<p><strong>Study interaction networks and their dynamics</strong></p>
+<ul>
+<li>Dynamic Algorithms</li>
+<li>Dynamic Visualisation</li>
+</ul>
+<p>A free and open-Source project supported by the University of Le Havre.</p>
+</section>
+<section id="in-a-nutshell" class="slide level1">
+<h1>In a nutshell</h1>
+<p>A Java library with a handy public API</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1">Graph g = <span class="kw">new</span> <span class="fu">SingleGraph</span>(<span class="st">&quot;MyGraph&quot;</span>);</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">g.<span class="fu">read</span>(<span class="st">&quot;some-file.tlp&quot;</span>);</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Average Degree: &quot;</span>+g.<span class="fu">getDegree</span>());</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">g.<span class="fu">display</span>();</a></code></pre></div>
+<p>Based on an event model: Nodes and Edges are Added/Removed/Modified</p>
+<p>Interaction with over tools</p>
+<ul>
+<li>Offline: several import / export file formats</li>
+<li>Online: through the API or through a network connection</li>
+</ul>
+</section>
+<section id="architecture" class="slide level1">
+<h1>Architecture</h1>
+<h3 id="public-api-graphstream-project.orgdocapi">Public API <small><a href="http://graphstream-project.org/doc/API">graphstream-project.org/doc/API</a></small></h3>
+<ul>
+<li><code>org.graphstream</code>
+<ul>
+<li><code>.graph</code></li>
+<li><code>.stream</code></li>
+<li><code>.ui</code></li>
+<li><code>.algorithm</code></li>
+</ul></li>
+</ul>
+<h3 id="organised-into-sub-projects-github.comgraphstream">Organised into sub-projects <small><a href="https://github.com/graphstream">github.com/graphstream</a></small></h3>
+<ul>
+<li><code>gs-core</code>, <code>gs-algo</code>,</li>
+<li><code>gs-ui-swing</code>, <code>gs-ui-javafx</code>, <code>gs-ui-android</code></li>
+<li><code>gs-netstream</code>, <code>gs-boids</code>, <code>gs-netlogo</code>, <code>gs-geography</code>, …</li>
+</ul>
+</section>
+<section id="get-graphstream" class="slide level1">
+<h1>Get GraphStream!</h1>
+<h3 id="on-the-website">On the Website</h3>
+<ul>
+<li><a href="http://graphstream-project.org">graphstream-project.org</a></li>
+<li>legacy release (v1.3) of <code>gs-core</code>, <code>gs-algo</code>, <code>gs-ui</code></li>
+</ul>
+<h3 id="on-github">On Github</h3>
+<ul>
+<li><a href="https://github.com/graphstream">github.com/graphstream</a></li>
+<li>bug tracker on the <code>gs-core</code> project</li>
+<li>New Official Releases (v2.0)</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h3 id="on-maven">On Maven</h3>
+<p>Use any version of GraphStream with <code>jitpack.io</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;repositories&gt;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">&lt;repository&gt;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">      <span class="kw">&lt;id&gt;</span>jitpack.io<span class="kw">&lt;/id&gt;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">      <span class="kw">&lt;url&gt;</span>https://jitpack.io<span class="kw">&lt;/url&gt;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw">&lt;/repository&gt;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">&lt;/repositories&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;groupId&gt;</span>com.github..graphstream<span class="kw">&lt;/groupId&gt;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">&lt;artifactId&gt;</span>gs-core<span class="kw">&lt;/artifactId&gt;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">&lt;version&gt;</span>2.0<span class="kw">&lt;/version&gt;</span></a></code></pre></div>
+</section>
+<section id="graphstreams-event-model" class="slide level1">
+<h1>GraphStream’s Event Model</h1>
+<p>The dynamics of the graph is expressed by an <strong>event model</strong></p>
+<p>Events</p>
+<ul>
+<li>Addition or removal of nodes</li>
+<li>Addition or removal of edge</li>
+<li>Addition, update or removal of data attributes</li>
+<li>Time steps</li>
+</ul>
+<p>A <strong>stream of events</strong> modifies the structure of a graph.</p>
+</section>
+<section id="graphstreams-event-model-1" class="slide level1">
+<h1>GraphStream’s Event Model</h1>
+<h3 id="sources-1">Sources</h3>
+<p>Produce streams of events. <img data-src="img/source.svg" /></p>
+<h3 id="sinks">Sinks</h3>
+<p>Receive streams of events. <img data-src="img/sink.svg" /></p>
+<h3 id="pipes">Pipes</h3>
+<p>Both source and sink. A <strong>graph</strong> is a pipe. <img data-src="img/pipe.svg" /></p>
+</section>
+<section id="pipelining" class="slide level1">
+<h1>Pipelining</h1>
+<p>Sources send events to sinks.</p>
+<ul>
+<li>Observer design pattern</li>
+<li>Publish / Subscribe</li>
+<li>Java Swing listeners</li>
+</ul>
+<p>Sources, pipes and sinks can be connected to form pipelines.</p>
+<figure>
+<img data-src="img/pipeline.svg" alt="Example Pipeline" /><figcaption>Example Pipeline</figcaption>
+</figure>
+</section>
+<section id="pipelining-1" class="slide level1">
+<h1>Pipelining</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1">Graph graph = <span class="kw">new</span> <span class="fu">SingleGraph</span>(<span class="st">&quot;Some Graph&quot;</span>);</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">graph.<span class="fu">display</span>();</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">FileSource source = <span class="kw">new</span> <span class="fu">FileSourceDGS</span>();</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">source.<span class="fu">addSink</span>( graph );</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">source.<span class="fu">begin</span>(<span class="st">&quot;someFile.dgs&quot;</span>);</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">while</span>( source.<span class="fu">nextEvents</span>() ){</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="co">// Do whatever between two events</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">source.<span class="fu">end</span>();</a></code></pre></div>
+<figure>
+<img data-src="img/pipeline.svg" alt="File-Graph-Viewer Pipeline" /><figcaption>File-Graph-Viewer Pipeline</figcaption>
+</figure>
+</section>
+<section id="pipelining-2" class="slide level1">
+<h1>Pipelining</h1>
+<p>The stream of events can flow between sources and sinks:</p>
+<ul>
+<li>across the network,</li>
+<li>processes,</li>
+<li>threads.</li>
+</ul>
+<p>For example a viewer can run in a distinct thread or machine, while a simulation on a graph runs on another.</p>
+<figure>
+<img data-src="img/proxy-pipe.svg" alt="Proxy Pipe" /><figcaption>Proxy Pipe</figcaption>
+</figure>
+</section>
+<section id="pipelining-3" class="slide level1">
+<h1>Pipelining</h1>
+<p>Receive events from another some other process/thread/programme/machine</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1">Graph g = <span class="kw">new</span> <span class="fu">SingleGraph</span>(<span class="st">&quot;RWP&quot;</span>);</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">ThreadProxyPipe pipe = <span class="fu">getPipeFromElsewhere</span>(); <span class="co">//fake function</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">pipe.<span class="fu">addSink</span>(g);</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">g.<span class="fu">display</span>(<span class="kw">false</span>);</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">while</span> (<span class="kw">true</span>) {</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  pipe.<span class="fu">pump</span>();</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  <span class="bu">Thread</span>.<span class="fu">sleep</span>(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">}</a></code></pre></div>
+</section>
+<section id="graph-components" class="slide level1">
+<h1>Graph components</h1>
+<h3 id="various-graph-structures">Various graph structures</h3>
+<ul>
+<li>Single graph (1-graph),</li>
+<li>Multi-graph (p-graph), graphs where several edges can connect two given nodes.</li>
+<li>Directed and/or undirected graphs.</li>
+</ul>
+<h3 id="several-internal-representations">Several internal representations</h3>
+<ul>
+<li>fast data retrieval,</li>
+<li>data compactness.</li>
+</ul>
+<p>Representation of a graph at a given time (static). But this representation can evolve.</p>
+</section>
+<section id="data-attributes" class="slide level1">
+<h1>Data Attributes</h1>
+<ul>
+<li>Any number of data attributes can be associated with any element of the graph.</li>
+<li>An attribute is <strong>key</strong>, <strong>value</strong> pair that can be any Java Object.</li>
+<li>You can place attributes on nodes, edges and on the graph itself.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb6-1" data-line-number="1">g.<span class="fu">setAttribute</span>(<span class="st">&quot;My attribute&quot;</span>, aValue);</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="bu">Node</span> n = g.<span class="fu">getNode</span>(<span class="st">&quot;A&quot;</span>);</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">n.<span class="fu">setAttribute</span>(<span class="st">&quot;xy&quot;</span>, <span class="fl">23.4</span>, <span class="fl">55.0</span>);</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">Edge e = g.<span class="fu">getEdge</span>(<span class="st">&quot;AB&quot;</span>);</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">e.<span class="fu">removeAttribute</span>(<span class="st">&quot;selected&quot;</span>);</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="dt">double</span> w = e.<span class="fu">getNumber</span>(<span class="st">&quot;weight&quot;</span>);</a></code></pre></div>
+</section>
+<section id="algorithms" class="slide level1">
+<h1>Algorithms</h1>
+<h3 id="searches">Searches</h3>
+<p>random searches, shortest paths, spanning trees, etc.</p>
+<h3 id="metrics">Metrics</h3>
+<p>modularity, centrality, degree distributions, connectivity, density, etc.</p>
+<h3 id="generators">Generators</h3>
+<p>random, regular, preferential attachment, small world, from GIS, from the web, etc.</p>
+</section>
+<section id="focus-on-dynamic-connected-components" class="slide level1">
+<h1>Focus on Dynamic Connected Components</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">import</span><span class="im"> org.graphstream.algorithm.ConnectedComponents;</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">//...</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">ConnectedComponents cc = <span class="kw">new</span> <span class="fu">ConnectedComponents</span>();</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">cc.<span class="fu">init</span>(graph);</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">while</span>(something) {</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  cc.<span class="fu">getConnectedComponentsCount</span>();</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">  <span class="fu">canDoSomethingWithGraph</span>();</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">}</a></code></pre></div>
+</section>
+<section id="focus-on-dynamic-shortest-paths" class="slide level1">
+<h1>Focus on Dynamic Shortest Paths</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">import</span> org.graphstream.algorithm</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">          .<span class="fu">networksimplex</span>.<span class="fu">DynamicOneToAllShortestPath</span>;</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">//...</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">DynamicOneToAllShortestPath algorithm =</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">                <span class="kw">new</span> <span class="fu">DynamicOneToAllShortestPath</span>(<span class="kw">null</span>);</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">algorithm.<span class="fu">init</span>(graph);</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">algorithm.<span class="fu">setSource</span>(<span class="st">&quot;0&quot;</span>);</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">while</span>(something) {</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">  algorithm.<span class="fu">compute</span>();</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">  <span class="fu">canDoSomethingWithGraph</span>();</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">}</a></code></pre></div>
+</section>
+<section id="algorithms-1" class="slide level1">
+<h1>Algorithms</h1>
+<p>Some tutorials to go further</p>
+<p><a href="http://graphstream-project.org/doc/Algorithms/">graphstream-project.org/doc/Algorithms/</a></p>
+</section>
+<section id="visualization" class="slide level1">
+<h1>Visualization</h1>
+<ol type="1">
+<li>Dynamic Visualization: the graph is evolving, so does the visualization.</li>
+<li>Get more information than the graph itself: sprites.</li>
+</ol>
+<p><img data-src="img/CSS.png" alt="CSS" /><!-- <video controls autoplay loop>
+  <source data-src="img/boids.mp4" type="video/mp4">
+</video> --> <iframe width="560" height="315" src="https://www.youtube.com/embed/hv8vrvzG9y0" frameborder="0" allowfullscreen></iframe></p>
+</section>
+<section id="extra-visual-information" class="slide level1">
+<h1>Extra visual information</h1>
+<h2 id="css">CSS</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb9-1" data-line-number="1">graph { <span class="kw">padding</span>: <span class="dv">50px</span>; }</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">node {</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  size-mode: fit; shape: rounded-box;</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  fill-color: <span class="dv">white</span>; stroke-mode: plain;</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="kw">padding</span>: <span class="dv">5px</span>, <span class="dv">4px</span>; icon-mode: at-left;</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">  icon: <span class="fu">url</span>(<span class="st">&#39;data/Smiley_032.png&#39;</span>);</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">}</a></code></pre></div>
+<p><img data-src="img/size_mode2_.png" alt="css1" /><img data-src="img/stroke_mode2.png" alt="css2" /><img data-src="img/edge_shape1.png" alt="css3" /><img data-src="img/node_shape6.png" alt="css4" /></p>
+</section>
+<section id="extra-visual-information-1" class="slide level1">
+<h1>Extra visual information</h1>
+<h2 id="css-classes">CSS classes</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb10-1" data-line-number="1">graph.<span class="fu">setAttribute</span>(<span class="st">&quot;stylesheet&quot;</span>,</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="st">&quot;graph {padding : 50px;}&quot;</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  + <span class="st">&quot;node {size: 100px; fill-mode: image-scaled;}&quot;</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  + <span class="st">&quot;node.fun {fill-image: url(&#39;fun.gif&#39;);}&quot;</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  + <span class="st">&quot;node.dull {fill-image: url(&#39;dull.png&#39;);}&quot;</span>);</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="bu">Node</span> a = graph.<span class="fu">addNode</span>(<span class="st">&quot;A&quot;</span>);</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="bu">Node</span> b = graph.<span class="fu">addNode</span>(<span class="st">&quot;B&quot;</span>);</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="bu">Node</span> c = graph.<span class="fu">addNode</span>(<span class="st">&quot;C&quot;</span>);</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">graph.<span class="fu">addEdge</span>(<span class="st">&quot;AB&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>);</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">graph.<span class="fu">addEdge</span>(<span class="st">&quot;CB&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;B&quot;</span>);</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">graph.<span class="fu">addEdge</span>(<span class="st">&quot;AC&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>);</a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">a.<span class="fu">setAttribute</span>(<span class="st">&quot;ui.class&quot;</span>, <span class="st">&quot;fun&quot;</span>);</a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">b.<span class="fu">setAttribute</span>(<span class="st">&quot;ui.class&quot;</span>, <span class="st">&quot;fun&quot;</span>);</a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">c.<span class="fu">setAttribute</span>(<span class="st">&quot;ui.class&quot;</span>, <span class="st">&quot;dull&quot;</span>);</a></code></pre></div>
+</section>
+<section id="extra-visual-information-2" class="slide level1">
+<h1>Extra visual information</h1>
+<h2 id="css-classes-1">CSS classes</h2>
+<figure>
+<img data-src="img/funordull.png" alt="…and of course it is dynamic." /><figcaption>…and of course it is dynamic.</figcaption>
+</figure>
+</section>
+<section id="extra-visual-information-3" class="slide level1">
+<h1>Extra visual information</h1>
+<h2 id="sprites">Sprites</h2>
+<p>Graphical objects that give extra information on the application you deal with.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" data-line-number="1">SpriteManager sman = <span class="kw">new</span> <span class="fu">SpriteManager</span>(graph);</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">Sprite pin = sman.<span class="fu">addSprite</span>(<span class="st">&quot;pin&quot;</span>);</a></code></pre></div>
+<p>Sprites are also customised with CSS <img data-src="img/mapPinSmall.png" alt="pin" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb12-1" data-line-number="1">sprite<span class="pp">#pin</span> {</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    shape: <span class="dv">box</span>;</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">    <span class="kw">size</span>: <span class="dv">32px</span>, <span class="dv">52px</span>;</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">    fill-mode: image-scaled;</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">    fill-image: <span class="fu">url</span>(<span class="st">&#39;mapPinSmall.png&#39;</span>);</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">}</a></code></pre></div>
+</section>
+<section class="slide level1">
+
+<section data-background=" white">
+<img alt="LH" src="img/leHavreStep2.png" style height="800px"/>
+</section>
+</section>
+<section class="slide level1">
+
+<section data-background=" white">
+<img alt="LH" src="img/leHavreStep7.png" style height="800px"/>
+</section>
+</section>
+<section id="interactions-with-other-tools" class="slide level1">
+<h1>Interactions with other Tools</h1>
+</section>
+<section id="offline-interactions" class="slide level1">
+<h1>Offline interactions</h1>
+<h3 id="file-formats">File formats</h3>
+<p>Tulip, Gephi, GML, Pajek, DOT, LGL, ncol, DGS</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb13-1" data-line-number="1">DGS004</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">&quot;graph.dgs&quot;</span> <span class="dv">0</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">an A x:<span class="dv">1</span> y:<span class="fl">2.3</span> label:<span class="st">&quot;Node A&quot;</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">an B x:<span class="dv">0</span> y:<span class="dv">0</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">an C xy:<span class="fl">2.3</span>,<span class="dv">1</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">an D xyz:<span class="dv">1</span>,<span class="dv">1</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">ae AB A B weight:<span class="fl">23.3</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">ae AC A C weight:<span class="dv">2</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">st <span class="fl">1.0</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">ae BC B &gt; C</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">ae BD B &gt; D</a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">st <span class="fl">1.1</span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">dn B</a></code></pre></div>
+</section>
+<section id="online-interactions" class="slide level1">
+<h1>OnLine interactions</h1>
+<h3 id="netstream">NetStream</h3>
+<ul>
+<li>Export streams of events to other applications / machines / languages</li>
+<li>Both ways. From GS to other and from other to GS</li>
+<li>Binary network protocol</li>
+<li>TCP socket (and WebSocket) implementation</li>
+<li>Several languages (Java, C++, Python, JS)</li>
+</ul>
+</section>
+<section id="netlogo-extension" class="slide level1">
+<h1>NetLogo Extension</h1>
+<ul>
+<li>NetLogo agents (turtles, links and observer) send graph events to external application</li>
+<li>The external application maintains a dynamic graph and runs algorithms on it</li>
+<li>It sends the computed results back to NetLogo</li>
+<li>Agents can receive and use them to take their decisions</li>
+</ul>
+<figure>
+<img data-src="img/netlogo.jpg" alt="NetLogo Extension" /><figcaption>NetLogo Extension</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<section data-background=" #efedef">
+<!-- <video controls  width="1280" height="800" >
+  <source data-src="img/GraphStream 1.0.mp4" type="video/mp4">
+</video> --> <iframe width="1280" height="800" src="https://www.youtube.com/embed/XX5rRF6uxow" frameborder="0" allowfullscreen></iframe>
+</section>
+<!-- END -->
+</section>
+    </div>
+  </div>
+
+  <script src="assets/reveal.js/lib/js/head.min.js"></script>
+  <script src="assets/reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: 0,
+        // Display a presentation progress bar
+        progress: 0,
+        // Display the page number of the current slide
+        slideNumber: 1,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: 1,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Loop the presentation
+        loop: true,
+        // Hides the address bar on mobile devices
+        hideAddressBar: true,
+        // Transition style
+        transition: 'linear', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'fast', // default/fast/slow
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+        height: 800,
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'assets/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'assets/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'assets/reveal.js/plugin/math/math.js', async: true },
+          { src: 'assets/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

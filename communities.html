@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Detect Community Structures in Networks">
+  <meta name="author" content="">
+  <title>GraphStream Tutorials</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="assets/reveal.js/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="assets/reveal.js/css/theme/none.css" id="theme">
+  <link rel="stylesheet" href="css/main.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'assets/reveal.js/css/print/pdf.css' : 'assets/reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="assets/reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">GraphStream Tutorials</h1>
+  <p class="author">Detect Community Structures in Networks</p>
+  <p class="author"><img style="width:60%;" src="img/zachary.png"/></p>
+  <p class="date">Formations JEDI – April 21 2016</p>
+</section>
+
+<section id="outline" class="slide level1">
+<h1>Outline</h1>
+<!--  {data-background="url('/img/tmp.png')"} -->
+<ul>
+<li><a href="index.html">General Presentation of GraphStream</a></li>
+<li><a href="tutorials.html">First Tutorials</a></li>
+<li>Community Structures Tutorial (this presentation)</li>
+</ul>
+<p>#Community structure We will try to detect community structure in networks.</p>
+<p><strong>Intuitively</strong>, communities are groups of nodes in a network, where:</p>
+<ul>
+<li>There are more links between nodes from the same community,</li>
+<li>Fewer links between nodes from different communities.</li>
+</ul>
+<figure>
+<img data-src="img/Community_Structure2.png" alt="Community Structures" /><figcaption>Community Structures</figcaption>
+</figure>
+<p>#Community structure Lots of complex networks exhibit community structure.</p>
+<ul>
+<li>Social networks,</li>
+<li>Biological networks,</li>
+<li>Information networks,</li>
+<li>Road networks,</li>
+<li>…</li>
+</ul>
+<p><img data-src="img/Network_Community_Structure.svg" alt="CS3" /><img data-src="img/Community_Structure1.png" alt="CS1" /><img data-src="img/Community_Structure3.png" alt="CS2" /><img data-src="img/Community_Structure4.png" alt="CS3" /></p>
+<p><strong>Let’s present a method to detect structures and handle network dynamics.</strong></p>
+<p>#Agenda ###In this tutorial we will:</p>
+<ul>
+<li>Try to detect communities inside a network using various tools provided by GraphStream.</li>
+<li>See how to measure the quality of the community structure.</li>
+<li>See a technique to approximate communities detection, and adapt to the network dynamics.</li>
+</ul>
+<p>This is not not an academic, but more a way to show you how to combine the various building blocks of GraphStream to experiment on dynamic networks.</p>
+<p>#Determining community structure</p>
+<p>Most often we use two kinds of criteria:</p>
+<ul>
+<li><strong>Internal validity</strong>: some sort of measure indicates the importance of links inside communities compared to links between communities.</li>
+<li><strong>External validity</strong>: we rely on an expert, having a knowledge on the network semantics, to validate the communities.</li>
+</ul>
+<p>We are focused here in the first one.</p>
+<p>#Determining communities</p>
+<p>Once we have such a measure, several techniques can be used to find the communities:</p>
+<ul>
+<li><strong>Optimizing the minimum cut</strong>: often used for load balancing. The number of communities is known in advance. One search to minimize the number of edges between communities (the cut).</li>
+<li><strong>Hierarchical clustering</strong>: uses a similarity measure to group node pairs, in communities, then to group communities.</li>
+<li><strong>Girvan-Newman algorithm</strong>: in this algorithm, we remove progressively edges that lie between communities, using some kind of measure to identify them.</li>
+<li><strong>Modularity maximization</strong>: The modularity is one of the most used measures. This methods employ various techniques (often metaheuristics) to compute network divisions and maximize modularity.</li>
+</ul>
+<p>#Modularity One of the most used measure is the modularity <span class="math inline">\(Q\)</span>.</p>
+<p>Intuition: <span class="math inline">\(Q\)</span> measures the fraction of intra-communities edges minus the same fraction if the network had edges at random (with the same communities divisions). <a href="http://www.pnas.org/content/103/23/8577.full">M. E. J. Newman (2006)</a></p>
+<ul>
+<li>If <span class="math inline">\(Q=0\)</span> the edges intra-communities is not better than random.</li>
+<li>If <span class="math inline">\(Q=1\)</span> we have very strong community structure.</li>
+<li>In practice modular network lie between <span class="math inline">\(Q=0.3\)</span> and <span class="math inline">\(Q=0.7\)</span>.</li>
+</ul>
+<p>Modularity gives results in <span class="math inline">\(\left[-\frac{1}{2} .. 1\right]\)</span>.</p>
+<p>#Modularity Suppose a given network with modules:</p>
+<p>How to determine its modularity ?</p>
+<p>#Modularity</p>
+<p>
+We could compare the proportion of internal links <span style="color:red;">\(I_c\)</span> in each community \(c\) to the number of edges \(m\). Links in green <span style="color:green;">\(O_c\)</span> go out of the community \(c\).
+</p>
+<p><span class="math inline">\(Q = \sum_c\frac{I_c}{m}~~~~~~~\)</span> <img data-src="img/Modularity2.svg" alt="Modularirty" /></p>
+<p>This would not be sufficient, since putting all nodes in the same community would produce a perfectly modular network !</p>
+<p>#Modularity</p>
+<p>Instead we compare the ratio \(\frac{I_c}{m}\) with the expected value in the same network but with all its links randomly rewired, that is:</p>
+<p><span class="math display">\[\frac{(2 I_c + O_c)^2}{(2m)^2}~~~~~~~~\]</span> <img data-src="img/Modularity3.svg" alt="Modularity" /></p>
+<p><span class="math inline">\(Q = \sum_c\frac{I_c}{m} - \sum_c\frac{(2 I_c + O_c)^2}{(2m)^2}\)</span></p>
+<p>#Network dynamics?</p>
+<ul>
+<li>Computing the <strong>modularity</strong> can take some time</li>
+<li>But computing the <strong>communities</strong> themselves is the most demanding task.</li>
+</ul>
+<p>If the network under analysis evolves, it becomes impossible to recompute in <em>real-time</em> the whole modules each time a change occurs in the graph.</p>
+<p>#Graph layouts</p>
+<p>A novel approach to determine modules uses graph layouts.</p>
+<ul>
+<li>A layout is a mapping of nodes in a space,</li>
+<li>positions are given according to a (aesthetic) criteria.</li>
+</ul>
+<p>Most layout algorithms are <strong>force based</strong>:</p>
+<ul>
+<li>repulsive force among all nodes,</li>
+<li>attractive force between connected nodes.</li>
+</ul>
+<p><img data-src="img/polbooks_fr.png" alt="Layout" /><img data-src="img/LinLog1.png" alt="LinLog Layout" /></p>
+<p>#The Lin-Log layout</p>
+<ul>
+<li>No aesthetic Layout</li>
+<li>Densely connected nodes are grouped at nearby positions.</li>
+<li>Weakly connected nodes are separated at distant positions.</li>
+</ul>
+<p>Most force based algorithms try to the minimize energy.</p>
+<p>Lin-Log is based on a <span class="math inline">\((a,r)\)</span>-energy model.</p>
+<ul>
+<li><span class="math inline">\(a\)</span> is the attraction force factor,</li>
+<li><span class="math inline">\(r\)</span> the repulsion force factor.</li>
+</ul>
+<p>#The Lin-Log layout and network dynamics</p>
+<p>After a change in the network the algorithm computes the layout from its <strong>previous equilibrium state</strong>.</p>
+<p>Chances are that reusing previous state costs less than a complete re-computation (c.f. re-optimization).</p>
+<p>The <strong>Lin-Log</strong> layout was proposed by <a href="http://emis.u-strasbg.fr/journals/JGAA/accepted/2007/Noack2007.11.2.pdf">Andreas Noack (2007)</a>.</p>
+<p>#Practical session</p>
+<p>We will see how to:</p>
+<ol type="1">
+<li>Read, layout and display a graph automatically.</li>
+<li>Control the layout directly and change it to a Lin-Log layout.</li>
+<li>Retrieve feedback from the distant view process.</li>
+<li>Compute communities from the Lin-Log layout and display them.</li>
+<li>Retrieve the communities.</li>
+<li>Compute the modularity of these communities.</li>
+<li>Stress the method on a highly dynamic network.</li>
+</ol>
+<p>#How GraphStream handles display</p>
+<p>GraphStream puts the display of the graph in a separate <strong>thread</strong> or <strong>process</strong> or <strong>host</strong>.</p>
+<p>Usually the display will evolve in <strong>parallel</strong> of the main application running on the graph.</p>
+<figure>
+<img data-src="img/proxy-pipeline.svg" alt="GraphNetwork Viewer" /><figcaption>GraphNetwork Viewer</figcaption>
+</figure>
+<p>#How GraphStream handles graph layouts</p>
+<p>By default the viewer creates another thread to handle the layout. The default Layout algorithm is a derivative of the Frutcherman-Reingold one.</p>
+<figure>
+<img data-src="img/layout-viewer-pipeline.svg" alt="Default Viewer and Layout" /><figcaption>Default Viewer and Layout</figcaption>
+</figure>
+</section>
+<section id="our-pipeline" class="slide level1">
+<h1>Our Pipeline</h1>
+<figure>
+<img data-src="img/layout-in-graph-pipeline.svg" alt="Self-Maintained-Layout Pipeline" /><figcaption>Self-Maintained-Layout Pipeline</figcaption>
+</figure>
+</section>
+<section id="step-1" class="slide level1">
+<h1>Step 1</h1>
+<p>Open the <code>modularity</code> package (<code>src/org/graphstream/demo/modularity</code>), then the <code>LinLogLayout.java</code> file.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> LinLogLayout {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">private</span> Graph graph;</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="kw">private</span> Viewer viewer;</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">      <span class="kw">throws</span> <span class="bu">IOException</span>, GraphParseException {</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    graph = <span class="kw">new</span> <span class="fu">SingleGraph</span>(<span class="st">&quot;communities&quot;</span>);</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    viewer = graph.<span class="fu">display</span>(<span class="kw">true</span>);</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    graph.<span class="fu">read</span>(fileName);</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">}</a></code></pre></div>
+<p>It creates a graph, displays, launches an automatic layout on it (the <code>display(true)</code> argument) and then reads it.</p>
+<p>#Before proceeding</p>
+<p>Before proceeding, to avoid compilation problems copy and paste the following imports to your program, just under the already present imports:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">import</span><span class="im"> org.graphstream.algorithm.ConnectedComponents;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">import</span><span class="im"> org.graphstream.algorithm.measure.Modularity;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">import</span><span class="im"> org.graphstream.graph.Edge;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">import</span><span class="im"> org.graphstream.stream.ProxyPipe;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">import</span><span class="im"> org.graphstream.ui.graphicGraph.GraphPosLengthUtils;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">import</span><span class="im"> org.graphstream.ui.graphicGraph.stylesheet.StyleConstants.Units;</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">import</span><span class="im"> org.graphstream.ui.layout.springbox.implementations.LinLog;</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">import</span><span class="im"> org.graphstream.ui.spriteManager.Sprite;</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">import</span><span class="im"> org.graphstream.ui.spriteManager.SpriteManager;</span></a></code></pre></div>
+<p>#Step 2</p>
+<ol type="1">
+<li>Stop the automatic layout.</li>
+<li>Create our own LinLog layout.</li>
+<li>Configure it using some <span class="math inline">\(a\)</span> and <span class="math inline">\(r\)</span> parameters.</li>
+<li>Connect the layout graph events output to the graph so that the graph nodes receive position attributes.</li>
+<li>Connect the graph to the layout so that the layout receive each modification event on the graph.</li>
+<li>Run the layout in a loop.</li>
+</ol>
+</section>
+<section class="slide level1">
+
+<p>##Step 2</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">private</span> LinLog layout;                  <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">private</span> <span class="dt">double</span> a = <span class="dv">0</span>;                   <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">private</span> <span class="dt">double</span> r = <span class="fl">-1.3</span>;                <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">private</span> <span class="dt">double</span> force = <span class="dv">3</span>;               <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName) <span class="kw">throws</span> <span class="kw">... </span>{</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  graph = <span class="kw">new</span> <span class="fu">SingleGraph</span>(<span class="st">&quot;communities&quot;</span>);</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  viewer = graph.<span class="fu">display</span>(<span class="kw">false</span>);        <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  layout = <span class="kw">new</span> <span class="fu">LinLog</span>(<span class="kw">false</span>);           <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  layout.<span class="fu">configure</span>(a, r, <span class="kw">true</span>, force);  <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  layout.<span class="fu">addSink</span>(graph);                <span class="co">// 4</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  graph.<span class="fu">addSink</span>(layout);                <span class="co">// 5</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  graph.<span class="fu">read</span>(fileName);</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">  <span class="kw">while</span>(<span class="kw">true</span>) {                         <span class="co">// 6</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">    layout.<span class="fu">compute</span>();                   <span class="co">// 6</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">  }                                     <span class="co">// 6</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">}</a></code></pre></div>
+<p>Let’s run it and observe the difference with the former layout.</p>
+<p>#Step 3</p>
+<p>Problem: The viewer runs in its own thread any interaction with it is not reflected on the graph. Try to grab a node with the mouse and move it… See?</p>
+<p>Let’s fix this:</p>
+<ol type="1">
+<li>Create a back link from the viewer the main process.</li>
+<li>Connect this link to our graph in order to receive events.</li>
+<li>Proactively check for new events from the viewer.</li>
+<li>Check if the user closed the viewer window to properly end the program.</li>
+</ol>
+</section>
+<section class="slide level1">
+
+<figure>
+<img data-src="img/layout-in-graph-2-pipeline.svg" alt="Self-Maintained-Layout Pipeline with Interaction" /><figcaption>Self-Maintained-Layout Pipeline with Interaction</figcaption>
+</figure>
+</section>
+<section class="slide level1">
+
+<p>##Step 3</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">private</span> ProxyPipe fromViewer;                          <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName) <span class="kw">throws</span> <span class="kw">... </span>{</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  graph = <span class="kw">new</span> <span class="fu">SingleGraph</span>(<span class="st">&quot;communities&quot;</span>);</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  viewer = graph.<span class="fu">display</span>(<span class="kw">false</span>);</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  fromViewer = viewer.<span class="fu">newThreadProxyOnGraphicGraph</span>();  <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  layout = <span class="kw">new</span> <span class="fu">LinLog</span>(<span class="kw">false</span>);</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  layout.<span class="fu">configure</span>(a, r, <span class="kw">true</span>, force);</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  layout.<span class="fu">addSink</span>(graph);</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  graph.<span class="fu">addSink</span>(layout);</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">  fromViewer.<span class="fu">addSink</span>(graph);                           <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">  graph.<span class="fu">read</span>(fileName);</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">  <span class="kw">while</span>(! graph.<span class="fu">hasAttribute</span>(<span class="st">&quot;ui.viewClosed&quot;</span>)) {       <span class="co">// 4</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">    fromViewer.<span class="fu">pump</span>();                                 <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">    layout.<span class="fu">compute</span>();</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">  }</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">}</a></code></pre></div>
+<p>Now try to grab a node in the display.</p>
+</section>
+<section class="slide level1">
+
+<p>##Finding community structure with a Lin-Log layout <strong>Lin-Log</strong> creates long edges outside communities and short edges between nodes in the same communities.</p>
+<p>Let’s use this property to obtain a quick (and hopefully good enough) approximation of the communities.</p>
+<ul>
+<li>Cut edges that are longer than the global average edge length.</li>
+<li>The cut can then be optimised above or under this average to improve the communities.</li>
+</ul>
+<p>#Step 4</p>
+<ol type="1">
+<li>Add a stylesheet on the graph.</li>
+<li>Enhance the display with anti-aliasing.</li>
+<li>Prepare for detection of communities using the layout.</li>
+<li>Specify a cut threshold (a factor for the average edge length).</li>
+</ol>
+<p>#Step 4</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">private</span> <span class="dt">double</span> cutThreshold = <span class="dv">1</span>;                    <span class="co">// 4</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName) <span class="kw">throws</span> <span class="kw">... </span>{</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  graph.<span class="fu">addAttribute</span>(<span class="st">&quot;ui.stylesheet&quot;</span>, styleSheet);  <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  graph.<span class="fu">addAttribute</span>(<span class="st">&quot;ui.antialias&quot;</span>);               <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  graph.<span class="fu">read</span>(fileName);</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="kw">while</span>(! graph.<span class="fu">hasAttribute</span>(<span class="st">&quot;ui.viewClosed&quot;</span>)) {</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    fromViewer.<span class="fu">pump</span>();</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    layout.<span class="fu">compute</span>();</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    <span class="fu">showCommunities</span>();                               <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">  }</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">showCommunities</span>() {                      <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="kw">protected</span> <span class="dt">static</span> <span class="bu">String</span> styleSheet =                <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">    <span class="st">&quot;node { size: 7px; fill-color: rgb(150,150,150); }&quot;</span> +</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">    <span class="st">&quot;edge { fill-color: rgb(255,50,50); size: 2px; }&quot;</span> +</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">    <span class="st">&quot;edge.cut { fill-color: rgba(200,200,200,128); }&quot;</span>;</a></code></pre></div>
+<p>#Step 4 a From the stylesheet:</p>
+<ul>
+<li>Edges are <strong>red</strong>.</li>
+<li>Edges with <code>ui.class</code> set to <code>&quot;cut&quot;</code> are <strong>grey</strong>.</li>
+</ul>
+<p>First part of the <code>showCommunities()</code> method :</p>
+<ol type="1">
+<li>Browse each edge.</li>
+<li>Store each edge’s length.</li>
+<li>Compute the average edge length.</li>
+</ol>
+</section>
+<section id="step-4-a" class="slide level1">
+<h1>Step 4 a</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">showCommunities</span>() {</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="dt">int</span> nEdges = graph.<span class="fu">getEdgeCount</span>();</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">double</span> length, averageLength = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">  <span class="kw">for</span>(Edge edge : graph.<span class="fu">getEachEdge</span>()) {              <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    length  = GraphPosLengthUtils.<span class="fu">edgeLength</span>(edge);</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    edge.<span class="fu">setAttribute</span>(<span class="st">&quot;length&quot;</span>, length);               <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    averageLength += length;                          <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">  averageLength /= nEdges;                            <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">}</a></code></pre></div>
+</section>
+<section id="step-4-b" class="slide level1">
+<h1>Step 4 b</h1>
+<p>Second part of the <code>showCommunities()</code> method: select which edge is inter-community.</p>
+<ol type="1">
+<li>Browse anew each edge.</li>
+<li>Compare their length with the <strong>average</strong> length.</li>
+<li><ol type="a">
+<li>If they are longer, mark them with a <code>&quot;cut&quot;</code> attribute.</li>
+<li>Else, remove the “cut” attribute.</li>
+</ol></li>
+</ol>
+</section>
+<section id="step-4-b-1" class="slide level1">
+<h1>Step 4 b</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">showCommunities</span>() {</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw">for</span>(Edge edge : graph.<span class="fu">getEachEdge</span>()) {           <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">    length  = edge.<span class="fu">getNumber</span>(<span class="st">&quot;length&quot;</span>);</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">    <span class="kw">if</span>(length &gt; averageLength * cutThreshold) {    <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">      edge.<span class="fu">addAttribute</span>(<span class="st">&quot;ui.class&quot;</span>, <span class="st">&quot;cut&quot;</span>);        <span class="co">// 3.1</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">      edge.<span class="fu">addAttribute</span>(<span class="st">&quot;cut&quot;</span>);</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">    } <span class="kw">else</span> {</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">      edge.<span class="fu">removeAttribute</span>(<span class="st">&quot;ui.class&quot;</span>);            <span class="co">// 3.2</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">      edge.<span class="fu">removeAttribute</span>(<span class="st">&quot;cut&quot;</span>);</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    }</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">}</a></code></pre></div>
+<p>#The Zachary Karate Club The graph we use as a demo comes from a well known social study in a Karate Club.</p>
+<p>Nodes represent members and edges their friendship ties.</p>
+<p>At a given time one of the member left the club to create its own club. Some members stayed in the old one, while others quit to join the new one.</p>
+<p>This graph usually admits at least two communities (the two clubs), although smaller sub-communities can be observed.</p>
+<p>#Computing the number of communities</p>
+<p>GraphStream contains a algorithm that <strong>compute</strong> and <strong>update</strong> the number of <strong>connected components</strong> of a graph.</p>
+<p>This algorithm can ignore edges with a specific attribute (say <code>&quot;cut&quot;</code>).</p>
+<p><strong>Sprites</strong> in the viewer help visual the number of communities.</p>
+<p>#Step 5 a</p>
+<p>Compute the number of connected components</p>
+<ol type="1">
+<li>Add a connected component algorithm.</li>
+<li>Initialize it on the graph.</li>
+<li>Setup a cut attribute so that the algorithm ignore the long edges.</li>
+</ol>
+<p>#Step 5 a</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">private</span> ConnectedComponents cc;                           <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName) <span class="kw">throws</span> <span class="kw">... </span>{</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  graph = <span class="kw">new</span> <span class="fu">SingleGraph</span>(<span class="st">&quot;communities&quot;</span>);</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">  viewer = graph.<span class="fu">display</span>(<span class="kw">false</span>);</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">  fromViewer = viewer.<span class="fu">newThreadProxyOnGraphicGraph</span>();</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">  layout = <span class="kw">new</span> <span class="fu">LinLog</span>(<span class="kw">false</span>);</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">  cc = <span class="kw">new</span> <span class="fu">ConnectedComponents</span>(graph);                    <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">  layout.<span class="fu">configure</span>(a, r, <span class="kw">true</span>, force);</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">  cc.<span class="fu">setCutAttribute</span>(<span class="st">&quot;cut&quot;</span>);                              <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">// ...</span></a></code></pre></div>
+</section>
+<section id="step-5-b" class="slide level1">
+<h1>Step 5 b</h1>
+<p>Display the number of connected components using a sprite:</p>
+<ol type="1">
+<li>Create a sprite that will indicate the connected component count.</li>
+<li>Position this sprite.</li>
+<li>Update it regularly with the number of components.</li>
+<li>Update the style sheet to display the sprite correctly.</li>
+</ol>
+<p>#Step 5 b</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">private</span> SpriteManager sm;                                  <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">private</span> Sprite ccCount;                                    <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName) <span class="kw">throws</span> <span class="kw">... </span>{</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">  cc = <span class="kw">new</span> <span class="fu">ConnectedComponents</span>(graph);</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">  sm = <span class="kw">new</span> <span class="fu">SpriteManager</span>(graph);                           <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">  ccCount = sm.<span class="fu">addSprite</span>(<span class="st">&quot;CC&quot;</span>);                            <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">  cc.<span class="fu">setCutAttribute</span>(<span class="st">&quot;cut&quot;</span>);</a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">  ccCount.<span class="fu">setPosition</span>(Units.<span class="fu">PX</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">0</span>);                <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13">  <span class="kw">while</span>(! graph.<span class="fu">hasAttribute</span>(<span class="st">&quot;ui.viewClosed&quot;</span>)) {</a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">    <span class="co">//...</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15">    <span class="fu">showCommunities</span>();</a>
+<a class="sourceLine" id="cb9-16" data-line-number="16">    ccCount.<span class="fu">setAttribute</span>(<span class="st">&quot;ui.label&quot;</span>,                       <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17">      <span class="bu">String</span><span class="fu">.format</span>(<span class="st">&quot;Modules </span><span class="sc">%d</span><span class="st">&quot;</span>, cc.<span class="fu">getConnectedComponentsCount</span>()));</a>
+<a class="sourceLine" id="cb9-18" data-line-number="18">  }</a>
+<a class="sourceLine" id="cb9-19" data-line-number="19">}</a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="kw">protected</span> <span class="dt">static</span> <span class="bu">String</span> styleSheet =                       <span class="co">// 4</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22">    <span class="st">&quot;node { size: 7px; fill-color: rgb(150,150,150); }&quot;</span> +</a>
+<a class="sourceLine" id="cb9-23" data-line-number="23">    <span class="st">&quot;edge { fill-color: rgb(255,50,50); size: 2px; }&quot;</span> +</a>
+<a class="sourceLine" id="cb9-24" data-line-number="24">    <span class="st">&quot;edge.cut { fill-color: rgba(200,200,200,128); }&quot;</span> +</a>
+<a class="sourceLine" id="cb9-25" data-line-number="25">    <span class="st">&quot;sprite#CC { size: 0px; text-color: rgb(150,100,100); text-size: 20; }&quot;</span>;</a></code></pre></div>
+<p>#Computing the modularity Now that communities are identified, we can measure the quality of the partition.</p>
+<p>GraphStream has a <strong>modularity</strong> algorithm that follows each update on the graph.</p>
+<ul>
+<li>The <strong>modularity</strong> algorithm needs that each node contains an attribute indicating its community.</li>
+<li>The <strong>connected components</strong> algorithm can identify each component.</li>
+</ul>
+</section>
+<section id="step-6-a" class="slide level1">
+<h1>Step 6 a</h1>
+<ol type="1">
+<li>Add the modularity algorithm.</li>
+<li>Create it so that it uses the <code>&quot;module&quot;</code> attribute on nodes.</li>
+<li>Initialise it on the graph.</li>
+<li>Have the connected components algorithm tag components/communities with a <code>&quot;module&quot;</code> attribute.</li>
+</ol>
+<p>#Step 6 a</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">private</span> Modularity modularity;                            <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName) <span class="kw">throws</span> <span class="kw">... </span>{</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  cc = <span class="kw">new</span> <span class="fu">ConnectedComponents</span>(graph);</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  sm = <span class="kw">new</span> <span class="fu">SpriteManager</span>(graph);</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  ccCount = sm.<span class="fu">addSprite</span>(<span class="st">&quot;CC&quot;</span>);</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  modularity = <span class="kw">new</span> <span class="fu">Modularity</span>(<span class="st">&quot;module&quot;</span>);                  <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">  modularity.<span class="fu">init</span>(graph);                                 <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">  layout.<span class="fu">configure</span>(a, r, <span class="kw">true</span>, force);</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">  cc.<span class="fu">setCutAttribute</span>(<span class="st">&quot;cut&quot;</span>);</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">  ccCount.<span class="fu">setPosition</span>(Units.<span class="fu">PX</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">  cc.<span class="fu">setCountAttribute</span>(<span class="st">&quot;module&quot;</span>);                         <span class="co">// 4</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">}</a></code></pre></div>
+<p>#Step 6 b</p>
+<p>Display the modularity value using a sprite:</p>
+<ol type="1">
+<li>Add a sprite for the modularity.</li>
+<li>Position it.</li>
+<li>Update it regularly with the modularity value.</li>
+<li>Update the style sheet for this other sprite.</li>
+</ol>
+<p>#Step 6 b</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co">// ...</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">private</span> Sprite ccCount, modValue;                            <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">findCommunities</span>(<span class="bu">String</span> fileName) <span class="kw">throws</span> <span class="kw">... </span>{</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">  modularity = <span class="kw">new</span> <span class="fu">Modularity</span>(<span class="st">&quot;module&quot;</span>);</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">  modValue = sm.<span class="fu">addSprite</span>(<span class="st">&quot;M&quot;</span>);                              <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">  cc.<span class="fu">setCutAttribute</span>(<span class="st">&quot;cut&quot;</span>);</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">  ccCount.<span class="fu">setPosition</span>(Units.<span class="fu">PX</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">  cc.<span class="fu">setCountAttribute</span>(<span class="st">&quot;module&quot;</span>);</a>
+<a class="sourceLine" id="cb11-11" data-line-number="11">  modValue.<span class="fu">setPosition</span>(Units.<span class="fu">PX</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">0</span>);                 <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">  <span class="kw">while</span>(! graph.<span class="fu">hasAttribute</span>(<span class="st">&quot;ui.viewClosed&quot;</span>)) {</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14">    <span class="co">//...</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15">    ccCount.<span class="fu">setAttribute</span>(<span class="st">&quot;ui.label&quot;</span>,</a>
+<a class="sourceLine" id="cb11-16" data-line-number="16">      <span class="bu">String</span><span class="fu">.format</span>(<span class="st">&quot;Modules </span><span class="sc">%d</span><span class="st">&quot;</span>, cc.<span class="fu">getConnectedComponentsCount</span>()));</a>
+<a class="sourceLine" id="cb11-17" data-line-number="17">    modValue.<span class="fu">setAttribute</span>(<span class="st">&quot;ui.label&quot;</span>,                        <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18">      <span class="bu">String</span><span class="fu">.format</span>(<span class="st">&quot;Modularity </span><span class="sc">%f</span><span class="st">&quot;</span>, modularity.<span class="fu">getMeasure</span>()));</a>
+<a class="sourceLine" id="cb11-19" data-line-number="19">  }</a>
+<a class="sourceLine" id="cb11-20" data-line-number="20">}</a>
+<a class="sourceLine" id="cb11-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="kw">protected</span> <span class="dt">static</span> <span class="bu">String</span> styleSheet =</a>
+<a class="sourceLine" id="cb11-23" data-line-number="23">    <span class="co">// ...                                                   // 4</span></a>
+<a class="sourceLine" id="cb11-24" data-line-number="24">    <span class="st">&quot;sprite#CC { size: 0px; text-color: rgb(150,100,100); text-size: 20; }&quot;</span> +</a>
+<a class="sourceLine" id="cb11-25" data-line-number="25">    <span class="st">&quot;sprite#M  { size: 0px; text-color: rgb(100,150,100); text-size: 20; }&quot;</span>;</a></code></pre></div>
+<p>#That’s it!</p>
+<p>Some other graphs are provided in the <code>data</code> directory of the eclipse project.</p>
+<p>You can experiment on them, and play with the <code>cutThreshold</code> parameter as well as the <span class="math inline">\((a, r)\)</span> and <code>force</code> parameters. Here is a set of good values for these graphs:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Graph</th>
+<th>a</th>
+<th>r</th>
+<th>force</th>
+<th>cutThreshold</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>karate.gml</td>
+<td>0</td>
+<td>-1.3</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>dolphins.gml</td>
+<td>0</td>
+<td>-1.2</td>
+<td>8</td>
+<td>0.8</td>
+</tr>
+<tr class="odd">
+<td>polbooks.gml</td>
+<td>0</td>
+<td>-1.9</td>
+<td>5</td>
+<td>0.8</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-about-a-dynamic-graph" class="slide level1" data-background="url(/img/boids.png)">
+<h1>What about a dynamic graph</h1>
+<p>Let’s try the method on a really dynamic graph.</p>
+<p>Consider a <a href="http://www.red3d.com/cwr/boids/">Boids</a> Simulation.</p>
+<p>The <code>LinLogLayoutAndBoids.java</code> file in the <code>modularity</code> package contains a working example of LinLog analysis of a Boids simulation.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="assets/reveal.js/lib/js/head.min.js"></script>
+  <script src="assets/reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: 0,
+        // Display a presentation progress bar
+        progress: 0,
+        // Display the page number of the current slide
+        slideNumber: 1,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: 1,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Loop the presentation
+        loop: true,
+        // Hides the address bar on mobile devices
+        hideAddressBar: true,
+        // Transition style
+        transition: 'linear', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'fast', // default/fast/slow
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+        height: 800,
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'assets/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'assets/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'assets/reveal.js/plugin/math/math.js', async: true },
+          { src: 'assets/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
